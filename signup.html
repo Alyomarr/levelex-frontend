@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - Levelex</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container navbar-container">
+        <a href="index.html" class="logo">
+          <i class="bx bxs-layer gradient-text"></i>
+          <span>Levelex</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#vision">Vision</a></li>
+          <li><a href="index.html#what-we-do">What We Do</a></li>
+          <li><a href="index.html#case-studies">Case Studies</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="auth-buttons">
+          <a href="login.html" class="btn-link">Login</a>
+          <a href="signup.html" class="btn btn-gradient"
+            ><span>Sign Up</span></a
+          >
+        </div>
+        <i class="bx bx-menu mobile-menu-toggle"></i>
+      </div>
+    </nav>
+
+    <section id="signup" class="contact" style="padding: 6rem 0">
+      <div class="container">
+        <div
+          class="card contact-form-card"
+          style="max-width: 600px; margin: 0 auto"
+        >
+          <h3
+            style="text-align: center; font-size: 1.8rem; margin-bottom: 2rem"
+          >
+            Create Your Account
+          </h3>
+
+          <form class="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                  type="text"
+                  id="username"
+                  placeholder="Choose a username"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                placeholder="Enter your phone number"
+              />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Create a password"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input
+                  type="password"
+                  id="confirm-password"
+                  placeholder="Confirm password"
+                  required
+                />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-gradient btn-full">
+              <span>Sign Up <i class="bx bx-right-arrow-alt"></i></span>
+            </button>
+
+            <p class="form-switch-link">
+              Already have an account? <a href="login.html">Login</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <a href="index.html" class="logo"><span>Levelex</span></a>
+            <p>Elevating businesses with intelligent solutions.</p>
+          </div>
+          <div class="footer-col">
+            <h3>Product</h3>
+            <ul>
+              <li><a href="#">Features</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">Security</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Company</h3>
+            <ul>
+              <li><a href="index.html#about">About</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Legal</h3>
+            <ul>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright-bar">
+          <p>© 2025 Levelex. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

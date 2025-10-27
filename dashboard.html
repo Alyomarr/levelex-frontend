@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Levelex</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      .auth-buttons .btn-link.active {
+        color: var(--text-white);
+        text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+      }
+      .dashboard-content {
+        padding-top: 5rem;
+        text-align: center;
+        min-height: calc(100vh - 400px); /* Keeps footer down */
+      }
+      .dashboard-content .card {
+        max-width: 600px;
+        margin: 2rem auto;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container navbar-container">
+        <a href="index.html" class="logo">
+          <i class="bx bxs-layer gradient-text"></i>
+          <span>Levelex</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#vision">Vision</a></li>
+          <li><a href="index.html#what-we-do">What We Do</a></li>
+          <li><a href="index.html#case-studies">Case Studies</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="auth-buttons">
+          <a href="dashboard.html" class="btn-link active">Dashboard</a>
+          <a href="login.html" class="btn btn-gradient"><span>Logout</span></a>
+        </div>
+        <i class="bx bx-menu mobile-menu-toggle"></i>
+      </div>
+    </nav>
+
+    <section id="dashboard" class="dashboard-content">
+      <div class="container">
+        <h1 class="section-title">
+          Welcome to your <span class="gradient-text">Dashboard</span>
+        </h1>
+        <p class="section-subheadline">
+          This is where you'll manage your automations, view analytics, and
+          more.
+        </p>
+
+        <div class="card">
+          <h3>Your Stats (from Analytics API)</h3>
+          <p>Stats content will go here...</p>
+        </div>
+        <div class="card">
+          <h3>Run Workflow (from n8n)</h3>
+          <p>A button to run your "Sales Report" will go here.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <a href="index.html" class="logo">
+              <span>Levelex</span>
+            </a>
+            <p>Elevating businesses with intelligent solutions.</p>
+          </div>
+          <div class="footer-col">
+            <h3>Product</h3>
+            <ul>
+              <li><a href="#">Features</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">Security</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Company</h3>
+            <ul>
+              <li><a href="index.html#about">About</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Legal</h3>
+            <ul>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright-bar">
+          <p>© 2025 Levelex. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
