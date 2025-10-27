@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Levelex</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,7 +17,9 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
+
     <link rel="stylesheet" href="style.css" />
+
     <style>
       .auth-buttons .btn-link.active {
         color: var(--text-white);
@@ -127,5 +132,91 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** Paste your Project URL here **
+      const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** Paste your Anon Key here **
+
+      // Ensure the Supabase library is loaded before creating the client
+      if (window.supabase) {
+        var supabase = window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_ANON_KEY
+        );
+        console.log("Supabase client initialized.");
+      } else {
+        console.error(
+          "Supabase library not loaded. Make sure the script tag is in the <head>."
+        );
+      }
+    </script>
+
+    <script>
+      // --- Login Form Logic ---
+      const loginForm = document.querySelector("#login .contact-form"); // More specific selector
+
+      // Check if the form and supabase client exist before adding listener
+      if (loginForm && typeof supabase !== "undefined") {
+        loginForm.addEventListener("submit", async (event) => {
+          event.preventDefault(); // Prevent default form submission
+
+          const emailInput = document.getElementById("email");
+          const passwordInput = document.getElementById("password");
+          const submitButton = loginForm.querySelector('button[type="submit"]');
+
+          // Basic validation
+          if (!emailInput || !passwordInput) {
+            console.error("Email or password input not found!");
+            alert("Error: Form elements missing. Cannot submit.");
+            return;
+          }
+
+          // Disable button
+          submitButton.disabled = true;
+          submitButton.innerHTML = `<span>Logging In...</span>`;
+
+          try {
+            // --- Call Supabase Auth Login ---
+            const { data, error } = await supabase.auth.signInWithPassword({
+              email: emailInput.value,
+              password: passwordInput.value,
+            });
+
+            if (error) {
+              // Show error message from Supabase
+              console.error("Login Error:", error);
+              alert(`Login failed: ${error.message}`);
+            } else {
+              // --- Success ---
+              console.log("Login successful:", data);
+              // Supabase JS library automatically handles storing the session info in localStorage
+              alert("Login successful! Redirecting to dashboard...");
+              // Redirect to the dashboard
+              window.location.href = "/dashboard.html";
+            }
+          } catch (catchError) {
+            console.error("Unexpected Login Error:", catchError);
+            alert(
+              "An unexpected error occurred during login. Please try again."
+            );
+          } finally {
+            // Re-enable button
+            if (submitButton) {
+              // Check if button still exists
+              submitButton.disabled = false;
+              submitButton.innerHTML = `<span>Login <i class='bx bx-right-arrow-alt'></i></span>`;
+            }
+          }
+        });
+        console.log("Login form listener added.");
+      } else if (!loginForm) {
+        console.error("Login form element not found on this page.");
+      } else {
+        console.error(
+          "Supabase client not initialized before adding login listener."
+        );
+      }
+    </script>
   </body>
 </html>

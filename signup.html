@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up - Levelex</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,6 +17,7 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
+
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -75,7 +79,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="phone">Phone Number</label>
+              <label for="phone">Phone Number (Optional)</label>
               <input
                 type="tel"
                 id="phone"
@@ -88,7 +92,7 @@
                 <input
                   type="password"
                   id="password"
-                  placeholder="Create a password"
+                  placeholder="Create a password (min 6 chars)"
                   required
                 />
               </div>
@@ -151,5 +155,128 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** Paste your Project URL here **
+      const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** Paste your Anon Key here **
+
+      // Ensure the Supabase library is loaded before creating the client
+      if (window.supabase) {
+        var supabase = window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_ANON_KEY
+        );
+        console.log("Supabase client initialized.");
+      } else {
+        console.error(
+          "Supabase library not loaded. Make sure the script tag is in the <head>."
+        );
+      }
+    </script>
+
+    <script>
+      // --- Signup Form Logic ---
+      const signupForm = document.querySelector("#signup .contact-form"); // More specific selector
+
+      // Check if the form and supabase client exist before adding listener
+      if (signupForm && typeof supabase !== "undefined") {
+        signupForm.addEventListener("submit", async (event) => {
+          event.preventDefault(); // Prevent default form submission
+
+          const usernameInput = document.getElementById("username");
+          const emailInput = document.getElementById("email");
+          const phoneInput = document.getElementById("phone"); // Optional
+          const passwordInput = document.getElementById("password");
+          const confirmPasswordInput =
+            document.getElementById("confirm-password");
+          const submitButton = signupForm.querySelector(
+            'button[type="submit"]'
+          );
+
+          // --- Basic Validation ---
+          if (
+            !usernameInput ||
+            !emailInput ||
+            !passwordInput ||
+            !confirmPasswordInput
+          ) {
+            console.error("One or more form elements not found!");
+            alert("Error: Form elements missing. Cannot submit.");
+            return;
+          }
+
+          if (passwordInput.value !== confirmPasswordInput.value) {
+            alert("Passwords do not match!");
+            return; // Stop submission
+          }
+          if (passwordInput.value.length < 6) {
+            alert("Password must be at least 6 characters long.");
+            return;
+          }
+
+          // Disable button during submission
+          submitButton.disabled = true;
+          submitButton.innerHTML = `<span>Signing Up...</span>`;
+
+          try {
+            // --- Call Supabase Auth Signup ---
+            const { data, error } = await supabase.auth.signUp({
+              email: emailInput.value,
+              password: passwordInput.value,
+              options: {
+                data: {
+                  // Add extra user metadata here if needed
+                  username: usernameInput.value,
+                  phone: phoneInput ? phoneInput.value : null, // Store optional phone number safely
+                },
+              },
+            });
+
+            if (error) {
+              // Show error message from Supabase
+              console.error("Signup Error:", error);
+              alert(`Signup failed: ${error.message}`);
+            } else {
+              // --- Success ---
+              console.log("Signup successful:", data);
+              // Check if email confirmation is required by Supabase settings
+              if (
+                data.user &&
+                data.user.identities &&
+                data.user.identities.length === 0
+              ) {
+                alert(
+                  "Signup almost complete! Please check your email to verify your account."
+                );
+              } else {
+                alert("Signup successful!");
+              }
+              // Redirect to login page after successful signup or attempt
+              window.location.href = "/login.html";
+            }
+          } catch (catchError) {
+            console.error("Unexpected Signup Error:", catchError);
+            alert(
+              "An unexpected error occurred during signup. Please try again."
+            );
+          } finally {
+            // Re-enable button
+            if (submitButton) {
+              // Check if button still exists
+              submitButton.disabled = false;
+              submitButton.innerHTML = `<span>Sign Up <i class='bx bx-right-arrow-alt'></i></span>`;
+            }
+          }
+        });
+        console.log("Signup form listener added.");
+      } else if (!signupForm) {
+        console.error("Signup form element not found on this page.");
+      } else {
+        console.error(
+          "Supabase client not initialized before adding signup listener."
+        );
+      }
+    </script>
   </body>
 </html>

@@ -35,9 +35,12 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  background-color: var(--bg-dark);
+  /* New gradient - lighter blue fades out by 15% */
+  background: linear-gradient(to bottom, #1763c1 0%, #0d0f2b 10%);
+  background-color: #0d0f2b; /* Fallback solid color */
   color: var(--text-white);
   line-height: 1.6;
+  min-height: 100vh; /* Ensures gradient covers full height */
 }
 
 /* ============================================ */
@@ -190,7 +193,7 @@ ul {
   background: rgba(13, 15, 43, 0.8); /* Slightly transparent background */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 1.2rem 0;
+  padding: 0.5rem 0;
   z-index: 100;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -209,6 +212,21 @@ ul {
   font-weight: 700;
   color: var(--text-white);
 }
+/* Add this to style.css */
+.logo-icon {
+  height: 6rem; /* Adjust size as needed */
+  width: auto; /* Maintain aspect ratio */
+  vertical-align: middle; /* Align with text */
+}
+
+/* Optional: If using SVG and want it colored like the old icon */
+/* .logo-icon path { 
+  fill: url(#yourGradientID); // Requires defining a gradient in SVG or CSS 
+} */
+/* Or just a solid color */
+/* .logo-icon { 
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg); // Makes SVG white
+} */
 
 .logo i {
   font-size: 1.8rem;
