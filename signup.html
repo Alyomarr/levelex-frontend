@@ -261,21 +261,19 @@
             });
             if (error) {
               console.error("Signup Error:", error);
-              messageDiv.textContent = `Signup failed: ${error.message}`;
-              // Don't redirect on specific 'user already exists' error
+              // Specific check for existing user error message
               if (
-                error.status === 400 ||
-                error.status === 422 ||
+                error.message &&
                 error.message.toLowerCase().includes("user already registered")
               ) {
-                submitButton.disabled = false;
-                submitButton.innerHTML = `<span>Sign Up <i class='bx bx-right-arrow-alt'></i></span>`;
+                messageDiv.textContent =
+                  "Signup failed: This email is already registered.";
               } else {
-                // Optional: Redirect on other errors after delay?
-                setTimeout(() => {
-                  window.location.href = "/login.html";
-                }, 2500);
+                messageDiv.textContent = `Signup failed: ${error.message}`;
               }
+              // Keep button enabled on error, do not redirect
+              submitButton.disabled = false;
+              submitButton.innerHTML = `<span>Sign Up <i class='bx bx-right-arrow-alt'></i></span>`;
             } else {
               console.log("Signup successful:", data);
               // Provide feedback based on whether email confirmation is likely needed
@@ -284,7 +282,7 @@
                 data.user.identities &&
                 data.user.identities.length === 0
               ) {
-                // Indicates confirmation needed
+                // Indicates confirmation likely needed
                 messageDiv.textContent =
                   "Signup successful! Please check your email to confirm your account before logging in. Redirecting...";
               } else {
@@ -315,11 +313,11 @@
     <script>
       // --- THIS SCRIPT IS IDENTICAL TO THE ONE IN index.html ---
       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      const navLinksUl = document.getElementById("nav-links-ul");
-      if (mobileMenuBtn && navLinksUl) {
+      const navLinksUlForMenu = document.getElementById("nav-links-ul"); // Use different var name
+      if (mobileMenuBtn && navLinksUlForMenu) {
         mobileMenuBtn.addEventListener("click", () => {
-          navLinksUl.classList.toggle("active");
-          if (navLinksUl.classList.contains("active")) {
+          navLinksUlForMenu.classList.toggle("active");
+          if (navLinksUlForMenu.classList.contains("active")) {
             mobileMenuBtn.classList.remove("bx-menu");
             mobileMenuBtn.classList.add("bx-x");
           } else {

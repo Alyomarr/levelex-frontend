@@ -221,7 +221,7 @@
               submitButton.disabled = false;
               submitButton.innerHTML = `<span>Login <i class='bx bx-right-arrow-alt'></i></span>`;
             } else {
-              // Optional extra check if needed, but error handling above should cover required confirmation
+              // Optional extra check if confirmation is needed but wasn't caught by error
               // if (data.user && !data.user.email_confirmed_at && ...) { ... }
 
               console.log("Login successful:", data);
@@ -248,11 +248,11 @@
     <script>
       // --- THIS SCRIPT IS IDENTICAL TO THE ONE IN index.html ---
       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      const navLinksUl = document.getElementById("nav-links-ul");
-      if (mobileMenuBtn && navLinksUl) {
+      const navLinksUlForMenu = document.getElementById("nav-links-ul"); // Use different var name
+      if (mobileMenuBtn && navLinksUlForMenu) {
         mobileMenuBtn.addEventListener("click", () => {
-          navLinksUl.classList.toggle("active");
-          if (navLinksUl.classList.contains("active")) {
+          navLinksUlForMenu.classList.toggle("active");
+          if (navLinksUlForMenu.classList.contains("active")) {
             mobileMenuBtn.classList.remove("bx-menu");
             mobileMenuBtn.classList.add("bx-x");
           } else {

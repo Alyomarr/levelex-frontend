@@ -137,7 +137,7 @@
       </div>
     </footer>
 
-   <script>
+  <script>
         // --- Initialize Supabase Client ---
         const SUPABASE_URL = 'https://mugxkieakyulsoqzrhro.supabase.co'; // ** INTEGRATED **
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8'; // ** INTEGRATED **
@@ -148,7 +148,7 @@
             console.log('Supabase client initialized for dashboard.');
         } else {
             console.error('Supabase library not loaded. Redirecting to login.');
-            window.location.href = '/login.html';
+            window.location.href = '/login.html'; // Redirect immediately if lib fails
         }
 
         // --- DOM Elements ---
@@ -180,6 +180,9 @@
                 if (!response.ok) {
                     let errorMsg = `Failed (${response.status})`;
                     try { const errorData = await response.json(); errorMsg = errorData.error || errorMsg; } catch (e) {/* Ignore parse error */}
+                    // Check specifically for common server errors from the function logs if needed
+                    if (response.status === 500) errorMsg = "Server error loading automations. Please check logs.";
+                    if (response.status === 401) errorMsg = "Unauthorized. Please log in again.";
                     throw new Error(errorMsg);
                  }
                 const automations = await response.json();
@@ -251,7 +254,7 @@
 
         // --- Check Authentication State on Page Load ---
         async function checkAuthState() {
-            if (!supabase) return;
+            if (!supabase) return; // Already handled redirect if lib failed
             const { data: { session }, error } = await supabase.auth.getSession();
             if (error) { console.error('Error getting session:', error); window.location.href = '/login.html'; return; }
             if (!session) { console.log('No session, redirecting.'); window.location.href = '/login.html'; }
@@ -265,29 +268,10 @@
             }
         }
 
-        // --- Run Auth Check When DOM is Ready ---
-        document.addEventListener('DOMContentLoaded', checkAuthState);
-
-        // --- Listen for Auth Changes ---
-        if (supabase) {
-            supabase.auth.onAuthStateChange((event, session) => {
-                if (event === "SIGNED_OUT") { console.log('Detected SIGNED_OUT, redirecting dashboard.'); window.location.href = "/login.html"; }
-            });
-        }
-
-        // --- Mobile Menu Toggle ---
-        if (mobileMenuBtn && navLinksUl) {
-            mobileMenuBtn.addEventListener('click', () => {
-                navLinksUl.classList.toggle('active');
-                if (navLinksUl.classList.contains('active')) { mobileMenuBtn.classList.remove('bx-menu'); mobileMenuBtn.classList.add('bx-x'); }
-                else { mobileMenuBtn.classList.remove('bx-x'); mobileMenuBtn.classList.add('bx-menu'); }
-            });
-        } else { console.error("Mobile menu elements not found."); }
-
          // --- Auth State & Navbar Update ---
-         // (Needed on dashboard too for consistency if resize happens)
+         // (Needed on dashboard too for consistency if resize happens & for initial load)
          function isMobileView() { const btn = document.getElementById('mobile-menu-btn'); return btn && getComputedStyle(btn).display !== 'none'; }
-         async function updateNavbarBasedOnAuthState() { /* ... Same code as index.html ... */
+         async function updateNavbarBasedOnAuthState() {
              if (!supabase) return;
              const { data: { session } } = await supabase.auth.getSession();
              const authButtonsContainer = document.querySelector('.auth-buttons');
@@ -303,20 +287,44 @@
                      const li2 = document.createElement('li'); li2.className = 'auth-link-mobile'; li2.innerHTML = logout; navLinksUl.appendChild(li2);
                  } else { if (authButtonsContainer) authButtonsContainer.innerHTML = dash + logout; }
                  const logoutBtn = document.getElementById('logout-button-dynamic');
-                 // Re-add listener if button was recreated
-                 if (logoutBtn && !logoutBtn.dataset.listenerAttached) {
-                      logoutBtn.addEventListener('click', async (e) => { e.preventDefault(); await supabase.auth.signOut(); });
-                      logoutBtn.dataset.listenerAttached = 'true'; // Prevent adding multiple listeners
+                 // Re-add listener if button was recreated (important on dashboard page)
+                 if (logoutBtn) {
+                      logoutBtn.removeEventListener('click', handleLogout); // Remove previous listener if any
+                      logoutBtn.addEventListener('click', handleLogout); // Add the actual logout handler
                  }
              } else { // Logged Out (Shouldn't happen if protection works, but good fallback)
                  const login = `<a href="login.html" class="btn-link">Login</a>`; const signup = `<a href="signup.html" class="btn btn-gradient"><span>Sign Up</span></a>`;
-                 if (isMobileView()) { /* ... add li elements ... */ }
+                 if (isMobileView()) { const li1 = document.createElement('li'); li1.className = 'auth-link-mobile'; li1.innerHTML = login; navLinksUl.appendChild(li1); const li2 = document.createElement('li'); li2.className = 'auth-link-mobile'; li2.innerHTML = signup; navLinksUl.appendChild(li2); }
                  else { if (authButtonsContainer) authButtonsContainer.innerHTML = login + signup; }
              }
          }
-         // Initial call might be redundant due to checkAuthState, but safe
-         document.addEventListener('DOMContentLoaded', updateNavbarBasedOnAuthState);
-         // Update on resize
+
+        // --- Mobile Menu Toggle ---
+        if (mobileMenuBtn && navLinksUl) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinksUl.classList.toggle('active');
+                if (navLinksUl.classList.contains('active')) { mobileMenuBtn.classList.remove('bx-menu'); mobileMenuBtn.classList.add('bx-x'); }
+                else { mobileMenuBtn.classList.remove('bx-x'); mobileMenuBtn.classList.add('bx-menu'); }
+            });
+        } else { console.error("Mobile menu elements not found."); }
+
+        // --- Run Auth Check & Initial Navbar Update When DOM is Ready ---
+        document.addEventListener('DOMContentLoaded', () => {
+             checkAuthState(); // Checks login status, loads data if logged in
+             updateNavbarBasedOnAuthState(); // Set navbar state on initial load
+        });
+
+        // --- Listen for Auth Changes & Update Navbar ---
+        if (supabase) {
+            supabase.auth.onAuthStateChange((event, session) => {
+                console.log('Dashboard Auth state changed:', event);
+                updateNavbarBasedOnAuthState(); // Update navbar buttons
+                // If user signs out elsewhere, redirect this page to login
+                if (event === "SIGNED_OUT") { console.log('Detected SIGNED_OUT, redirecting dashboard.'); window.location.href = "/login.html"; }
+            });
+        }
+
+         // --- Update Navbar on Resize ---
          let resizeTimer; window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { updateNavbarBasedOnAuthState(); }, 250); });
 
     </script>

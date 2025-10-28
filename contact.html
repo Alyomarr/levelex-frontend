@@ -97,17 +97,12 @@
           <div class="card info-card">
             <i class="bx bxs-envelope card-icon"></i>
             <h3>Email</h3>
-            <p>hello@levelex.com</p>
+            <p>levelexcloud@gmail.com</p>
           </div>
           <div class="card info-card">
             <i class="bx bxs-phone card-icon"></i>
             <h3>Phone</h3>
-            <p>+1 (555) 123-4567</p>
-          </div>
-          <div class="card info-card">
-            <i class="bx bxs-map card-icon"></i>
-            <h3>Address</h3>
-            <p>123 Tech Street, San Francisco, CA</p>
+            <p>+20 103 2270 126</p>
           </div>
         </div>
 
@@ -250,7 +245,6 @@
           .querySelectorAll(".auth-link-mobile")
           .forEach((el) => el.remove());
         if (authButtonsContainer) authButtonsContainer.innerHTML = "";
-
         if (session) {
           // Logged In
           const dash = `<a href="dashboard.html" class="btn-link">Dashboard</a>`;
@@ -294,23 +288,6 @@
           }
         }
       }
-      document.addEventListener(
-        "DOMContentLoaded",
-        updateNavbarBasedOnAuthState
-      );
-      if (supabase) {
-        supabase.auth.onAuthStateChange((event, session) => {
-          console.log("Auth state changed:", event);
-          updateNavbarBasedOnAuthState();
-        });
-      }
-      let resizeTimer;
-      window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          updateNavbarBasedOnAuthState();
-        }, 250);
-      });
     </script>
 
     <script>
@@ -337,8 +314,8 @@
               formMessageDiv.textContent = "Thanks! Message sent.";
               contactForm.reset();
             } else {
-              throw new Error("Form submission failed.");
-            }
+              throw new Error(`Form submission failed (${response.status})`);
+            } // Include status
           } catch (error) {
             console.error("Netlify form error:", error);
             formMessageDiv.textContent = "Sorry, error sending message.";
@@ -353,11 +330,11 @@
     <script>
       // --- THIS SCRIPT IS IDENTICAL TO THE ONE IN index.html ---
       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      const navLinksUl = document.getElementById("nav-links-ul");
-      if (mobileMenuBtn && navLinksUl) {
+      const navLinksUlForMenu = document.getElementById("nav-links-ul"); // Use different var name
+      if (mobileMenuBtn && navLinksUlForMenu) {
         mobileMenuBtn.addEventListener("click", () => {
-          navLinksUl.classList.toggle("active");
-          if (navLinksUl.classList.contains("active")) {
+          navLinksUlForMenu.classList.toggle("active");
+          if (navLinksUlForMenu.classList.contains("active")) {
             mobileMenuBtn.classList.remove("bx-menu");
             mobileMenuBtn.classList.add("bx-x");
           } else {
@@ -368,6 +345,26 @@
       } else {
         console.error("Mobile menu elements not found.");
       }
+    </script>
+
+    <script>
+      document.addEventListener(
+        "DOMContentLoaded",
+        updateNavbarBasedOnAuthState
+      ); // Set initial navbar state
+      if (supabase) {
+        supabase.auth.onAuthStateChange((event, session) => {
+          console.log("Auth state changed:", event);
+          updateNavbarBasedOnAuthState();
+        });
+      } // Listen for auth changes
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          updateNavbarBasedOnAuthState();
+        }, 250);
+      }); // Update navbar on resize
     </script>
   </body>
 </html>
