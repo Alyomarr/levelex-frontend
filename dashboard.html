@@ -144,13 +144,10 @@
 
     <script>
       // --- Initialize Supabase Client ---
-      const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** Paste your Project URL here **
-      const SUPABASE_ANON_KEY =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** Paste your Anon Key here **
+      const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL"; // ** Paste your Project URL here **
+      const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY"; // ** Paste your Anon Key here **
 
-      let supabase = null; // Declare supabase variable
-
-      // Ensure the Supabase library is loaded before creating the client
+      let supabase = null;
       if (window.supabase) {
         supabase = window.supabase.createClient(
           SUPABASE_URL,
@@ -158,17 +155,12 @@
         );
         console.log("Supabase client initialized for dashboard.");
       } else {
-        console.error(
-          "Supabase library not loaded. Make sure the script tag is in the <head>."
-        );
-        // Redirect to login if Supabase fails to load, as auth check won't work
-        window.location.href = "/login.html";
+        console.error("Supabase library not loaded. Redirecting to login.");
+        window.location.href = "/login.html"; // Redirect immediately if lib fails
       }
 
       // --- DOM Elements ---
-      const logoutButton = document.querySelector(
-        ".auth-buttons .btn-gradient"
-      );
+      const logoutButton = document.querySelector('.auth-buttons a[href="#"]'); // More specific selector for logout
       const dashboardContent = document.getElementById("dashboard");
       const welcomeMessage = document.getElementById("welcome-message");
       const workflowContainer = document.getElementById(
@@ -182,10 +174,10 @@
         const { error } = await supabase.auth.signOut();
         if (error) {
           console.error("Error logging out:", error);
-          alert("Logout failed. Please try again.");
+          alert("Logout failed. Please try again."); // Alert ok for simple logout error
         } else {
           console.log("Logged out successfully.");
-          window.location.href = "/login.html"; // Redirect after logout
+          window.location.href = "/login.html";
         }
       }
 
@@ -196,38 +188,29 @@
           return;
         }
         workflowContainer.innerHTML = "<p>Loading your automations...</p>";
-
         try {
-          // Fetch automations list from Vercel function
           const response = await fetch("/api/get-user-automations", {
+            // Calls Vercel function
             method: "GET",
             headers: {
               Authorization: `Bearer ${accessToken}`,
               "Content-Type": "application/json",
             },
           });
-
           if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(
-              errorData.error ||
-                `Failed to fetch automations (${response.status})`
-            );
+            throw new Error(errorData.error || `Failed (${response.status})`);
           }
-
           const automations = await response.json();
-          workflowContainer.innerHTML = ""; // Clear loading state
-
+          workflowContainer.innerHTML = ""; // Clear loading
           if (!automations || automations.length === 0) {
             workflowContainer.innerHTML =
               "<p>You do not have access to any automations yet.</p>";
             return;
           }
-
-          // Create buttons for each automation
           automations.forEach((auto) => {
             if (!auto || !auto.id || !auto.name) {
-              console.warn("Received invalid automation data:", auto);
+              console.warn("Invalid automation data:", auto);
               return;
             }
             const button = document.createElement("button");
@@ -249,22 +232,18 @@
       async function handleWorkflowTrigger(event) {
         const button = event.currentTarget;
         const automationId = parseInt(button.dataset.automationId, 10);
-        if (!supabase) return; // Ensure supabase is initialized
+        if (!supabase) return;
 
         const {
           data: { session },
           error: sessionError,
         } = await supabase.auth.getSession();
-
         if (sessionError || !session?.access_token) {
           alert("Error: Could not get user session. Please log in again.");
           console.error("Session error:", sessionError);
-          // Optionally redirect to login
-          // window.location.href = '/login.html';
           return;
         }
         const accessToken = session.access_token;
-
         if (!automationId) {
           alert("Error: Missing automation data.");
           return;
@@ -273,10 +252,9 @@
         const originalButtonText = button.innerHTML;
         button.disabled = true;
         button.innerHTML = `<span>Running...</span>`;
-
         try {
-          // Call the trigger-workflow Vercel function
           const response = await fetch("/api/trigger-workflow", {
+            // Calls Vercel function
             method: "POST",
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -284,19 +262,14 @@
             },
             body: JSON.stringify({ automationId: automationId }),
           });
-
           const result = await response.json();
-
           if (!response.ok) {
-            throw new Error(
-              result.error || `Failed to trigger workflow (${response.status})`
-            );
+            throw new Error(result.error || `Failed (${response.status})`);
           }
-
-          alert(result.message || "Workflow triggered successfully!");
+          alert(result.message || "Workflow triggered successfully!"); // Use alert for trigger confirmation
         } catch (error) {
           console.error("Workflow trigger failed:", error);
-          alert(`Error: ${error.message}`);
+          alert(`Error: ${error.message}`); // Use alert for trigger error
         } finally {
           button.disabled = false;
           button.innerHTML = originalButtonText;
@@ -307,9 +280,7 @@
       async function loadAnalytics(accessToken) {
         if (!statsContainer || !supabase) return;
         statsContainer.innerHTML = "<p>Loading stats...</p>";
-
         try {
-          // Get user ID securely
           const {
             data: { user },
             error: userError,
@@ -317,21 +288,16 @@
           if (userError || !user)
             throw userError || new Error("User not found");
           const userId = user.id;
-
-          // Fetch count of triggered workflows for this user
           const { count, error: countError } = await supabase
             .from("AnalyticsEvents")
             .select("*", { count: "exact", head: true })
             .eq("user_id", userId)
             .eq("event_type", "workflow_triggered");
-
           if (countError) throw countError;
-
-          // Display the count
-          statsContainer.innerHTML = `
-                     <p>Workflows Triggered: ${count ?? 0}</p>
-                     `;
-          console.log(`Analytics loaded: ${count} workflow triggers.`);
+          statsContainer.innerHTML = `<p>Workflows Triggered: ${
+            count ?? 0
+          }</p>`;
+          console.log(`Analytics loaded: ${count} triggers.`);
         } catch (error) {
           console.error("Error loading analytics:", error.message);
           statsContainer.innerHTML = `<p style="color: red;">Error loading stats: ${error.message}</p>`;
@@ -341,7 +307,6 @@
       // --- Load User-Specific Data ---
       async function loadUserSpecificData(token) {
         console.log("Loading user-specific data...");
-        // Use Promise.all to load in parallel (optional)
         await Promise.all([
           loadAvailableAutomations(token),
           loadAnalytics(token),
@@ -351,25 +316,17 @@
 
       // --- Check Authentication State on Page Load ---
       async function checkAuthState() {
-        if (!supabase) {
-          console.error(
-            "Supabase client failed to initialize. Redirecting to login."
-          );
-          window.location.href = "/login.html";
-          return;
-        }
+        if (!supabase) return; // Already handled redirect if lib failed
 
         const {
           data: { session },
           error,
         } = await supabase.auth.getSession();
-
         if (error) {
           console.error("Error getting session:", error);
           window.location.href = "/login.html";
           return;
         }
-
         if (!session) {
           console.log("No session found, redirecting to login.");
           window.location.href = "/login.html";
@@ -384,8 +341,6 @@
           if (dashboardContent) {
             dashboardContent.style.display = "block"; // Show content
           }
-
-          // Add logout listener
           if (logoutButton) {
             logoutButton.addEventListener("click", (event) => {
               event.preventDefault();
@@ -395,17 +350,23 @@
           } else {
             console.error("Logout button element not found.");
           }
-
-          // Load data specific to the logged-in user
-          loadUserSpecificData(session.access_token);
+          loadUserSpecificData(session.access_token); // Load data for logged-in user
         }
       }
 
       // --- Run Auth Check When DOM is Ready ---
-      document.addEventListener("DOMContentLoaded", () => {
-        // Content is hidden by default CSS
-        checkAuthState();
-      });
+      document.addEventListener("DOMContentLoaded", checkAuthState);
+
+      // Optional: Listen for auth changes while on dashboard page
+      if (supabase) {
+        supabase.auth.onAuthStateChange((event, session) => {
+          // If user is signed out (e.g. in another tab), redirect to login
+          if (event === "SIGNED_OUT") {
+            console.log("Detected SIGNED_OUT event, redirecting to login.");
+            window.location.href = "/login.html";
+          }
+        });
+      }
     </script>
   </body>
 </html>

@@ -138,41 +138,37 @@
     </footer>
 
     <script>
-      const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** Paste your Project URL here **
-      const SUPABASE_ANON_KEY =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** Paste your Anon Key here **
+      const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL"; // ** Paste your Project URL here **
+      const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY"; // ** Paste your Anon Key here **
 
-      // Ensure the Supabase library is loaded before creating the client
+      let supabase = null;
       if (window.supabase) {
-        var supabase = window.supabase.createClient(
+        supabase = window.supabase.createClient(
           SUPABASE_URL,
           SUPABASE_ANON_KEY
         );
         console.log("Supabase client initialized.");
       } else {
-        console.error(
-          "Supabase library not loaded. Make sure the script tag is in the <head>."
-        );
+        console.error("Supabase library not loaded.");
       }
     </script>
 
     <script>
       // --- Login Form Logic ---
-      const loginForm = document.querySelector("#login .contact-form"); // More specific selector
+      const loginForm = document.querySelector("#login .contact-form");
+      const messageDiv = document.getElementById("form-message"); // Assumes you added this div
 
-      // Check if the form and supabase client exist before adding listener
-      if (loginForm && typeof supabase !== "undefined") {
+      if (loginForm && typeof supabase !== "undefined" && messageDiv) {
         loginForm.addEventListener("submit", async (event) => {
-          event.preventDefault(); // Prevent default form submission
+          event.preventDefault();
+          messageDiv.textContent = ""; // Clear message
 
           const emailInput = document.getElementById("email");
           const passwordInput = document.getElementById("password");
           const submitButton = loginForm.querySelector('button[type="submit"]');
 
-          // Basic validation
           if (!emailInput || !passwordInput) {
-            console.error("Email or password input not found!");
-            alert("Error: Form elements missing. Cannot submit.");
+            messageDiv.textContent = "Error: Form elements missing.";
             return;
           }
 
@@ -181,45 +177,53 @@
           submitButton.innerHTML = `<span>Logging In...</span>`;
 
           try {
-            // --- Call Supabase Auth Login ---
             const { data, error } = await supabase.auth.signInWithPassword({
               email: emailInput.value,
               password: passwordInput.value,
             });
 
             if (error) {
-              // Show error message from Supabase
               console.error("Login Error:", error);
-              alert(`Login failed: ${error.message}`);
+              messageDiv.textContent = `Login failed: ${error.message}`;
+              submitButton.disabled = false;
+              submitButton.innerHTML = `<span>Login <i class='bx bx-right-arrow-alt'></i></span>`;
             } else {
-              // --- Success ---
+              // Check email confirmation if required
+              if (
+                data.user &&
+                !data.user.email_confirmed_at &&
+                supabase.auth?.config?.requireEmailConfirmation
+              ) {
+                // Check if confirmation is enabled
+                console.log("User email not confirmed");
+                messageDiv.textContent =
+                  "Login successful, but please confirm your email address first.";
+                // Optional: Log user out again immediately if you don't want them partially logged in
+                // await supabase.auth.signOut();
+                submitButton.disabled = false;
+                submitButton.innerHTML = `<span>Login <i class='bx bx-right-arrow-alt'></i></span>`;
+                return; // Stop before redirecting
+              }
+
               console.log("Login successful:", data);
-              // Supabase JS library automatically handles storing the session info in localStorage
-              alert("Login successful! Redirecting to dashboard...");
-              // Redirect to the dashboard
+              // Success: INSTANT REDIRECT
               window.location.href = "/dashboard.html";
+              // Button state doesn't need resetting as page changes
             }
           } catch (catchError) {
             console.error("Unexpected Login Error:", catchError);
-            alert(
-              "An unexpected error occurred during login. Please try again."
-            );
-          } finally {
-            // Re-enable button
-            if (submitButton) {
-              // Check if button still exists
-              submitButton.disabled = false;
-              submitButton.innerHTML = `<span>Login <i class='bx bx-right-arrow-alt'></i></span>`;
-            }
+            messageDiv.textContent =
+              "An unexpected error occurred. Please try again.";
+            submitButton.disabled = false;
+            submitButton.innerHTML = `<span>Login <i class='bx bx-right-arrow-alt'></i></span>`;
           }
         });
         console.log("Login form listener added.");
-      } else if (!loginForm) {
-        console.error("Login form element not found on this page.");
       } else {
-        console.error(
-          "Supabase client not initialized before adding login listener."
-        );
+        if (!loginForm) console.error("Login form not found.");
+        if (typeof supabase === "undefined")
+          console.error("Supabase client not initialized.");
+        if (!messageDiv) console.error("Form message div not found.");
       }
     </script>
   </body>

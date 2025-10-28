@@ -144,5 +144,118 @@
         </div>
       </div>
     </footer>
+    <script>
+      const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL"; // ** Paste your Project URL here **
+      const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY"; // ** Paste your Anon Key here **
+
+      let supabase = null;
+      if (window.supabase) {
+        supabase = window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_ANON_KEY
+        );
+        console.log("Supabase client initialized.");
+      } else {
+        console.error("Supabase library not loaded.");
+      }
+    </script>
+
+    <script>
+      // --- NOTE: This is the EXACT SAME script as in index.html ---
+      async function updateNavbarBasedOnAuthState() {
+        if (!supabase) return;
+
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        const authButtonsContainer = document.querySelector(".auth-buttons");
+
+        if (authButtonsContainer) {
+          if (session) {
+            // User is logged in
+            authButtonsContainer.innerHTML = `
+                        <a href="dashboard.html" class="btn-link">Dashboard</a>
+                        <a href="#" id="logout-button-dynamic" class="btn btn-gradient"><span>Logout</span></a>
+                    `;
+            const logoutBtn = document.getElementById("logout-button-dynamic");
+            if (logoutBtn) {
+              logoutBtn.addEventListener("click", async (e) => {
+                e.preventDefault();
+                await supabase.auth.signOut();
+                // No redirect needed here, onAuthStateChange will handle UI update
+              });
+            }
+          } else {
+            // User is logged out
+            authButtonsContainer.innerHTML = `
+                        <a href="login.html" class="btn-link">Login</a>
+                        <a href="signup.html" class="btn btn-gradient"><span>Sign Up</span></a>
+                    `;
+          }
+        } else {
+          console.error("Auth buttons container not found in navbar.");
+        }
+      }
+
+      // Run check when DOM is ready
+      document.addEventListener(
+        "DOMContentLoaded",
+        updateNavbarBasedOnAuthState
+      );
+
+      // Listen for auth state changes
+      if (supabase) {
+        supabase.auth.onAuthStateChange((event, session) => {
+          console.log("Auth state changed:", event);
+          updateNavbarBasedOnAuthState(); // Re-run the check
+        });
+      }
+    </script>
+
+    <script>
+      // Optional: Enhance Netlify form submission without full page reload
+      const contactForm = document.querySelector('form[data-netlify="true"]');
+      const formMessageDiv = document.getElementById("form-message"); // Assumes you added this div
+
+      if (contactForm) {
+        contactForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const formData = new FormData(contactForm);
+          const submitButton = contactForm.querySelector(
+            'button[type="submit"]'
+          );
+          const originalButtonHtml = submitButton.innerHTML;
+
+          if (formMessageDiv) formMessageDiv.textContent = "Sending...";
+          submitButton.disabled = true;
+          submitButton.innerHTML = "<span>Sending...</span>";
+
+          try {
+            const response = await fetch("/", {
+              // Netlify handles submission to root path
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: new URLSearchParams(formData).toString(),
+            });
+            if (response.ok) {
+              if (formMessageDiv)
+                formMessageDiv.textContent =
+                  "Thanks! Your message has been sent.";
+              contactForm.reset(); // Clear the form
+            } else {
+              throw new Error("Form submission failed.");
+            }
+          } catch (error) {
+            console.error("Netlify form submission error:", error);
+            if (formMessageDiv)
+              formMessageDiv.textContent =
+                "Sorry, there was an error sending your message. Please try again.";
+          } finally {
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButtonHtml;
+          }
+        });
+      }
+    </script>
   </body>
 </html>
