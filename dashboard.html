@@ -93,6 +93,13 @@
         </div>
         <div class="card">
           <h3>Available Automations</h3>
+          <div class="card">
+            <h3>Available Automations</h3>
+            <div id="trigger-message" style="color: var(--accent-cyan); text-align: center; margin-bottom: 1rem; min-height: 1em;"></div>
+            <div id="workflow-buttons-container">
+                <p>Loading automations...</p>
+            </div>
+        </div>
           <div id="workflow-buttons-container">
             <p>Loading automations...</p>
           </div>
@@ -157,8 +164,9 @@
         const welcomeMessage = document.getElementById('welcome-message');
         const workflowContainer = document.getElementById('workflow-buttons-container');
         const statsContainer = document.getElementById('analytics-stats');
+        const triggerMessageDiv = document.getElementById('trigger-message'); // For workflow status
         const mobileMenuBtn = document.getElementById('mobile-menu-btn'); // For mobile menu
-        const navLinksUl = document.getElementById('nav-links-ul'); // For mobile menu
+        const navLinksUl = document.getElementById('nav-links-ul'); // For mobile menu & navbar updates
 
         // --- Function to handle logout ---
         async function handleLogout() {
@@ -172,6 +180,8 @@
         async function loadAvailableAutomations(accessToken) {
             if (!workflowContainer) { console.error('Workflow container not found.'); return; }
             workflowContainer.innerHTML = '<p>Loading your automations...</p>';
+            if(triggerMessageDiv) triggerMessageDiv.textContent = ''; // Clear trigger message on load
+
             try {
                 // Calls Vercel function relative to current domain
                 const response = await fetch('/api/get-user-automations', {
@@ -180,7 +190,6 @@
                 if (!response.ok) {
                     let errorMsg = `Failed (${response.status})`;
                     try { const errorData = await response.json(); errorMsg = errorData.error || errorMsg; } catch (e) {/* Ignore parse error */}
-                    // Check specifically for common server errors from the function logs if needed
                     if (response.status === 500) errorMsg = "Server error loading automations. Please check logs.";
                     if (response.status === 401) errorMsg = "Unauthorized. Please log in again.";
                     throw new Error(errorMsg);
@@ -206,11 +215,22 @@
         async function handleWorkflowTrigger(event) {
             const button = event.currentTarget; const automationId = parseInt(button.dataset.automationId, 10);
             if (!supabase) return;
+            if (triggerMessageDiv) triggerMessageDiv.textContent = ''; // Clear previous message
+
             const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-            if (sessionError || !session?.access_token) { alert('Session error. Please log in again.'); console.error('Session error:', sessionError); return; }
+            if (sessionError || !session?.access_token) {
+                 if(triggerMessageDiv) triggerMessageDiv.textContent = 'Error: Session expired. Please log in again.';
+                 console.error('Session error:', sessionError); return;
+            }
             const accessToken = session.access_token;
-            if (!automationId) { alert('Error: Missing automation data.'); return; }
+            if (!automationId) {
+                if(triggerMessageDiv) triggerMessageDiv.textContent = 'Error: Missing automation data.';
+                return;
+            }
+
             const originalButtonText = button.innerHTML; button.disabled = true; button.innerHTML = `<span>Running...</span>`;
+            if(triggerMessageDiv) triggerMessageDiv.textContent = 'Triggering...';
+
             try {
                 // Calls Vercel function relative to current domain
                 const response = await fetch('/api/trigger-workflow', {
@@ -219,11 +239,19 @@
                 });
                 const result = await response.json();
                 if (!response.ok) { throw new Error(result.error || `Failed (${response.status})`); }
-                alert(result.message || 'Workflow triggered successfully!'); // Show confirmation
-                loadAnalytics(accessToken); // Reload analytics after trigger
+
+                if(triggerMessageDiv) triggerMessageDiv.textContent = result.message || 'Workflow triggered successfully!'; // Show success message
+                console.log(result.message || 'Workflow triggered successfully!');
+                loadAnalytics(accessToken); // Reload analytics after successful trigger
+
             } catch (error) {
-                console.error('Workflow trigger failed:', error); alert(`Error: ${error.message}`);
-            } finally { button.disabled = false; button.innerHTML = originalButtonText; }
+                console.error('Workflow trigger failed:', error);
+                if(triggerMessageDiv) triggerMessageDiv.textContent = `Error: ${error.message}`; // Show error message
+            } finally {
+                 button.disabled = false; button.innerHTML = originalButtonText;
+                 // Optional: Clear the message after a few seconds
+                 setTimeout(() => { if(triggerMessageDiv) triggerMessageDiv.textContent = ''; }, 5000);
+            }
         }
 
         // --- Load Basic Analytics ---
@@ -234,9 +262,17 @@
                  const { data: { user }, error: userError } = await supabase.auth.getUser(accessToken);
                  if (userError || !user) throw userError || new Error('User not found');
                  const userId = user.id;
+                 // Fetch count ONLY for better performance if table gets large
                  const { count, error: countError } = await supabase.from('AnalyticsEvents')
                      .select('*', { count: 'exact', head: true }).eq('user_id', userId).eq('event_type', 'workflow_triggered');
-                 if (countError) throw countError;
+                 if (countError) {
+                     // Check if table exists error
+                     if (countError.message.includes('relation') && countError.message.includes('does not exist')) {
+                         console.error("AnalyticsEvents table not found. Please create it.");
+                         throw new Error("Analytics table missing.");
+                     }
+                     throw countError; // Throw other DB errors
+                 }
                  statsContainer.innerHTML = `<p>Workflows Triggered: ${count ?? 0}</p>`;
                  console.log(`Analytics loaded: ${count} triggers.`);
              } catch (error) {
@@ -254,7 +290,7 @@
 
         // --- Check Authentication State on Page Load ---
         async function checkAuthState() {
-            if (!supabase) return; // Already handled redirect if lib failed
+            if (!supabase) return;
             const { data: { session }, error } = await supabase.auth.getSession();
             if (error) { console.error('Error getting session:', error); window.location.href = '/login.html'; return; }
             if (!session) { console.log('No session, redirecting.'); window.location.href = '/login.html'; }
@@ -262,41 +298,54 @@
                 console.log('User logged in:', session.user.email);
                 if (welcomeMessage) welcomeMessage.textContent = `Manage automations and view insights, ${session.user.email || 'User'}.`;
                 if (dashboardContent) dashboardContent.style.display = 'block'; // Show content
-                if (logoutButton) { logoutButton.addEventListener('click', (e) => { e.preventDefault(); handleLogout(); }); console.log('Logout listener added.'); }
-                else { console.error('Logout button element not found.'); }
+                // Ensure logout listener is only added once and correctly references handleLogout
+                if (logoutButton && !logoutButton.dataset.listenerAttached) {
+                     logoutButton.addEventListener('click', (e) => { e.preventDefault(); handleLogout(); });
+                     logoutButton.dataset.listenerAttached = 'true'; // Mark as attached
+                     console.log('Logout listener added.');
+                } else if (!logoutButton) { console.error('Logout button element not found.'); }
                 loadUserSpecificData(session.access_token); // Load data
             }
         }
 
          // --- Auth State & Navbar Update ---
-         // (Needed on dashboard too for consistency if resize happens & for initial load)
          function isMobileView() { const btn = document.getElementById('mobile-menu-btn'); return btn && getComputedStyle(btn).display !== 'none'; }
          async function updateNavbarBasedOnAuthState() {
-             if (!supabase) return;
+             if (!supabase || !navLinksUl) return; // Add check for navLinksUl
              const { data: { session } } = await supabase.auth.getSession();
              const authButtonsContainer = document.querySelector('.auth-buttons');
-             const navLinksUl = document.getElementById('nav-links-ul');
-             navLinksUl.querySelectorAll('.auth-link-mobile').forEach(el => el.remove());
-             if(authButtonsContainer) authButtonsContainer.innerHTML = '';
+             navLinksUl.querySelectorAll('.auth-link-mobile').forEach(el => el.remove()); // Clear mobile auth links
+             if(authButtonsContainer) authButtonsContainer.innerHTML = ''; // Clear desktop auth container
 
              if (session) { // Logged In
-                 const dash = `<a href="dashboard.html" class="btn-link active">Dashboard</a>`; // Add active class here
+                 const dash = `<a href="dashboard.html" class="btn-link ${window.location.pathname.includes('/dashboard.html') ? 'active' : ''}">Dashboard</a>`; // Check if current page is dashboard
                  const logout = `<a href="#" id="logout-button-dynamic" class="btn btn-gradient"><span>Logout</span></a>`;
                  if (isMobileView()) {
                      const li1 = document.createElement('li'); li1.className = 'auth-link-mobile'; li1.innerHTML = dash; navLinksUl.appendChild(li1);
                      const li2 = document.createElement('li'); li2.className = 'auth-link-mobile'; li2.innerHTML = logout; navLinksUl.appendChild(li2);
                  } else { if (authButtonsContainer) authButtonsContainer.innerHTML = dash + logout; }
                  const logoutBtn = document.getElementById('logout-button-dynamic');
-                 // Re-add listener if button was recreated (important on dashboard page)
-                 if (logoutBtn) {
-                      logoutBtn.removeEventListener('click', handleLogout); // Remove previous listener if any
-                      logoutBtn.addEventListener('click', handleLogout); // Add the actual logout handler
+                 // Re-add listener if button was recreated
+                 if (logoutBtn && !logoutBtn.dataset.listenerAttached) {
+                      logoutBtn.addEventListener('click', handleLogout); // Use named function
+                      logoutBtn.dataset.listenerAttached = 'true';
                  }
-             } else { // Logged Out (Shouldn't happen if protection works, but good fallback)
-                 const login = `<a href="login.html" class="btn-link">Login</a>`; const signup = `<a href="signup.html" class="btn btn-gradient"><span>Sign Up</span></a>`;
-                 if (isMobileView()) { const li1 = document.createElement('li'); li1.className = 'auth-link-mobile'; li1.innerHTML = login; navLinksUl.appendChild(li1); const li2 = document.createElement('li'); li2.className = 'auth-link-mobile'; li2.innerHTML = signup; navLinksUl.appendChild(li2); }
+             } else { // Logged Out
+                 const login = `<a href="login.html" class="btn-link ${window.location.pathname.includes('/login.html') ? 'active' : ''}">Login</a>`;
+                 const signup = `<a href="signup.html" class="btn btn-gradient"><span>Sign Up</span></a>`;
+                 if (isMobileView()) {
+                     const li1 = document.createElement('li'); li1.className = 'auth-link-mobile'; li1.innerHTML = login; navLinksUl.appendChild(li1);
+                     const li2 = document.createElement('li'); li2.className = 'auth-link-mobile'; li2.innerHTML = signup; navLinksUl.appendChild(li2);
+                 }
                  else { if (authButtonsContainer) authButtonsContainer.innerHTML = login + signup; }
              }
+             // Ensure listeners are only attached once or removed/re-added correctly
+             document.querySelectorAll('#logout-button-dynamic').forEach(btn => {
+                if(!btn.dataset.listenerAttached) {
+                    btn.addEventListener('click', handleLogout);
+                    btn.dataset.listenerAttached = 'true';
+                }
+             });
          }
 
         // --- Mobile Menu Toggle ---
