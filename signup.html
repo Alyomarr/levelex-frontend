@@ -268,7 +268,6 @@
                 error.status === 422 ||
                 error.message.toLowerCase().includes("user already registered")
               ) {
-                // Keep message, re-enable button
                 submitButton.disabled = false;
                 submitButton.innerHTML = `<span>Sign Up <i class='bx bx-right-arrow-alt'></i></span>`;
               } else {
@@ -285,6 +284,7 @@
                 data.user.identities &&
                 data.user.identities.length === 0
               ) {
+                // Indicates confirmation needed
                 messageDiv.textContent =
                   "Signup successful! Please check your email to confirm your account before logging in. Redirecting...";
               } else {
@@ -313,6 +313,7 @@
     </script>
 
     <script>
+      // --- THIS SCRIPT IS IDENTICAL TO THE ONE IN index.html ---
       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
       const navLinksUl = document.getElementById("nav-links-ul");
       if (mobileMenuBtn && navLinksUl) {
@@ -327,7 +328,7 @@
           }
         });
       } else {
-        console.error("Mobile menu button or nav links UL not found.");
+        console.error("Mobile menu elements not found.");
       }
     </script>
   </body>

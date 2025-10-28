@@ -7,7 +7,7 @@
 
 :root {
   --bg-dark: #0d0f2b; /* Very dark navy blue */
-  --bg-light-blue: #1a237e; /* Slightly lighter blue for gradient */
+  --bg-light-blue: #1e5dc2; /* Slightly lighter blue for gradient */
   --card-bg: rgba(26, 28, 58, 0.7); /* Semi-transparent liquid glass */
   --footer-bg: #10122f;
   --text-white: #f0f1f5;
@@ -37,12 +37,12 @@ html {
 body {
   font-family: "Poppins", sans-serif;
   /* Updated background: Subtle gradient */
+  background-attachment: fixed;
   background: linear-gradient(
     to bottom,
     var(--bg-light-blue) 0%,
-    var(--bg-dark) 15%
+    var(--bg-dark) 10%
   );
-  background-attachment: fixed;
   background-color: var(--bg-dark); /* Fallback */
   color: var(--text-white);
   line-height: 1.6;
@@ -610,6 +610,10 @@ ul {
 @media (max-width: 992px) {
   .container {
     padding: 0 1.5rem;
+  }
+
+  .auth-buttons {
+    display: none;
   }
   /* Mobile Nav specific styles */
   .nav-links,

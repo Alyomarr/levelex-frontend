@@ -216,13 +216,13 @@
                 messageDiv.textContent =
                   "Login failed: Please check your email to confirm your account first.";
               } else {
-                messageDiv.textContent = `Login failed: ${error.message}`;
+                messageDiv.textContent = `Login failed: ${error.message}`; // Handles "Invalid login credentials" etc.
               }
               submitButton.disabled = false;
               submitButton.innerHTML = `<span>Login <i class='bx bx-right-arrow-alt'></i></span>`;
             } else {
-              // Check email confirmation status (optional extra check if needed)
-              // if (data.user && !data.user.email_confirmed_at) { ... }
+              // Optional extra check if needed, but error handling above should cover required confirmation
+              // if (data.user && !data.user.email_confirmed_at && ...) { ... }
 
               console.log("Login successful:", data);
               // Success: INSTANT REDIRECT
@@ -246,6 +246,7 @@
     </script>
 
     <script>
+      // --- THIS SCRIPT IS IDENTICAL TO THE ONE IN index.html ---
       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
       const navLinksUl = document.getElementById("nav-links-ul");
       if (mobileMenuBtn && navLinksUl) {
@@ -260,7 +261,7 @@
           }
         });
       } else {
-        console.error("Mobile menu button or nav links UL not found.");
+        console.error("Mobile menu elements not found.");
       }
     </script>
   </body>

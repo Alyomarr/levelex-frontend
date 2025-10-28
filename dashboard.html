@@ -60,7 +60,7 @@
     <nav class="navbar">
       <div class="container navbar-container">
         <a href="index.html" class="logo">
-          <img src="assets/logo.svg" alt="Levelex Logo" class="logo-icon" />
+          <img src="assets\LevelX-Photoroom.svg" alt="Levelex Logo" class="logo-icon" />
           <span>Levelex</span>
         </a>
         <ul id="nav-links-ul" class="nav-links">
@@ -137,246 +137,190 @@
       </div>
     </footer>
 
-    <script>
-      // --- Initialize Supabase Client ---
-      const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** INTEGRATED **
-      const SUPABASE_ANON_KEY =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** INTEGRATED **
+   <script>
+        // --- Initialize Supabase Client ---
+        const SUPABASE_URL = 'https://mugxkieakyulsoqzrhro.supabase.co'; // ** INTEGRATED **
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8'; // ** INTEGRATED **
 
-      let supabase = null;
-      if (window.supabase) {
-        supabase = window.supabase.createClient(
-          SUPABASE_URL,
-          SUPABASE_ANON_KEY
-        );
-        console.log("Supabase client initialized for dashboard.");
-      } else {
-        console.error("Supabase library not loaded. Redirecting to login.");
-        window.location.href = "/login.html";
-      }
-
-      // --- DOM Elements ---
-      const logoutButton = document.querySelector('.auth-buttons a[href="#"]'); // More specific selector for logout
-      const dashboardContent = document.getElementById("dashboard");
-      const welcomeMessage = document.getElementById("welcome-message");
-      const workflowContainer = document.getElementById(
-        "workflow-buttons-container"
-      );
-      const statsContainer = document.getElementById("analytics-stats");
-
-      // --- Function to handle logout ---
-      async function handleLogout() {
-        if (!supabase) return;
-        const { error } = await supabase.auth.signOut();
-        if (error) {
-          console.error("Error logging out:", error);
-          alert("Logout failed.");
+        let supabase = null;
+        if (window.supabase) {
+            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            console.log('Supabase client initialized for dashboard.');
         } else {
-          console.log("Logged out successfully.");
-          window.location.href = "/login.html";
+            console.error('Supabase library not loaded. Redirecting to login.');
+            window.location.href = '/login.html';
         }
-      }
 
-      // --- Load Available Automations ---
-      async function loadAvailableAutomations(accessToken) {
-        if (!workflowContainer) {
-          console.error("Workflow container not found.");
-          return;
+        // --- DOM Elements ---
+        const logoutButton = document.querySelector('.auth-buttons a[href="#"]'); // More specific selector for logout
+        const dashboardContent = document.getElementById('dashboard');
+        const welcomeMessage = document.getElementById('welcome-message');
+        const workflowContainer = document.getElementById('workflow-buttons-container');
+        const statsContainer = document.getElementById('analytics-stats');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn'); // For mobile menu
+        const navLinksUl = document.getElementById('nav-links-ul'); // For mobile menu
+
+        // --- Function to handle logout ---
+        async function handleLogout() {
+            if (!supabase) return;
+            const { error } = await supabase.auth.signOut();
+            if (error) { console.error('Error logging out:', error); alert('Logout failed.'); }
+            else { console.log('Logged out successfully.'); window.location.href = '/login.html'; }
         }
-        workflowContainer.innerHTML = "<p>Loading your automations...</p>";
-        try {
-          // Calls Vercel function relative to current domain
-          const response = await fetch("/api/get-user-automations", {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "Content-Type": "application/json",
-            },
-          });
-          if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || `Failed (${response.status})`);
-          }
-          const automations = await response.json();
-          workflowContainer.innerHTML = ""; // Clear loading
-          if (!automations || automations.length === 0) {
-            workflowContainer.innerHTML = "<p>No automations assigned yet.</p>";
-            return;
-          }
-          automations.forEach((auto) => {
-            if (!auto || !auto.id || !auto.name) {
-              console.warn("Invalid automation data:", auto);
-              return;
+
+        // --- Load Available Automations ---
+        async function loadAvailableAutomations(accessToken) {
+            if (!workflowContainer) { console.error('Workflow container not found.'); return; }
+            workflowContainer.innerHTML = '<p>Loading your automations...</p>';
+            try {
+                // Calls Vercel function relative to current domain
+                const response = await fetch('/api/get-user-automations', {
+                    method: 'GET', headers: { 'Authorization': `Bearer ${accessToken}`, 'Content-Type': 'application/json' }
+                });
+                if (!response.ok) {
+                    let errorMsg = `Failed (${response.status})`;
+                    try { const errorData = await response.json(); errorMsg = errorData.error || errorMsg; } catch (e) {/* Ignore parse error */}
+                    throw new Error(errorMsg);
+                 }
+                const automations = await response.json();
+                workflowContainer.innerHTML = ''; // Clear loading
+                if (!automations || automations.length === 0) { workflowContainer.innerHTML = '<p>No automations assigned yet.</p>'; return; }
+                automations.forEach(auto => {
+                    if (!auto || !auto.id || !auto.name) { console.warn('Invalid automation data:', auto); return; }
+                    const button = document.createElement('button');
+                    button.className = 'btn btn-gradient'; button.innerHTML = `<span>Run ${auto.name}</span>`;
+                    button.dataset.automationId = auto.id; button.title = auto.description || '';
+                    button.addEventListener('click', handleWorkflowTrigger); workflowContainer.appendChild(button);
+                });
+                console.log('Automations loaded:', automations);
+            } catch (error) {
+                console.error('Error loading automations:', error);
+                workflowContainer.innerHTML = `<p style="color: red;">Error loading automations: ${error.message}</p>`;
             }
-            const button = document.createElement("button");
-            button.className = "btn btn-gradient";
-            button.innerHTML = `<span>Run ${auto.name}</span>`;
-            button.dataset.automationId = auto.id;
-            button.title = auto.description || "";
-            button.addEventListener("click", handleWorkflowTrigger);
-            workflowContainer.appendChild(button);
-          });
-          console.log("Automations loaded:", automations);
-        } catch (error) {
-          console.error("Error loading automations:", error);
-          workflowContainer.innerHTML = `<p style="color: red;">Error loading automations: ${error.message}</p>`;
         }
-      }
 
-      // --- Handle Triggering Workflow ---
-      async function handleWorkflowTrigger(event) {
-        const button = event.currentTarget;
-        const automationId = parseInt(button.dataset.automationId, 10);
-        if (!supabase) return;
-        const {
-          data: { session },
-          error: sessionError,
-        } = await supabase.auth.getSession();
-        if (sessionError || !session?.access_token) {
-          alert("Session error. Please log in again.");
-          console.error("Session error:", sessionError);
-          return;
+        // --- Handle Triggering Workflow ---
+        async function handleWorkflowTrigger(event) {
+            const button = event.currentTarget; const automationId = parseInt(button.dataset.automationId, 10);
+            if (!supabase) return;
+            const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+            if (sessionError || !session?.access_token) { alert('Session error. Please log in again.'); console.error('Session error:', sessionError); return; }
+            const accessToken = session.access_token;
+            if (!automationId) { alert('Error: Missing automation data.'); return; }
+            const originalButtonText = button.innerHTML; button.disabled = true; button.innerHTML = `<span>Running...</span>`;
+            try {
+                // Calls Vercel function relative to current domain
+                const response = await fetch('/api/trigger-workflow', {
+                    method: 'POST', headers: { 'Authorization': `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ automationId: automationId })
+                });
+                const result = await response.json();
+                if (!response.ok) { throw new Error(result.error || `Failed (${response.status})`); }
+                alert(result.message || 'Workflow triggered successfully!'); // Show confirmation
+                loadAnalytics(accessToken); // Reload analytics after trigger
+            } catch (error) {
+                console.error('Workflow trigger failed:', error); alert(`Error: ${error.message}`);
+            } finally { button.disabled = false; button.innerHTML = originalButtonText; }
         }
-        const accessToken = session.access_token;
-        if (!automationId) {
-          alert("Error: Missing automation data.");
-          return;
-        }
-        const originalButtonText = button.innerHTML;
-        button.disabled = true;
-        button.innerHTML = `<span>Running...</span>`;
-        try {
-          // Calls Vercel function relative to current domain
-          const response = await fetch("/api/trigger-workflow", {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ automationId: automationId }),
-          });
-          const result = await response.json();
-          if (!response.ok) {
-            throw new Error(result.error || `Failed (${response.status})`);
-          }
-          alert(result.message || "Workflow triggered successfully!"); // Show confirmation
-          // Optionally reload analytics after trigger
-          loadAnalytics(accessToken);
-        } catch (error) {
-          console.error("Workflow trigger failed:", error);
-          alert(`Error: ${error.message}`);
-        } finally {
-          button.disabled = false;
-          button.innerHTML = originalButtonText;
-        }
-      }
 
-      // --- Load Basic Analytics ---
-      async function loadAnalytics(accessToken) {
-        if (!statsContainer || !supabase) return;
-        statsContainer.innerHTML = "<p>Loading stats...</p>";
-        try {
-          const {
-            data: { user },
-            error: userError,
-          } = await supabase.auth.getUser(accessToken);
-          if (userError || !user)
-            throw userError || new Error("User not found");
-          const userId = user.id;
-          const { count, error: countError } = await supabase
-            .from("AnalyticsEvents")
-            .select("*", { count: "exact", head: true })
-            .eq("user_id", userId)
-            .eq("event_type", "workflow_triggered");
-          if (countError) throw countError;
-          statsContainer.innerHTML = `<p>Workflows Triggered: ${
-            count ?? 0
-          }</p>`;
-          console.log(`Analytics loaded: ${count} triggers.`);
-        } catch (error) {
-          console.error("Error loading analytics:", error.message);
-          statsContainer.innerHTML = `<p style="color: red;">Error loading stats: ${error.message}</p>`;
-        }
-      }
+        // --- Load Basic Analytics ---
+        async function loadAnalytics(accessToken) {
+             if (!statsContainer || !supabase) return;
+             statsContainer.innerHTML = '<p>Loading stats...</p>';
+             try {
+                 const { data: { user }, error: userError } = await supabase.auth.getUser(accessToken);
+                 if (userError || !user) throw userError || new Error('User not found');
+                 const userId = user.id;
+                 const { count, error: countError } = await supabase.from('AnalyticsEvents')
+                     .select('*', { count: 'exact', head: true }).eq('user_id', userId).eq('event_type', 'workflow_triggered');
+                 if (countError) throw countError;
+                 statsContainer.innerHTML = `<p>Workflows Triggered: ${count ?? 0}</p>`;
+                 console.log(`Analytics loaded: ${count} triggers.`);
+             } catch (error) {
+                 console.error('Error loading analytics:', error.message);
+                 statsContainer.innerHTML = `<p style="color: red;">Error loading stats: ${error.message}</p>`;
+             }
+         }
 
-      // --- Load User-Specific Data ---
-      async function loadUserSpecificData(token) {
-        console.log("Loading user-specific data...");
-        await Promise.all([
-          loadAvailableAutomations(token),
-          loadAnalytics(token),
-        ]);
-        console.log("User-specific data loading finished.");
-      }
-
-      // --- Check Authentication State on Page Load ---
-      async function checkAuthState() {
-        if (!supabase) return; // Should have redirected if lib failed
-        const {
-          data: { session },
-          error,
-        } = await supabase.auth.getSession();
-        if (error) {
-          console.error("Error getting session:", error);
-          window.location.href = "/login.html";
-          return;
+        // --- Load User-Specific Data ---
+        async function loadUserSpecificData(token) {
+             console.log("Loading user-specific data...");
+             await Promise.all([ loadAvailableAutomations(token), loadAnalytics(token) ]);
+             console.log("User-specific data loading finished.");
         }
-        if (!session) {
-          console.log("No session, redirecting.");
-          window.location.href = "/login.html";
-        } else {
-          // User is logged in
-          console.log("User logged in:", session.user.email);
-          if (welcomeMessage)
-            welcomeMessage.textContent = `Manage automations and view insights, ${
-              session.user.email || "User"
-            }.`;
-          if (dashboardContent) dashboardContent.style.display = "block"; // Show content
-          if (logoutButton) {
-            logoutButton.addEventListener("click", (e) => {
-              e.preventDefault();
-              handleLogout();
+
+        // --- Check Authentication State on Page Load ---
+        async function checkAuthState() {
+            if (!supabase) return;
+            const { data: { session }, error } = await supabase.auth.getSession();
+            if (error) { console.error('Error getting session:', error); window.location.href = '/login.html'; return; }
+            if (!session) { console.log('No session, redirecting.'); window.location.href = '/login.html'; }
+            else { // User is logged in
+                console.log('User logged in:', session.user.email);
+                if (welcomeMessage) welcomeMessage.textContent = `Manage automations and view insights, ${session.user.email || 'User'}.`;
+                if (dashboardContent) dashboardContent.style.display = 'block'; // Show content
+                if (logoutButton) { logoutButton.addEventListener('click', (e) => { e.preventDefault(); handleLogout(); }); console.log('Logout listener added.'); }
+                else { console.error('Logout button element not found.'); }
+                loadUserSpecificData(session.access_token); // Load data
+            }
+        }
+
+        // --- Run Auth Check When DOM is Ready ---
+        document.addEventListener('DOMContentLoaded', checkAuthState);
+
+        // --- Listen for Auth Changes ---
+        if (supabase) {
+            supabase.auth.onAuthStateChange((event, session) => {
+                if (event === "SIGNED_OUT") { console.log('Detected SIGNED_OUT, redirecting dashboard.'); window.location.href = "/login.html"; }
             });
-            console.log("Logout listener added.");
-          } else {
-            console.error("Logout button element not found.");
-          }
-          loadUserSpecificData(session.access_token); // Load data
         }
-      }
 
-      // --- Run Auth Check When DOM is Ready ---
-      document.addEventListener("DOMContentLoaded", checkAuthState);
+        // --- Mobile Menu Toggle ---
+        if (mobileMenuBtn && navLinksUl) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinksUl.classList.toggle('active');
+                if (navLinksUl.classList.contains('active')) { mobileMenuBtn.classList.remove('bx-menu'); mobileMenuBtn.classList.add('bx-x'); }
+                else { mobileMenuBtn.classList.remove('bx-x'); mobileMenuBtn.classList.add('bx-menu'); }
+            });
+        } else { console.error("Mobile menu elements not found."); }
 
-      // --- Listen for Auth Changes ---
-      if (supabase) {
-        supabase.auth.onAuthStateChange((event, session) => {
-          // If user signs out elsewhere, redirect this page to login
-          if (event === "SIGNED_OUT") {
-            console.log("Detected SIGNED_OUT, redirecting dashboard to login.");
-            window.location.href = "/login.html";
-          }
-        });
-      }
+         // --- Auth State & Navbar Update ---
+         // (Needed on dashboard too for consistency if resize happens)
+         function isMobileView() { const btn = document.getElementById('mobile-menu-btn'); return btn && getComputedStyle(btn).display !== 'none'; }
+         async function updateNavbarBasedOnAuthState() { /* ... Same code as index.html ... */
+             if (!supabase) return;
+             const { data: { session } } = await supabase.auth.getSession();
+             const authButtonsContainer = document.querySelector('.auth-buttons');
+             const navLinksUl = document.getElementById('nav-links-ul');
+             navLinksUl.querySelectorAll('.auth-link-mobile').forEach(el => el.remove());
+             if(authButtonsContainer) authButtonsContainer.innerHTML = '';
+
+             if (session) { // Logged In
+                 const dash = `<a href="dashboard.html" class="btn-link active">Dashboard</a>`; // Add active class here
+                 const logout = `<a href="#" id="logout-button-dynamic" class="btn btn-gradient"><span>Logout</span></a>`;
+                 if (isMobileView()) {
+                     const li1 = document.createElement('li'); li1.className = 'auth-link-mobile'; li1.innerHTML = dash; navLinksUl.appendChild(li1);
+                     const li2 = document.createElement('li'); li2.className = 'auth-link-mobile'; li2.innerHTML = logout; navLinksUl.appendChild(li2);
+                 } else { if (authButtonsContainer) authButtonsContainer.innerHTML = dash + logout; }
+                 const logoutBtn = document.getElementById('logout-button-dynamic');
+                 // Re-add listener if button was recreated
+                 if (logoutBtn && !logoutBtn.dataset.listenerAttached) {
+                      logoutBtn.addEventListener('click', async (e) => { e.preventDefault(); await supabase.auth.signOut(); });
+                      logoutBtn.dataset.listenerAttached = 'true'; // Prevent adding multiple listeners
+                 }
+             } else { // Logged Out (Shouldn't happen if protection works, but good fallback)
+                 const login = `<a href="login.html" class="btn-link">Login</a>`; const signup = `<a href="signup.html" class="btn btn-gradient"><span>Sign Up</span></a>`;
+                 if (isMobileView()) { /* ... add li elements ... */ }
+                 else { if (authButtonsContainer) authButtonsContainer.innerHTML = login + signup; }
+             }
+         }
+         // Initial call might be redundant due to checkAuthState, but safe
+         document.addEventListener('DOMContentLoaded', updateNavbarBasedOnAuthState);
+         // Update on resize
+         let resizeTimer; window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { updateNavbarBasedOnAuthState(); }, 250); });
+
     </script>
-
-    <script>
-      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      const navLinksUl = document.getElementById("nav-links-ul");
-      if (mobileMenuBtn && navLinksUl) {
-        mobileMenuBtn.addEventListener("click", () => {
-          navLinksUl.classList.toggle("active");
-          if (navLinksUl.classList.contains("active")) {
-            mobileMenuBtn.classList.remove("bx-menu");
-            mobileMenuBtn.classList.add("bx-x");
-          } else {
-            mobileMenuBtn.classList.remove("bx-x");
-            mobileMenuBtn.classList.add("bx-menu");
-          }
-        });
-      } else {
-        console.error("Mobile menu button or nav links UL not found.");
-      }
-    </script>
+</body>
+</html>
   </body>
 </html>

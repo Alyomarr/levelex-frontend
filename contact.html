@@ -234,27 +234,64 @@
     </script>
 
     <script>
+      function isMobileView() {
+        const btn = document.getElementById("mobile-menu-btn");
+        return btn && getComputedStyle(btn).display !== "none";
+      }
       async function updateNavbarBasedOnAuthState() {
+        // --- THIS FUNCTION IS IDENTICAL TO THE ONE IN index.html ---
         if (!supabase) return;
         const {
           data: { session },
         } = await supabase.auth.getSession();
         const authButtonsContainer = document.querySelector(".auth-buttons");
-        if (authButtonsContainer) {
-          if (session) {
-            authButtonsContainer.innerHTML = `<a href="dashboard.html" class="btn-link">Dashboard</a><a href="#" id="logout-button-dynamic" class="btn btn-gradient"><span>Logout</span></a>`;
-            const logoutBtn = document.getElementById("logout-button-dynamic");
-            if (logoutBtn) {
-              logoutBtn.addEventListener("click", async (e) => {
-                e.preventDefault();
-                await supabase.auth.signOut();
-              });
-            }
+        const navLinksUl = document.getElementById("nav-links-ul");
+        navLinksUl
+          .querySelectorAll(".auth-link-mobile")
+          .forEach((el) => el.remove());
+        if (authButtonsContainer) authButtonsContainer.innerHTML = "";
+
+        if (session) {
+          // Logged In
+          const dash = `<a href="dashboard.html" class="btn-link">Dashboard</a>`;
+          const logout = `<a href="#" id="logout-button-dynamic" class="btn btn-gradient"><span>Logout</span></a>`;
+          if (isMobileView()) {
+            const li1 = document.createElement("li");
+            li1.className = "auth-link-mobile";
+            li1.innerHTML = dash;
+            navLinksUl.appendChild(li1);
+            const li2 = document.createElement("li");
+            li2.className = "auth-link-mobile";
+            li2.innerHTML = logout;
+            navLinksUl.appendChild(li2);
           } else {
-            authButtonsContainer.innerHTML = `<a href="login.html" class="btn-link">Login</a><a href="signup.html" class="btn btn-gradient"><span>Sign Up</span></a>`;
+            if (authButtonsContainer)
+              authButtonsContainer.innerHTML = dash + logout;
+          }
+          const logoutBtn = document.getElementById("logout-button-dynamic");
+          if (logoutBtn) {
+            logoutBtn.addEventListener("click", async (e) => {
+              e.preventDefault();
+              await supabase.auth.signOut();
+            });
           }
         } else {
-          console.error("Auth buttons container not found.");
+          // Logged Out
+          const login = `<a href="login.html" class="btn-link">Login</a>`;
+          const signup = `<a href="signup.html" class="btn btn-gradient"><span>Sign Up</span></a>`;
+          if (isMobileView()) {
+            const li1 = document.createElement("li");
+            li1.className = "auth-link-mobile";
+            li1.innerHTML = login;
+            navLinksUl.appendChild(li1);
+            const li2 = document.createElement("li");
+            li2.className = "auth-link-mobile";
+            li2.innerHTML = signup;
+            navLinksUl.appendChild(li2);
+          } else {
+            if (authButtonsContainer)
+              authButtonsContainer.innerHTML = login + signup;
+          }
         }
       }
       document.addEventListener(
@@ -267,6 +304,13 @@
           updateNavbarBasedOnAuthState();
         });
       }
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          updateNavbarBasedOnAuthState();
+        }, 250);
+      });
     </script>
 
     <script>
@@ -307,6 +351,7 @@
     </script>
 
     <script>
+      // --- THIS SCRIPT IS IDENTICAL TO THE ONE IN index.html ---
       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
       const navLinksUl = document.getElementById("nav-links-ul");
       if (mobileMenuBtn && navLinksUl) {
@@ -321,7 +366,7 @@
           }
         });
       } else {
-        console.error("Mobile menu button or nav links UL not found.");
+        console.error("Mobile menu elements not found.");
       }
     </script>
   </body>

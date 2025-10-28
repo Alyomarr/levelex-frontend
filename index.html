@@ -240,6 +240,7 @@
     </footer>
 
     <script>
+      // --- Initialize Supabase Client ---
       const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** INTEGRATED **
       const SUPABASE_ANON_KEY =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** INTEGRATED **
@@ -254,10 +255,8 @@
       } else {
         console.error("Supabase library not loaded.");
       }
-    </script>
 
-    <script>
-      // --- Load Dynamic Content for index.html ---
+      // --- Load Dynamic Content ---
       async function loadPublicContent() {
         if (!supabase) return;
         console.log("Loading public content...");
@@ -270,6 +269,7 @@
         console.log("Public content loading finished.");
       }
       async function loadCaseStudies() {
+        /* ... function code from previous responses ... */
         const { data, error } = await supabase.from("CaseStudies").select("*");
         if (error) {
           console.error("Error loading case studies:", error.message);
@@ -290,21 +290,16 @@
                   )
                   .join("")
               : "";
-          card.innerHTML = `
-                    <div class="case-study-img-placeholder"><i class='bx bx-trending-up'></i></div>
-                    <div class="case-study-content">
-                        <span class="client-name">${
-                          study.client || ""
-                        }</span><h3>${study.title || "Case Study"}</h3>
-                        <p>${
-                          study.description || ""
-                        }</p><span class="results-title">Key Results:</span><ul>${resultsHtml}</ul>
-                        <a href="#" class="btn-link">Read Full Case Study <i class='bx bx-right-arrow-alt'></i></a>
-                    </div>`;
+          card.innerHTML = `<div class="case-study-img-placeholder"><i class='bx bx-trending-up'></i></div><div class="case-study-content"><span class="client-name">${
+            study.client || ""
+          }</span><h3>${study.title || "Case Study"}</h3><p>${
+            study.description || ""
+          }</p><span class="results-title">Key Results:</span><ul>${resultsHtml}</ul><a href="#" class="btn-link">Read Full Case Study <i class='bx bx-right-arrow-alt'></i></a></div>`;
           grid.appendChild(card);
         });
       }
       async function loadServices() {
+        /* ... function code from previous responses ... */
         const { data, error } = await supabase.from("Services").select("*");
         if (error) {
           console.error("Error loading services:", error.message);
@@ -325,6 +320,7 @@
         });
       }
       async function loadVision() {
+        /* ... function code from previous responses ... */
         const { data, error } = await supabase.from("Vision").select("*");
         if (error) {
           console.error("Error loading vision:", error.message);
@@ -345,6 +341,7 @@
         });
       }
       async function loadAboutStats() {
+        /* ... function code from previous responses ... */
         const { data, error } = await supabase
           .from("AboutPage")
           .select("*")
@@ -359,65 +356,80 @@
         }
         const statsGrid = document.querySelector(".stats-grid");
         if (statsGrid) {
-          statsGrid.innerHTML = `
-                    <div class="stat-item"><span class="stat-number">${
-                      data.stat_clients || "N/A"
-                    }</span><span class="stat-label">Happy Clients</span></div>
-                    <div class="stat-item"><span class="stat-number">${
-                      data.stat_datapoints || "N/A"
-                    }</span><span class="stat-label">Data Points</span></div>
-                    <div class="stat-item"><span class="stat-number">${
-                      data.stat_uptime || "N/A"
-                    }</span><span class="stat-label">Uptime</span></div>
-                    <div class="stat-item"><span class="stat-number">${
-                      data.stat_support || "N/A"
-                    }</span><span class="stat-label">Support</span></div>`;
+          statsGrid.innerHTML = `<div class="stat-item"><span class="stat-number">${
+            data.stat_clients || "N/A"
+          }</span><span class="stat-label">Happy Clients</span></div><div class="stat-item"><span class="stat-number">${
+            data.stat_datapoints || "N/A"
+          }</span><span class="stat-label">Data Points</span></div><div class="stat-item"><span class="stat-number">${
+            data.stat_uptime || "N/A"
+          }</span><span class="stat-label">Uptime</span></div><div class="stat-item"><span class="stat-number">${
+            data.stat_support || "N/A"
+          }</span><span class="stat-label">Support</span></div>`;
         }
       }
-      document.addEventListener("DOMContentLoaded", loadPublicContent);
-    </script>
 
-    <script>
+      // --- Auth State & Navbar Update ---
+      function isMobileView() {
+        const btn = document.getElementById("mobile-menu-btn");
+        return btn && getComputedStyle(btn).display !== "none";
+      }
       async function updateNavbarBasedOnAuthState() {
         if (!supabase) return;
         const {
           data: { session },
         } = await supabase.auth.getSession();
         const authButtonsContainer = document.querySelector(".auth-buttons");
-        if (authButtonsContainer) {
-          if (session) {
-            authButtonsContainer.innerHTML = `
-                        <a href="dashboard.html" class="btn-link">Dashboard</a>
-                        <a href="#" id="logout-button-dynamic" class="btn btn-gradient"><span>Logout</span></a>`;
-            const logoutBtn = document.getElementById("logout-button-dynamic");
-            if (logoutBtn) {
-              logoutBtn.addEventListener("click", async (e) => {
-                e.preventDefault();
-                await supabase.auth.signOut();
-              });
-            }
+        const navLinksUl = document.getElementById("nav-links-ul");
+        navLinksUl
+          .querySelectorAll(".auth-link-mobile")
+          .forEach((el) => el.remove());
+        if (authButtonsContainer) authButtonsContainer.innerHTML = "";
+
+        if (session) {
+          // Logged In
+          const dash = `<a href="dashboard.html" class="btn-link">Dashboard</a>`;
+          const logout = `<a href="#" id="logout-button-dynamic" class="btn btn-gradient"><span>Logout</span></a>`;
+          if (isMobileView()) {
+            const li1 = document.createElement("li");
+            li1.className = "auth-link-mobile";
+            li1.innerHTML = dash;
+            navLinksUl.appendChild(li1);
+            const li2 = document.createElement("li");
+            li2.className = "auth-link-mobile";
+            li2.innerHTML = logout;
+            navLinksUl.appendChild(li2);
           } else {
-            authButtonsContainer.innerHTML = `
-                        <a href="login.html" class="btn-link">Login</a>
-                        <a href="signup.html" class="btn btn-gradient"><span>Sign Up</span></a>`;
+            if (authButtonsContainer)
+              authButtonsContainer.innerHTML = dash + logout;
+          }
+          const logoutBtn = document.getElementById("logout-button-dynamic");
+          if (logoutBtn) {
+            logoutBtn.addEventListener("click", async (e) => {
+              e.preventDefault();
+              await supabase.auth.signOut();
+            });
           }
         } else {
-          console.error("Auth buttons container not found.");
+          // Logged Out
+          const login = `<a href="login.html" class="btn-link">Login</a>`;
+          const signup = `<a href="signup.html" class="btn btn-gradient"><span>Sign Up</span></a>`;
+          if (isMobileView()) {
+            const li1 = document.createElement("li");
+            li1.className = "auth-link-mobile";
+            li1.innerHTML = login;
+            navLinksUl.appendChild(li1);
+            const li2 = document.createElement("li");
+            li2.className = "auth-link-mobile";
+            li2.innerHTML = signup;
+            navLinksUl.appendChild(li2);
+          } else {
+            if (authButtonsContainer)
+              authButtonsContainer.innerHTML = login + signup;
+          }
         }
       }
-      document.addEventListener(
-        "DOMContentLoaded",
-        updateNavbarBasedOnAuthState
-      );
-      if (supabase) {
-        supabase.auth.onAuthStateChange((event, session) => {
-          console.log("Auth state changed:", event);
-          updateNavbarBasedOnAuthState();
-        });
-      }
-    </script>
 
-    <script>
+      // --- Mobile Menu Toggle ---
       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
       const navLinksUl = document.getElementById("nav-links-ul");
       if (mobileMenuBtn && navLinksUl) {
@@ -432,8 +444,28 @@
           }
         });
       } else {
-        console.error("Mobile menu button or nav links UL not found.");
+        console.error("Mobile menu elements not found.");
       }
+
+      // --- Event Listeners ---
+      document.addEventListener("DOMContentLoaded", () => {
+        loadPublicContent(); // Load content on page load
+        updateNavbarBasedOnAuthState(); // Set initial navbar state
+      });
+      if (supabase) {
+        // Listen for auth changes
+        supabase.auth.onAuthStateChange((event, session) => {
+          console.log("Auth state changed:", event);
+          updateNavbarBasedOnAuthState();
+        });
+      }
+      let resizeTimer; // Update navbar on resize
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          updateNavbarBasedOnAuthState();
+        }, 250);
+      });
     </script>
   </body>
 </html>
