@@ -7,6 +7,7 @@
 
 :root {
   --bg-dark: #0d0f2b; /* Very dark navy blue */
+  --bg-light-blue: #1a237e; /* Slightly lighter blue for gradient */
   --card-bg: rgba(26, 28, 58, 0.7); /* Semi-transparent liquid glass */
   --footer-bg: #10122f;
   --text-white: #f0f1f5;
@@ -35,9 +36,14 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  /* New gradient - lighter blue fades out by 15% */
-  background: linear-gradient(to bottom, #1763c1 0%, #0d0f2b 10%);
-  background-color: #0d0f2b; /* Fallback solid color */
+  /* Updated background: Subtle gradient from lighter to dark blue */
+  background: linear-gradient(
+    to bottom,
+    var(--bg-light-blue) 0%,
+    var(--bg-dark) 15%
+  );
+  background-attachment: fixed; /* Keeps gradient fixed during scroll */
+  background-color: var(--bg-dark); /* Fallback solid color */
   color: var(--text-white);
   line-height: 1.6;
   min-height: 100vh; /* Ensures gradient covers full height */
@@ -50,7 +56,7 @@ body {
 .container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 20px; /* Default padding */
 }
 
 section {
@@ -114,6 +120,7 @@ ul {
   position: relative; /* For animation */
   overflow: hidden; /* For animation */
   z-index: 1; /* For animation */
+  text-align: center; /* Ensure text is centered */
 }
 
 .btn-gradient {
@@ -127,7 +134,7 @@ ul {
 }
 
 .btn-link {
-  color: var(--text-gray); /* Changed to gray for inactive state */
+  color: var(--text-gray); /* Default inactive state */
   font-weight: 600;
   display: inline-flex;
   align-items: center;
@@ -138,27 +145,24 @@ ul {
 /* Active & Hover state for .btn-link */
 .btn-link.active,
 .btn-link:hover {
-  /* New gradient text effect */
   background: var(--gradient-hover); /* Cyan to Purple */
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-
-  /* New glow effect */
   text-shadow: 0 0 8px rgba(0, 255, 255, 0.7), 0 0 15px rgba(138, 43, 226, 0.5);
 }
 
-/* This span holds the text and stays on top */
+/* Span inside button for text/icon alignment and animation layering */
 .btn span {
   position: relative;
   z-index: 2;
-  display: inline-flex; /* To align icons properly */
+  display: inline-flex;
   align-items: center;
   gap: 0.25rem;
 }
 
-/* The new gradient wipe pseudo-element */
+/* Gradient wipe animation pseudo-element */
 .btn::before {
   content: "";
   position: absolute;
@@ -168,7 +172,7 @@ ul {
   height: 100%;
   background: var(--gradient-hover); /* Cyan to Purple */
   transition: width 0.4s ease-out;
-  z-index: -1; /* Behind the text */
+  z-index: -1; /* Behind the text span */
 }
 
 .btn:hover::before {
@@ -193,7 +197,7 @@ ul {
   background: rgba(13, 15, 43, 0.8); /* Slightly transparent background */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 0.5rem 0;
+  padding: 1.2rem 0;
   z-index: 100;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -202,34 +206,34 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* Adjusted padding to shift content left */
+  padding-left: 10px;
+  padding-right: 20px;
+  /* Inherit container properties */
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0; /* Reduced gap since image has margin */
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-white);
 }
-/* Add this to style.css */
-.logo-icon {
-  height: 6rem; /* Adjust size as needed */
-  width: auto; /* Maintain aspect ratio */
-  vertical-align: middle; /* Align with text */
-}
-
-/* Optional: If using SVG and want it colored like the old icon */
-/* .logo-icon path { 
-  fill: url(#yourGradientID); // Requires defining a gradient in SVG or CSS 
-} */
-/* Or just a solid color */
-/* .logo-icon { 
-  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg); // Makes SVG white
-} */
 
 .logo i {
+  /* Style for the old Boxicon (kept for reference) */
   font-size: 1.8rem;
+}
+
+/* Style for the new SVG/Image logo */
+.logo-icon {
+  height: 2.2rem; /* Adjusted height */
+  width: auto;
+  vertical-align: middle;
+  margin-right: 0.5rem; /* Space before 'Levelex' text */
 }
 
 .nav-links {
@@ -493,7 +497,7 @@ ul {
 }
 
 /* ============================================ */
-/* 8. COMPONENT 7: "CONTACT" SECTION */
+/* 8. COMPONENT 7: "CONTACT" SECTION & FORMS */
 /* ============================================ */
 
 .info-grid {
@@ -661,8 +665,9 @@ ul {
 /* ============================================ */
 
 @media (max-width: 992px) {
-  .container {
-    padding: 0 1.5rem;
+  .container,
+  .navbar-container {
+    padding: 0 1.5rem; /* Consistent mobile padding */
   }
 
   .nav-links,
@@ -674,6 +679,8 @@ ul {
     display: block;
   }
 
+  /* Add JS later to toggle nav-links visibility */
+
   .hero h1 {
     font-size: 3rem;
   }
@@ -684,14 +691,12 @@ ul {
   .about-grid {
     grid-template-columns: 1fr;
   }
-
   .feature-grid-3,
   .feature-grid-2,
   .case-study-grid,
   .info-grid {
     grid-template-columns: 1fr;
   }
-
   .footer-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -717,11 +722,9 @@ ul {
   .contact-form .form-row {
     grid-template-columns: 1fr;
   }
-
   .footer-grid {
     grid-template-columns: 1fr;
   }
-
   .section-title {
     font-size: 2rem;
   }
