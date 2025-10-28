@@ -64,14 +64,10 @@
     <nav class="navbar">
       <div class="container navbar-container">
         <a href="index.html#home" class="logo">
-          <img
-            src="LevelX-Photoroom.svg"
-            alt="Levelex Logo"
-            class="logo-icon"
-          />
+          <img src="assets/logo.svg" alt="Levelex Logo" class="logo-icon" />
           <span>Levelex</span>
         </a>
-        <ul class="nav-links">
+        <ul id="nav-links-ul" class="nav-links">
           <li><a href="index.html#home" class="active">Home</a></li>
           <li><a href="index.html#about">About</a></li>
           <li><a href="index.html#vision">Vision</a></li>
@@ -85,7 +81,7 @@
             ><span>Sign Up</span></a
           >
         </div>
-        <i class="bx bx-menu mobile-menu-toggle"></i>
+        <i id="mobile-menu-btn" class="bx bx-menu mobile-menu-toggle"></i>
       </div>
     </nav>
 
@@ -414,6 +410,25 @@
           console.log("Auth state changed:", event);
           updateNavbarBasedOnAuthState();
         });
+      }
+    </script>
+
+    <script>
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const navLinksUl = document.getElementById("nav-links-ul");
+      if (mobileMenuBtn && navLinksUl) {
+        mobileMenuBtn.addEventListener("click", () => {
+          navLinksUl.classList.toggle("active");
+          if (navLinksUl.classList.contains("active")) {
+            mobileMenuBtn.classList.remove("bx-menu");
+            mobileMenuBtn.classList.add("bx-x");
+          } else {
+            mobileMenuBtn.classList.remove("bx-x");
+            mobileMenuBtn.classList.add("bx-menu");
+          }
+        });
+      } else {
+        console.error("Mobile menu button or nav links UL not found.");
       }
     </script>
   </body>

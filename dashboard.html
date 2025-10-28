@@ -29,17 +29,15 @@
     <link rel="stylesheet" href="style.css" />
 
     <style>
-      /* Style for the active "Dashboard" link */
       .auth-buttons .btn-link.active {
         color: var(--text-white);
         text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
       }
-      /* Basic dashboard layout styles */
       .dashboard-content {
-        padding-top: 5rem; /* Add padding below navbar */
+        padding-top: 5rem;
         text-align: center;
-        min-height: calc(100vh - 250px); /* Adjust based on footer height */
-        display: none; /* Initially hide content */
+        min-height: calc(100vh - 250px);
+        display: none;
       }
       .dashboard-content .card {
         max-width: 600px;
@@ -55,21 +53,17 @@
       #analytics-stats p,
       #workflow-buttons-container p {
         color: var(--text-gray);
-      } /* Style loading messages */
+      }
     </style>
   </head>
   <body>
     <nav class="navbar">
       <div class="container navbar-container">
         <a href="index.html" class="logo">
-          <img
-            src="LevelX-Photoroom.svg"
-            alt="Levelex Logo"
-            class="logo-icon"
-          />
+          <img src="assets/logo.svg" alt="Levelex Logo" class="logo-icon" />
           <span>Levelex</span>
         </a>
-        <ul class="nav-links">
+        <ul id="nav-links-ul" class="nav-links">
           <li><a href="index.html#home">Home</a></li>
           <li><a href="index.html#about">About</a></li>
           <li><a href="index.html#vision">Vision</a></li>
@@ -81,7 +75,7 @@
           <a href="dashboard.html" class="btn-link active">Dashboard</a>
           <a href="#" class="btn btn-gradient"><span>Logout</span></a>
         </div>
-        <i class="bx bx-menu mobile-menu-toggle"></i>
+        <i id="mobile-menu-btn" class="bx bx-menu mobile-menu-toggle"></i>
       </div>
     </nav>
 
@@ -93,14 +87,10 @@
         <p class="section-subheadline" id="welcome-message">
           Loading your information...
         </p>
-
         <div class="card">
           <h3>Your Stats (from Analytics)</h3>
-          <div id="analytics-stats">
-            <p>Loading stats...</p>
-          </div>
+          <div id="analytics-stats"><p>Loading stats...</p></div>
         </div>
-
         <div class="card">
           <h3>Available Automations</h3>
           <div id="workflow-buttons-container">
@@ -166,7 +156,7 @@
       }
 
       // --- DOM Elements ---
-      const logoutButton = document.querySelector('.auth-buttons a[href="#"]'); // More specific selector
+      const logoutButton = document.querySelector('.auth-buttons a[href="#"]'); // More specific selector for logout
       const dashboardContent = document.getElementById("dashboard");
       const welcomeMessage = document.getElementById("welcome-message");
       const workflowContainer = document.getElementById(
@@ -229,7 +219,7 @@
           console.log("Automations loaded:", automations);
         } catch (error) {
           console.error("Error loading automations:", error);
-          workflowContainer.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+          workflowContainer.innerHTML = `<p style="color: red;">Error loading automations: ${error.message}</p>`;
         }
       }
 
@@ -349,7 +339,7 @@
             });
             console.log("Logout listener added.");
           } else {
-            console.error("Logout button not found.");
+            console.error("Logout button element not found.");
           }
           loadUserSpecificData(session.access_token); // Load data
         }
@@ -367,6 +357,25 @@
             window.location.href = "/login.html";
           }
         });
+      }
+    </script>
+
+    <script>
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const navLinksUl = document.getElementById("nav-links-ul");
+      if (mobileMenuBtn && navLinksUl) {
+        mobileMenuBtn.addEventListener("click", () => {
+          navLinksUl.classList.toggle("active");
+          if (navLinksUl.classList.contains("active")) {
+            mobileMenuBtn.classList.remove("bx-menu");
+            mobileMenuBtn.classList.add("bx-x");
+          } else {
+            mobileMenuBtn.classList.remove("bx-x");
+            mobileMenuBtn.classList.add("bx-menu");
+          }
+        });
+      } else {
+        console.error("Mobile menu button or nav links UL not found.");
       }
     </script>
   </body>

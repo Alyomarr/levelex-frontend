@@ -46,7 +46,6 @@
 
     <style>
       .auth-buttons .btn-link.active {
-        /* Keep page-specific styles if needed */
         color: var(--text-white);
         text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
       }
@@ -56,14 +55,10 @@
     <nav class="navbar">
       <div class="container navbar-container">
         <a href="index.html" class="logo">
-          <img
-            src="LevelX-Photoroom.svg"
-            alt="Levelex Logo"
-            class="logo-icon"
-          />
+          <img src="assets/logo.svg" alt="Levelex Logo" class="logo-icon" />
           <span>Levelex</span>
         </a>
-        <ul class="nav-links">
+        <ul id="nav-links-ul" class="nav-links">
           <li><a href="index.html#home">Home</a></li>
           <li><a href="index.html#about">About</a></li>
           <li><a href="index.html#vision">Vision</a></li>
@@ -77,7 +72,7 @@
             ><span>Sign Up</span></a
           >
         </div>
-        <i class="bx bx-menu mobile-menu-toggle"></i>
+        <i id="mobile-menu-btn" class="bx bx-menu mobile-menu-toggle"></i>
       </div>
     </nav>
 
@@ -222,18 +217,8 @@
               submitButton.disabled = false;
               submitButton.innerHTML = `<span>Login <i class='bx bx-right-arrow-alt'></i></span>`;
             } else {
-              // Check email confirmation status (Supabase might still log in but user object shows lack of confirmation)
-              // Note: If 'Confirm Email' is OFF in Supabase, email_confirmed_at might be null initially.
-              // We rely on the error check above if confirmation is strictly required *before* login.
-              if (
-                data.user &&
-                data.user.email_confirmed_at === null &&
-                data.session
-              ) {
-                console.warn("User logged in but email is not confirmed.");
-                // Decide if you want to allow access or force confirmation
-                // For now, we proceed as Supabase granted a session
-              }
+              // Check email confirmation status (optional extra check if needed)
+              // if (data.user && !data.user.email_confirmed_at) { ... }
 
               console.log("Login successful:", data);
               // Success: INSTANT REDIRECT
@@ -253,6 +238,25 @@
         if (typeof supabase === "undefined")
           console.error("Supabase client not initialized.");
         if (!messageDiv) console.error("Form message div not found.");
+      }
+    </script>
+
+    <script>
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const navLinksUl = document.getElementById("nav-links-ul");
+      if (mobileMenuBtn && navLinksUl) {
+        mobileMenuBtn.addEventListener("click", () => {
+          navLinksUl.classList.toggle("active");
+          if (navLinksUl.classList.contains("active")) {
+            mobileMenuBtn.classList.remove("bx-menu");
+            mobileMenuBtn.classList.add("bx-x");
+          } else {
+            mobileMenuBtn.classList.remove("bx-x");
+            mobileMenuBtn.classList.add("bx-menu");
+          }
+        });
+      } else {
+        console.error("Mobile menu button or nav links UL not found.");
       }
     </script>
   </body>

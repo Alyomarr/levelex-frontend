@@ -1,5 +1,5 @@
 /* ============================================ */
-/* 0. GLOBAL STYLES & VARIABLES */
+/* 0. GLOBAL STYLES & VARIABLES                 */
 /* ============================================ */
 
 /* Import Google Font */
@@ -36,21 +36,21 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  /* Updated background: Subtle gradient from lighter to dark blue */
+  /* Updated background: Subtle gradient */
   background: linear-gradient(
     to bottom,
     var(--bg-light-blue) 0%,
     var(--bg-dark) 15%
   );
-  background-attachment: fixed; /* Keeps gradient fixed during scroll */
-  background-color: var(--bg-dark); /* Fallback solid color */
+  background-attachment: fixed;
+  background-color: var(--bg-dark); /* Fallback */
   color: var(--text-white);
   line-height: 1.6;
-  min-height: 100vh; /* Ensures gradient covers full height */
+  min-height: 100vh;
 }
 
 /* ============================================ */
-/* 1. UTILITY CLASSES */
+/* 1. UTILITY CLASSES                           */
 /* ============================================ */
 
 .container {
@@ -78,7 +78,7 @@ ul {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent; /* Fallback */
+  color: transparent;
 }
 
 .section-title {
@@ -111,41 +111,44 @@ ul {
 .btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  border-radius: 50px; /* Pill-shaped */
+  border-radius: 50px;
   font-weight: 600;
   font-size: 1rem;
   transition: all 0.3s ease;
   cursor: pointer;
   border: none;
-  position: relative; /* For animation */
-  overflow: hidden; /* For animation */
-  z-index: 1; /* For animation */
-  text-align: center; /* Ensure text is centered */
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  text-align: center;
+}
+.btn:disabled {
+  /* Style for disabled buttons */
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .btn-gradient {
   background: var(--gradient);
   color: var(--text-white);
 }
-
-.btn-gradient:hover {
-  box-shadow: 0 0 15px var(--accent-cyan), 0 0 25px var(--accent-purple); /* Enhanced glow */
+.btn-gradient:hover:not(:disabled) {
+  /* Only apply hover if not disabled */
+  box-shadow: 0 0 15px var(--accent-cyan), 0 0 25px var(--accent-purple);
   transform: translateY(-2px);
 }
 
 .btn-link {
-  color: var(--text-gray); /* Default inactive state */
+  color: var(--text-gray);
   font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
   transition: all 0.3s ease;
 }
-
-/* Active & Hover state for .btn-link */
 .btn-link.active,
 .btn-link:hover {
-  background: var(--gradient-hover); /* Cyan to Purple */
+  background: var(--gradient-hover);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -153,7 +156,6 @@ ul {
   text-shadow: 0 0 8px rgba(0, 255, 255, 0.7), 0 0 15px rgba(138, 43, 226, 0.5);
 }
 
-/* Span inside button for text/icon alignment and animation layering */
 .btn span {
   position: relative;
   z-index: 2;
@@ -161,8 +163,6 @@ ul {
   align-items: center;
   gap: 0.25rem;
 }
-
-/* Gradient wipe animation pseudo-element */
 .btn::before {
   content: "";
   position: absolute;
@@ -170,12 +170,11 @@ ul {
   left: 0;
   width: 0;
   height: 100%;
-  background: var(--gradient-hover); /* Cyan to Purple */
+  background: var(--gradient-hover);
   transition: width 0.4s ease-out;
-  z-index: -1; /* Behind the text span */
+  z-index: -1;
 }
-
-.btn:hover::before {
+.btn:hover:not(:disabled)::before {
   width: 100%;
 }
 
@@ -187,14 +186,14 @@ ul {
 }
 
 /* ============================================ */
-/* 2. COMPONENT 1: NAVIGATION BAR */
+/* 2. COMPONENT 1: NAVIGATION BAR               */
 /* ============================================ */
 
 .navbar {
   position: sticky;
   top: 0;
   width: 100%;
-  background: rgba(13, 15, 43, 0.8); /* Slightly transparent background */
+  background: rgba(13, 15, 43, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 1.2rem 0;
@@ -206,10 +205,9 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* Adjusted padding to shift content left */
+  /* Adjusted padding */
   padding-left: 10px;
   padding-right: 20px;
-  /* Inherit container properties */
   max-width: 1100px;
   margin: 0 auto;
 }
@@ -217,36 +215,30 @@ ul {
 .logo {
   display: flex;
   align-items: center;
-  gap: 0; /* Reduced gap since image has margin */
+  gap: 0;
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-white);
 }
 
-.logo i {
-  /* Style for the old Boxicon (kept for reference) */
-  font-size: 1.8rem;
-}
-
-/* Style for the new SVG/Image logo */
+/* Style for the SVG/Image logo */
 .logo-icon {
   height: 2.2rem; /* Adjusted height */
   width: auto;
   vertical-align: middle;
-  margin-right: 0.5rem; /* Space before 'Levelex' text */
+  margin-right: 0.5rem;
 }
 
 .nav-links {
+  /* Desktop links container */
   display: flex;
   gap: 2rem;
 }
-
 .nav-links a {
   color: var(--text-gray);
   font-weight: 600;
   padding-bottom: 0.25rem;
 }
-
 .nav-links a.active,
 .nav-links a:hover {
   color: var(--text-white);
@@ -254,19 +246,22 @@ ul {
 }
 
 .auth-buttons {
+  /* Desktop auth buttons container */
   display: flex;
   align-items: center;
   gap: 1.5rem;
 }
 
 .mobile-menu-toggle {
-  display: none; /* Hidden on desktop */
+  /* Hamburger icon */
+  display: none; /* Initially hidden on desktop */
   font-size: 2rem;
   cursor: pointer;
+  color: var(--text-white);
 }
 
 /* ============================================ */
-/* 3. COMPONENT 2: HERO SECTION */
+/* 3. COMPONENT 2: HERO SECTION                 */
 /* ============================================ */
 
 .hero {
@@ -275,48 +270,42 @@ ul {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding-top: 0; /* Override section padding */
+  padding-top: 0;
 }
-
 .hero-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width: 800px;
 }
-
 .hero h1 {
   font-size: 4.5rem;
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
-
 .hero h1 span {
   display: block;
   font-size: 5.5rem;
 }
-
 .hero p {
   font-size: 1.2rem;
   color: var(--text-gray);
   margin-bottom: 2rem;
   max-width: 600px;
 }
-
 .cta-buttons {
   display: flex;
   gap: 1.5rem;
   align-items: center;
 }
-
 .cta-buttons .btn i {
   font-size: 1.2rem;
   vertical-align: middle;
 }
 
 /* ============================================ */
-/* 4. COMPONENT 3: "ABOUT US" SECTION */
+/* 4. COMPONENT 3: "ABOUT US" SECTION           */
 /* ============================================ */
 
 .about-grid {
@@ -325,46 +314,39 @@ ul {
   gap: 3rem;
   align-items: center;
 }
-
 .about-text p {
   margin-bottom: 1.5rem;
   color: var(--text-gray);
 }
-
 .about-text p:first-child {
   color: var(--text-white);
   font-size: 1.1rem;
 }
-
 .stats-card {
   border: 1px solid var(--accent-cyan);
   box-shadow: var(--glow-shadow);
 }
-
 .stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
 }
-
 .stat-item {
   text-align: center;
 }
-
 .stat-number {
   display: block;
   font-size: 2.5rem;
   font-weight: 700;
   color: var(--accent-cyan);
 }
-
 .stat-label {
   color: var(--text-gray);
   font-size: 0.9rem;
 }
 
 /* ============================================ */
-/* 5. COMPONENT 4: "OUR VISION" SECTION */
+/* 5. COMPONENT 4: "OUR VISION" SECTION         */
 /* ============================================ */
 
 .feature-grid-3 {
@@ -372,23 +354,20 @@ ul {
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
-
 .feature-card {
   text-align: center;
 }
-
 .feature-card h3 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
-
 .feature-card p {
   color: var(--text-gray);
   font-size: 0.95rem;
 }
 
 /* ============================================ */
-/* 6. COMPONENT 5: "WHAT WE DO" SECTION */
+/* 6. COMPONENT 5: "WHAT WE DO" SECTION         */
 /* ============================================ */
 
 .feature-grid-2 {
@@ -396,23 +375,20 @@ ul {
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 }
-
 .feature-card-large {
   padding: 2rem;
 }
-
 .feature-card-large h3 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
-
 .feature-card-large p {
   color: var(--text-gray);
   font-size: 0.95rem;
 }
 
 /* ============================================ */
-/* 7. COMPONENT 6: "CASE STUDIES" SECTION */
+/* 7. COMPONENT 6: "CASE STUDIES" SECTION       */
 /* ============================================ */
 
 .case-study-grid {
@@ -420,14 +396,12 @@ ul {
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
-
 .case-study-card {
   padding: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
-
 .case-study-img-placeholder {
   height: 180px;
   background: linear-gradient(rgba(26, 28, 58, 0.9), rgba(26, 28, 58, 0.7));
@@ -435,49 +409,41 @@ ul {
   align-items: center;
   justify-content: center;
 }
-
 .case-study-img-placeholder i {
   font-size: 4rem;
   color: var(--accent-cyan);
   opacity: 0.5;
 }
-
 .case-study-content {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Makes card content fill space */
+  flex-grow: 1;
 }
-
 .client-name {
   font-size: 0.9rem;
   color: var(--accent-cyan);
   font-weight: 600;
   margin-bottom: 0.25rem;
 }
-
 .case-study-content h3 {
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
 }
-
 .case-study-content p {
   color: var(--text-gray);
   font-size: 0.9rem;
   margin-bottom: 1rem;
 }
-
 .results-title {
   font-size: 0.9rem;
   color: var(--text-white);
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
-
 .case-study-content ul {
   margin-bottom: 1.5rem;
 }
-
 .case-study-content ul li {
   color: var(--text-gray);
   font-size: 0.9rem;
@@ -486,18 +452,16 @@ ul {
   gap: 0.5rem;
   margin-bottom: 0.25rem;
 }
-
 .case-study-content ul i {
   color: var(--accent-cyan);
   font-size: 1.1rem;
 }
-
 .case-study-content .btn-link {
-  margin-top: auto; /* Pushes link to the bottom */
-}
+  margin-top: auto;
+} /* Pushes link to bottom */
 
 /* ============================================ */
-/* 8. COMPONENT 7: "CONTACT" SECTION & FORMS */
+/* 8. COMPONENT 7: "CONTACT" SECTION & FORMS    */
 /* ============================================ */
 
 .info-grid {
@@ -506,11 +470,9 @@ ul {
   gap: 1.5rem;
   margin-bottom: 3rem;
 }
-
 .info-card {
   text-align: center;
 }
-
 .info-card h3 {
   margin-bottom: 0.25rem;
 }
@@ -521,55 +483,46 @@ ul {
   border: 1px solid var(--accent-cyan);
   box-shadow: var(--glow-shadow);
 }
-
 .contact-form-card h3 {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
 }
-
 .contact-form .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
 }
-
 .contact-form .form-group {
   margin-bottom: 1.5rem;
 }
-
 .contact-form label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
 }
-
 .contact-form input,
 .contact-form textarea {
   width: 100%;
   padding: 0.75rem 1rem;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  background: #0d0f2b; /* Dark background */
+  background: #0d0f2b;
   color: var(--text-white);
   font-family: "Poppins", sans-serif;
 }
-
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
   border-color: var(--accent-cyan);
 }
-
 .btn-full {
   width: 100%;
 }
-
 .btn-full i {
   font-size: 1.2rem;
   vertical-align: middle;
 }
 
-/* Style for the Login/Signup page switch link */
 .form-switch-link {
   text-align: center;
   margin-top: 1.5rem;
@@ -586,19 +539,17 @@ ul {
 }
 
 /* ============================================ */
-/* 9. COMPONENT 8: FINAL CTA */
+/* 9. COMPONENT 8: FINAL CTA                    */
 /* ============================================ */
 
 .final-cta {
-  padding-top: 0; /* No top padding, just above footer */
+  padding-top: 0;
 }
-
 .final-cta-card {
   text-align: center;
   border: 1px solid var(--accent-cyan);
   box-shadow: var(--glow-shadow);
 }
-
 .final-cta-card p {
   font-size: 1.5rem;
   font-weight: 600;
@@ -607,51 +558,43 @@ ul {
 }
 
 /* ============================================ */
-/* 10. COMPONENT 9: FOOTER */
+/* 10. COMPONENT 9: FOOTER                      */
 /* ============================================ */
 
 .footer {
   background: var(--footer-bg);
   padding-top: 4rem;
 }
-
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 2rem;
   margin-bottom: 3rem;
 }
-
 .footer-col .logo span {
   font-size: 1.5rem;
   font-weight: 700;
 }
-
 .footer-col p {
   color: var(--text-gray);
   font-size: 0.9rem;
   margin-top: 0.5rem;
   max-width: 250px;
 }
-
 .footer-col h3 {
   font-size: 1.1rem;
   margin-bottom: 1rem;
 }
-
 .footer-col ul li {
   margin-bottom: 0.5rem;
 }
-
 .footer-col ul a {
   color: var(--text-gray);
   font-size: 0.95rem;
 }
-
 .footer-col ul a:hover {
   color: var(--text-white);
 }
-
 .copyright-bar {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1.5rem 0;
@@ -661,33 +604,60 @@ ul {
 }
 
 /* ============================================ */
-/* 11. RESPONSIVE DESIGN (Mobile) */
+/* 11. RESPONSIVE DESIGN (Mobile)               */
 /* ============================================ */
 
 @media (max-width: 992px) {
-  .container,
-  .navbar-container {
-    padding: 0 1.5rem; /* Consistent mobile padding */
+  .container {
+    padding: 0 1.5rem;
   }
-
+  /* Mobile Nav specific styles */
   .nav-links,
   .auth-buttons {
-    display: none; /* Hide on mobile by default */
+    display: none; /* Hide desktop versions */
   }
-
-  .mobile-menu-toggle {
+  .nav-links {
+    /* Style mobile dropdown */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgba(13, 15, 43, 0.95);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    flex-direction: column;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 99;
+  }
+  .nav-links.active {
+    display: flex; /* Show dropdown when active */
+  }
+  .nav-links li {
+    text-align: center;
+    margin: 0.5rem 0;
+  }
+  .nav-links a {
+    border-bottom: none;
+    padding: 0.5rem 1rem;
     display: block;
   }
+  .nav-links a.active,
+  .nav-links a:hover {
+    color: var(--accent-cyan);
+    border-bottom: none;
+  }
+  .mobile-menu-toggle {
+    display: block; /* Show hamburger icon */
+  }
 
-  /* Add JS later to toggle nav-links visibility */
-
+  /* General layout adjustments */
   .hero h1 {
     font-size: 3rem;
   }
   .hero h1 span {
     font-size: 3.5rem;
   }
-
   .about-grid {
     grid-template-columns: 1fr;
   }
@@ -703,22 +673,23 @@ ul {
 }
 
 @media (max-width: 576px) {
+  .navbar-container {
+    padding-left: 15px;
+    padding-right: 15px;
+  } /* Adjust padding for small screens */
   .hero h1 {
     font-size: 2.5rem;
   }
   .hero h1 span {
     font-size: 3rem;
   }
-
   .cta-buttons {
     flex-direction: column;
     width: 100%;
   }
   .cta-buttons a {
     width: 100%;
-    text-align: center;
   }
-
   .contact-form .form-row {
     grid-template-columns: 1fr;
   }
