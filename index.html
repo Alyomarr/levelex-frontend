@@ -1,408 +1,416 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Levelex - Elevate Your Digital Presence</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <title>Levelex - AI-Architected Automation Solutions</title>
+    <meta
+      name="description"
+      content="Elevate your business with Levelex. We provide cutting-edge, AI-architected automation solutions and intelligent workflows tailored to your needs."
+    />
+    <meta
+      name="keywords"
+      content="AI, automation, workflow automation, n8n, intelligent solutions, business process automation, Levelex, SaaS"
+    />
+    <meta name="author" content="Levelex" />
+
+    <meta
+      property="og:title"
+      content="Levelex - AI-Architected Automation Solutions"
+    />
+    <meta
+      property="og:description"
+      content="Elevate your business with cutting-edge, AI-architected automation solutions and intelligent workflows."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://your-levelex-domain.com/" />
+    <meta
+      property="og:image"
+      content="https://your-levelex-domain.com/assets/og-image.png"
+    />
+    <meta property="og:site_name" content="Levelex" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Levelex - AI-Architected Automation Solutions"
+    />
+    <meta
+      name="twitter:description"
+      content="Elevate your business with cutting-edge, AI-architected automation solutions and intelligent workflows."
+    />
+    <meta
+      name="twitter:image"
+      content="https://your-levelex-domain.com/assets/twitter-image.png"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <nav class="navbar">
-        <div class="container navbar-container">
-            <a href="index.html#home" class="logo">
-                <img src="LevelX-Photoroom.svg" alt="Levelex Logo" class="logo-icon"> <span>Levelex</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html#home" class="active">Home</a></li>
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#vision">Vision</a></li>
-                <li><a href="index.html#what-we-do">What We Do</a></li>
-                <li><a href="index.html#case-studies">Case Studies</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <div class="auth-buttons">
-                <a href="dashboard.html" class="btn-link">Dashboard</a>
-                <a href="login.html" class="btn btn-gradient"><span>Login</span></a>
-            </div>
-            <i class='bx bx-menu mobile-menu-toggle'></i>
+      <div class="container navbar-container">
+        <a href="index.html#home" class="logo">
+          <img src="assets/logo.svg" alt="Levelex Logo" class="logo-icon" />
+          <span>Levelex</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html#home" class="active">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#vision">Vision</a></li>
+          <li><a href="index.html#what-we-do">What We Do</a></li>
+          <li><a href="index.html#case-studies">Case Studies</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="auth-buttons">
+          <a href="login.html" class="btn-link">Login</a>
+          <a href="signup.html" class="btn btn-gradient"
+            ><span>Sign Up</span></a
+          >
         </div>
+        <i class="bx bx-menu mobile-menu-toggle"></i>
+      </div>
     </nav>
 
     <section id="home" class="hero">
-        <div class="container hero-content">
-            <h1>
-                Elevate Your
-                <span class="gradient-text">Digital Presence</span>
-            </h1>
-            <p>
-                Levelex is a cutting-edge platform providing AI-architected automation solutions
-                using workflows built in n8n and integrated into client systems.
-            </p>
-            <div class="cta-buttons">
-                <a href="#" class="btn btn-gradient">
-                    <span>Get Started <i class='bx bx-right-arrow-alt'></i></span>
-                </a>
-                <a href="#" class="btn-link">Learn More</a>
-            </div>
+      <div class="container hero-content">
+        <h1>
+          Elevate Your
+          <span class="gradient-text">Digital Presence</span>
+        </h1>
+        <p>
+          Levelex is a cutting-edge platform providing AI-architected automation
+          solutions using workflows built to integrate seamlessly into client
+          systems.
+        </p>
+        <div class="cta-buttons">
+          <a href="#contact" class="btn btn-gradient">
+            <span>Get Started <i class="bx bx-right-arrow-alt"></i></span>
+          </a>
+          <a href="#about" class="btn-link">Learn More</a>
         </div>
+      </div>
     </section>
 
     <section id="about" class="about-us">
-        <div class="container">
-            <h2 class="section-title">About <span class="gradient-text">Levelex</span></h2>
-            <div class="about-grid">
-                <div class="about-text">
-                    <p>Levelex was founded on the principle that technology should be an enabler, not a barrier. We saw countless businesses struggling with fragmented systems, manual processes, and data silos that stifled growth and innovation.</p>
-                    <p>Our mission is to democratize intelligent automation. We provide the tools and expertise to connect disparate apps, streamline complex workflows, and unlock the true potential of your data, allowing you to focus on what truly matters: your business.</p>
-                    <p>With a deep focus on AI-architected solutions and robust n8n integrations, we build scalable systems that grow with you, ensuring you're always one step ahead.</p>
-                </div>
-                <div class="stats-card card">
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-number">500+</span>
-                            <span class="stat-label">Happy Clients</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">10M+</span>
-                            <span class="stat-label">Data Points</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">99.9%</span>
-                            <span class="stat-label">Uptime</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">24/7</span>
-                            <span class="stat-label">Support</span>
-                        </div>
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="section-title">
+          About <span class="gradient-text">Levelex</span>
+        </h2>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              Levelex was founded on the principle that technology should be an
+              enabler, not a barrier. We saw countless businesses struggling
+              with fragmented systems, manual processes, and data silos that
+              stifled growth and innovation.
+            </p>
+            <p>
+              Our mission is to democratize intelligent automation. We provide
+              the tools and expertise to connect disparate apps, streamline
+              complex workflows, and unlock the true potential of your data,
+              allowing you to focus on what truly matters: your business.
+            </p>
+            <p>
+              With a deep focus on AI-architected solutions and robust
+              integrations, we build scalable systems that grow with you,
+              ensuring you're always one step ahead.
+            </p>
+          </div>
+          <div class="stats-card card">
+            <div class="stats-grid">
+              <p>Loading stats...</p>
             </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <section id="vision" class="vision">
-        <div class="container">
-            <h2 class="section-title">Our <span class="gradient-text">Vision</span></h2>
-            <p class="section-subheadline">
-                To empower businesses worldwide with intelligent, scalable solutions...
-            </p>
-            <div class="feature-grid-3">
-                <div class="card feature-card">
-                    <i class='bx bxs-rocket card-icon'></i>
-                    <h3>Innovation First</h3>
-                    <p>We leverage the latest in AI and automation to deliver truly next-generation solutions.</p>
-                </div>
-                <div class="card feature-card">
-                    <i class='bx bxs-bullseye card-icon'></i>
-                    <h3>Results Driven</h3>
-                    <p>Our success is measured by your success. We focus on delivering tangible, measurable outcomes.</p>
-                </div>
-                <div class="card feature-card">
-                    <i class='bx bxs-group card-icon'></i>
-                    <h3>Client Focused</h3>
-                    <p>We partner with you to understand your unique challenges and build custom-tailored solutions.</p>
-                </div>
-            </div>
+      <div class="container">
+        <h2 class="section-title">
+          Our <span class="gradient-text">Vision</span>
+        </h2>
+        <p class="section-subheadline">
+          To empower businesses worldwide with intelligent, scalable
+          solutions...
+        </p>
+        <div class="feature-grid-3">
+          <p>Loading vision items...</p>
         </div>
+      </div>
     </section>
 
     <section id="what-we-do" class="what-we-do">
-        <div class="container">
-            <h2 class="section-title">What We <span class="gradient-text">Do</span></h2>
-            <p class="section-subheadline">
-                Comprehensive solutions tailored to your business needs.
-            </p>
-            <div class="feature-grid-2">
-                <div class="card feature-card-large">
-                    <i class='bx bxs-bar-chart-alt-2 card-icon'></i>
-                    <h3>Analytics & Insights</h3>
-                    <p>Turn raw data into actionable intelligence with our advanced AI-driven analytics dashboards.</p>
-                </div>
-                <div class="card feature-card-large">
-                    <i class='bx bxs-shield-alt-2 card-icon'></i>
-                    <h3>Security & Compliance</h3>
-                    <p>Rest easy with enterprise-grade security and built-in compliance for GDPR, HIPAA, and more.</p>
-                </div>
-                <div class="card feature-card-large">
-                    <i class='bx bxs-bolt card-icon'></i>
-                    <h3>Performance Optimization</h3>
-                    <p>We streamline your n8n workflows and database queries for lightning-fast execution.</p>
-                </div>
-                <div class="card feature-card-large">
-                    <i class='bx bxs-server card-icon'></i>
-                    <h3>Scalable Infrastructure</h3>
-                    <p>Our solutions are built on cloud-native architecture that scales with you, from startup to enterprise.</p>
-                </div>
-            </div>
+      <div class="container">
+        <h2 class="section-title">
+          What We <span class="gradient-text">Do</span>
+        </h2>
+        <p class="section-subheadline">
+          Comprehensive solutions tailored to your business needs.
+        </p>
+        <div class="feature-grid-2">
+          <p>Loading services...</p>
         </div>
+      </div>
     </section>
 
     <section id="case-studies" class="case-studies">
-        <div class="container">
-            <h2 class="section-title">Our <span class="gradient-text">Case Studies</span></h2>
-            <p class="section-subheadline">
-                Discover how we've helped businesses transform, scale, and succeed...
-            </p>
-            <div class="case-study-grid">
-                <div class="card case-study-card">
-                    <div class="case-study-img-placeholder">
-                        <i class='bx bx-trending-up'></i>
-                    </div>
-                    <div class="case-study-content">
-                        <span class="client-name">Enterprise Systems Ltd.</span>
-                        <h3>Cloud Migration Success</h3>
-                        <p>Migrated a legacy system of 100+ apps to a unified, AI-driven automation platform.</p>
-                        <span class="results-title">Key Results:</span>
-                        <ul>
-                            <li><i class='bx bxs-check-circle'></i> 40% reduction in operating costs</li>
-                            <li><i class='bx bxs-check-circle'></i> 300% faster process execution</li>
-                            <li><i class='bx bxs-check-circle'></i> 99.99% system uptime</li>
-                        </ul>
-                        <a href="#" class="btn-link">Read Full Case Study <i class='bx bx-right-arrow-alt'></i></a>
-                    </div>
-                </div>
-                <div class="card case-study-card">
-                    <div class="case-study-img-placeholder">
-                        <i class='bx bx-trending-up'></i>
-                    </div>
-                    <div class="case-study-content">
-                        <span class="client-name">Global E-commerce Inc.</span>
-                        <h3>Sales Automation</h3>
-                        <p>Implemented an end-to-end automated sales funnel, from lead capture to conversion.</p>
-                        <span class="results-title">Key Results:</span>
-                        <ul>
-                            <li><i class='bx bxs-check-circle'></i> 55% increase in lead conversion</li>
-                            <li><i class='bx bxs-check-circle'></i> 100+ hours/week saved</li>
-                            <li><i class='bx bxs-check-circle'></i> Real-time sales reporting</li>
-                        </ul>
-                        <a href="#" class="btn-link">Read Full Case Study <i class='bx bx-right-arrow-alt'></i></a>
-                    </div>
-                </div>
-                <div class="card case-study-card">
-                    <div class="case-study-img-placeholder">
-                        <i class='bx bx-trending-up'></i>
-                    </div>
-                    <div class="case-study-content">
-                        <span class="client-name">HealthTech Solutions</span>
-                        <h3>HIPAA-Compliant AI</h3>
-                        <p>Developed a secure AI model for processing patient data while ensuring full compliance.</p>
-                        <span class="results-title">Key Results:</span>
-                        <ul>
-                            <li><i class='bx bxs-check-circle'></i> 100% HIPAA compliance</li>
-                            <li><i class='bx bxs-check-circle'></i> 98% accuracy in data extraction</li>
-                            <li><TMLi><i class='bx bxs-check-circle'></i> Zero data breaches since launch</li>
-                        </ul>
-                        <a href="#" class="btn-link">Read Full Case Study <i class='bx bx-right-arrow-alt'></i></a>
-                    </div>
-                </div>
-            </div>
+      <div class="container">
+        <h2 class="section-title">
+          Our <span class="gradient-text">Case Studies</span>
+        </h2>
+        <p class="section-subheadline">
+          Discover how we've helped businesses transform, scale, and succeed...
+        </p>
+        <div class="case-study-grid">
+          <p>Loading case studies...</p>
         </div>
+      </div>
     </section>
 
     <section class="final-cta">
-        <div class="container">
-            <div class="card final-cta-card">
-                <p>Join hundreds of businesses already transforming their operations with Levelex.</p>
-                <a href="#" class="btn btn-gradient">
-                    <span>Start Free Trial <i class='bx bx-right-arrow-alt'></i></span>
-                </a>
-            </div>
+      <div class="container">
+        <div class="card final-cta-card">
+          <p>
+            Join hundreds of businesses already transforming their operations
+            with Levelex.
+          </p>
+          <a href="signup.html" class="btn btn-gradient">
+            <span>Start Free Trial <i class="bx bx-right-arrow-alt"></i></span>
+          </a>
         </div>
+      </div>
     </section>
 
     <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <a href="index.html#home" class="logo">
-                        <span>Levelex</span>
-                    </a>
-                    <p>Elevating businesses with intelligent solutions.</p>
-                </div>
-                <div class="footer-col">
-                    <h3>Product</h3>
-                    <ul>
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">Security</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Company</h3>
-                    <ul>
-                        <li><a href="index.html#about">About</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Legal</h3>
-                    <ul>
-                        <li><a href="#">Privacy</a></li>
-                        <li><a href="#">Terms</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright-bar">
-                <p>© 2025 Levelex. All rights reserved.</p>
-            </div>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <a href="index.html#home" class="logo">
+              <span>Levelex</span>
+            </a>
+            <p>Elevating businesses with intelligent solutions.</p>
+          </div>
+          <div class="footer-col">
+            <h3>Product</h3>
+            <ul>
+              <li><a href="#what-we-do">Features</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">Security</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Company</h3>
+            <ul>
+              <li><a href="#about">About</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Legal</h3>
+            <ul>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Terms</a></li>
+            </ul>
+          </div>
         </div>
+        <div class="copyright-bar">
+          <p>© 2025 Levelex. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
-<script>
-        const SUPABASE_URL = 'https://mugxkieakyulsoqzrhro.supabase.co'; // ** Paste your Project URL here **
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8'; // ** Paste your Anon Key here **
 
-        let supabase = null;
-        if (window.supabase) {
-            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            console.log('Supabase client initialized.');
-        } else {
-            console.error('Supabase library not loaded.');
-        }
+    <script>
+      const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** INTEGRATED **
+      const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** INTEGRATED **
+
+      let supabase = null;
+      if (window.supabase) {
+        supabase = window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_ANON_KEY
+        );
+        console.log("Supabase client initialized.");
+      } else {
+        console.error("Supabase library not loaded.");
+      }
     </script>
 
     <script>
-        // --- Load Dynamic Content for index.html ---
-
-        async function loadPublicContent() {
-            if (!supabase) return; // Don't run if client failed
-            console.log("Loading public content...");
-            // Use Promise.all to load sections concurrently (optional performance boost)
-            await Promise.all([
-                loadCaseStudies(),
-                loadServices(),
-                loadVision(),
-                loadAboutStats()
-            ]);
-            console.log("Public content loading finished.");
+      // --- Load Dynamic Content for index.html ---
+      async function loadPublicContent() {
+        if (!supabase) return;
+        console.log("Loading public content...");
+        await Promise.all([
+          loadCaseStudies(),
+          loadServices(),
+          loadVision(),
+          loadAboutStats(),
+        ]);
+        console.log("Public content loading finished.");
+      }
+      async function loadCaseStudies() {
+        const { data, error } = await supabase.from("CaseStudies").select("*");
+        if (error) {
+          console.error("Error loading case studies:", error.message);
+          return;
         }
-
-        async function loadCaseStudies() {
-            const { data, error } = await supabase.from('CaseStudies').select('*');
-            if (error) {
-                console.error('Error loading case studies:', error.message); return;
-            }
-            const grid = document.querySelector('.case-study-grid');
-            if (!grid) return;
-            grid.innerHTML = ''; // Clear static placeholders
-            data.forEach(study => {
-                const card = document.createElement('div');
-                card.className = 'card case-study-card';
-                let resultsHtml = (study.results && Array.isArray(study.results))
-                    ? study.results.map(result => `<li><i class='bx bxs-check-circle'></i> ${result}</li>`).join('')
-                    : '';
-                card.innerHTML = `
+        const grid = document.querySelector(".case-study-grid");
+        if (!grid) return;
+        grid.innerHTML = "";
+        data.forEach((study) => {
+          const card = document.createElement("div");
+          card.className = "card case-study-card";
+          let resultsHtml =
+            study.results && Array.isArray(study.results)
+              ? study.results
+                  .map(
+                    (result) =>
+                      `<li><i class='bx bxs-check-circle'></i> ${result}</li>`
+                  )
+                  .join("")
+              : "";
+          card.innerHTML = `
                     <div class="case-study-img-placeholder"><i class='bx bx-trending-up'></i></div>
                     <div class="case-study-content">
-                        <span class="client-name">${study.client || ''}</span>
-                        <h3>${study.title || 'Case Study'}</h3>
-                        <p>${study.description || ''}</p>
-                        <span class="results-title">Key Results:</span><ul>${resultsHtml}</ul>
+                        <span class="client-name">${
+                          study.client || ""
+                        }</span><h3>${study.title || "Case Study"}</h3>
+                        <p>${
+                          study.description || ""
+                        }</p><span class="results-title">Key Results:</span><ul>${resultsHtml}</ul>
                         <a href="#" class="btn-link">Read Full Case Study <i class='bx bx-right-arrow-alt'></i></a>
                     </div>`;
-                grid.appendChild(card);
-            });
+          grid.appendChild(card);
+        });
+      }
+      async function loadServices() {
+        const { data, error } = await supabase.from("Services").select("*");
+        if (error) {
+          console.error("Error loading services:", error.message);
+          return;
         }
-
-        async function loadServices() {
-            const { data, error } = await supabase.from('Services').select('*');
-            if (error) { console.error('Error loading services:', error.message); return; }
-            const grid = document.querySelector('.feature-grid-2');
-            if (!grid) return;
-            grid.innerHTML = '';
-            data.forEach(service => {
-                 const card = document.createElement('div');
-                 card.className = 'card feature-card-large';
-                 card.innerHTML = `<i class='${service.icon || 'bx bx-question-mark'} card-icon'></i><h3>${service.title || 'Service'}</h3><p>${service.description || ''}</p>`;
-                 grid.appendChild(card);
-            });
+        const grid = document.querySelector(".feature-grid-2");
+        if (!grid) return;
+        grid.innerHTML = "";
+        data.forEach((service) => {
+          const card = document.createElement("div");
+          card.className = "card feature-card-large";
+          card.innerHTML = `<i class='${
+            service.icon || "bx bx-question-mark"
+          } card-icon'></i><h3>${service.title || "Service"}</h3><p>${
+            service.description || ""
+          }</p>`;
+          grid.appendChild(card);
+        });
+      }
+      async function loadVision() {
+        const { data, error } = await supabase.from("Vision").select("*");
+        if (error) {
+          console.error("Error loading vision:", error.message);
+          return;
         }
-
-        async function loadVision() {
-            const { data, error } = await supabase.from('Vision').select('*');
-            if (error) { console.error('Error loading vision:', error.message); return; }
-            const grid = document.querySelector('.feature-grid-3');
-            if (!grid) return;
-            grid.innerHTML = '';
-            data.forEach(item => {
-                 const card = document.createElement('div');
-                 card.className = 'card feature-card';
-                 card.innerHTML = `<i class='${item.icon || 'bx bx-question-mark'} card-icon'></i><h3>${item.title || 'Vision Item'}</h3><p>${item.description || ''}</p>`;
-                 grid.appendChild(card);
-            });
+        const grid = document.querySelector(".feature-grid-3");
+        if (!grid) return;
+        grid.innerHTML = "";
+        data.forEach((item) => {
+          const card = document.createElement("div");
+          card.className = "card feature-card";
+          card.innerHTML = `<i class='${
+            item.icon || "bx bx-question-mark"
+          } card-icon'></i><h3>${item.title || "Vision Item"}</h3><p>${
+            item.description || ""
+          }</p>`;
+          grid.appendChild(card);
+        });
+      }
+      async function loadAboutStats() {
+        const { data, error } = await supabase
+          .from("AboutPage")
+          .select("*")
+          .eq("id", true)
+          .single();
+        if (error || !data) {
+          console.error(
+            "Error loading about stats:",
+            error?.message || "No data"
+          );
+          return;
         }
-
-        async function loadAboutStats() {
-            const { data, error } = await supabase.from('AboutPage').select('*').eq('id', true).single();
-            if (error || !data) { console.error('Error loading about stats:', error?.message || 'No data'); return; }
-            const statsGrid = document.querySelector('.stats-grid');
-            if (statsGrid) {
-                statsGrid.innerHTML = `
-                    <div class="stat-item"><span class="stat-number">${data.stat_clients || 'N/A'}</span><span class="stat-label">Happy Clients</span></div>
-                    <div class="stat-item"><span class="stat-number">${data.stat_datapoints || 'N/A'}</span><span class="stat-label">Data Points</span></div>
-                    <div class="stat-item"><span class="stat-number">${data.stat_uptime || 'N/A'}</span><span class="stat-label">Uptime</span></div>
-                    <div class="stat-item"><span class="stat-number">${data.stat_support || 'N/A'}</span><span class="stat-label">Support</span></div>`;
-            }
+        const statsGrid = document.querySelector(".stats-grid");
+        if (statsGrid) {
+          statsGrid.innerHTML = `
+                    <div class="stat-item"><span class="stat-number">${
+                      data.stat_clients || "N/A"
+                    }</span><span class="stat-label">Happy Clients</span></div>
+                    <div class="stat-item"><span class="stat-number">${
+                      data.stat_datapoints || "N/A"
+                    }</span><span class="stat-label">Data Points</span></div>
+                    <div class="stat-item"><span class="stat-number">${
+                      data.stat_uptime || "N/A"
+                    }</span><span class="stat-label">Uptime</span></div>
+                    <div class="stat-item"><span class="stat-number">${
+                      data.stat_support || "N/A"
+                    }</span><span class="stat-label">Support</span></div>`;
         }
-
-        // Run content loading when the page is ready
-        document.addEventListener('DOMContentLoaded', loadPublicContent);
+      }
+      document.addEventListener("DOMContentLoaded", loadPublicContent);
     </script>
 
     <script>
-        async function updateNavbarBasedOnAuthState() {
-            if (!supabase) return;
-
-            const { data: { session } } = await supabase.auth.getSession();
-            const authButtonsContainer = document.querySelector('.auth-buttons');
-
-            if (authButtonsContainer) {
-                if (session) {
-                    // User is logged in
-                    authButtonsContainer.innerHTML = `
+      async function updateNavbarBasedOnAuthState() {
+        if (!supabase) return;
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        const authButtonsContainer = document.querySelector(".auth-buttons");
+        if (authButtonsContainer) {
+          if (session) {
+            authButtonsContainer.innerHTML = `
                         <a href="dashboard.html" class="btn-link">Dashboard</a>
-                        <a href="#" id="logout-button-dynamic" class="btn btn-gradient"><span>Logout</span></a>
-                    `;
-                    const logoutBtn = document.getElementById('logout-button-dynamic');
-                    if (logoutBtn) {
-                        logoutBtn.addEventListener('click', async (e) => {
-                            e.preventDefault();
-                            await supabase.auth.signOut();
-                            // No redirect needed here, onAuthStateChange will handle UI update
-                        });
-                    }
-                } else {
-                    // User is logged out
-                    authButtonsContainer.innerHTML = `
-                        <a href="login.html" class="btn-link">Login</a>
-                        <a href="signup.html" class="btn btn-gradient"><span>Sign Up</span></a>
-                    `;
-                }
-            } else {
-                console.error('Auth buttons container not found in navbar.');
+                        <a href="#" id="logout-button-dynamic" class="btn btn-gradient"><span>Logout</span></a>`;
+            const logoutBtn = document.getElementById("logout-button-dynamic");
+            if (logoutBtn) {
+              logoutBtn.addEventListener("click", async (e) => {
+                e.preventDefault();
+                await supabase.auth.signOut();
+              });
             }
+          } else {
+            authButtonsContainer.innerHTML = `
+                        <a href="login.html" class="btn-link">Login</a>
+                        <a href="signup.html" class="btn btn-gradient"><span>Sign Up</span></a>`;
+          }
+        } else {
+          console.error("Auth buttons container not found.");
         }
-
-        // Run check when DOM is ready
-        document.addEventListener('DOMContentLoaded', updateNavbarBasedOnAuthState);
-
-        // Listen for auth state changes
-        if (supabase) {
-            supabase.auth.onAuthStateChange((event, session) => {
-                console.log('Auth state changed:', event);
-                updateNavbarBasedOnAuthState(); // Re-run the check
-                // If user logs out on this page, maybe redirect to login
-                if (event === 'SIGNED_OUT') {
-                    // Optional: Redirect if desired on public pages after logout
-                    // window.location.href = '/login.html';
-                }
-            });
-        }
+      }
+      document.addEventListener(
+        "DOMContentLoaded",
+        updateNavbarBasedOnAuthState
+      );
+      if (supabase) {
+        supabase.auth.onAuthStateChange((event, session) => {
+          console.log("Auth state changed:", event);
+          updateNavbarBasedOnAuthState();
+        });
+      }
     </script>
-</body>
+  </body>
 </html>

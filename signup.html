@@ -3,7 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Sign Up - Levelex</title>
+    <meta
+      name="description"
+      content="Create your Levelex account to access powerful AI-driven automation tools and workflows. Sign up today."
+    />
+    <meta name="author" content="Levelex" />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <meta property="og:title" content="Sign Up - Levelex" />
+    <meta
+      property="og:description"
+      content="Create your Levelex account to access powerful AI-driven automation tools."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://your-levelex-domain.com/signup.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Sign Up - Levelex" />
+    <meta
+      name="twitter:description"
+      content="Create your Levelex account to access powerful AI-driven automation tools."
+    />
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -24,11 +48,7 @@
     <nav class="navbar">
       <div class="container navbar-container">
         <a href="index.html" class="logo">
-          <img
-            src="LevelX-Photoroom.svg"
-            alt="Levelex Logo"
-            class="logo-icon"
-          />
+          <img src="assets/logo.svg" alt="Levelex Logo" class="logo-icon" />
           <span>Levelex</span>
         </a>
         <ul class="nav-links">
@@ -64,8 +84,8 @@
           <form class="contact-form">
             <div class="form-row">
               <div class="form-group">
-                <label for="username">Username</label>
-                <input
+                <label for="username">Username</label
+                ><input
                   type="text"
                   id="username"
                   placeholder="Choose a username"
@@ -73,8 +93,8 @@
                 />
               </div>
               <div class="form-group">
-                <label for="email">Email</label>
-                <input
+                <label for="email">Email</label
+                ><input
                   type="email"
                   id="email"
                   placeholder="Enter your email"
@@ -83,8 +103,8 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="phone">Phone Number (Optional)</label>
-              <input
+              <label for="phone">Phone Number (Optional)</label
+              ><input
                 type="tel"
                 id="phone"
                 placeholder="Enter your phone number"
@@ -92,8 +112,8 @@
             </div>
             <div class="form-row">
               <div class="form-group">
-                <label for="password">Password</label>
-                <input
+                <label for="password">Password</label
+                ><input
                   type="password"
                   id="password"
                   placeholder="Create a password (min 6 chars)"
@@ -101,8 +121,8 @@
                 />
               </div>
               <div class="form-group">
-                <label for="confirm-password">Confirm Password</label>
-                <input
+                <label for="confirm-password">Confirm Password</label
+                ><input
                   type="password"
                   id="confirm-password"
                   placeholder="Confirm password"
@@ -110,11 +130,18 @@
                 />
               </div>
             </div>
-
+            <div
+              id="form-message"
+              style="
+                color: var(--accent-cyan);
+                text-align: center;
+                margin-bottom: 1rem;
+                min-height: 1em;
+              "
+            ></div>
             <button type="submit" class="btn btn-gradient btn-full">
               <span>Sign Up <i class="bx bx-right-arrow-alt"></i></span>
             </button>
-
             <p class="form-switch-link">
               Already have an account? <a href="login.html">Login</a>
             </p>
@@ -128,7 +155,7 @@
         <div class="footer-grid">
           <div class="footer-col">
             <a href="index.html" class="logo"><span>Levelex</span></a>
-            <p>Elevating businesses with intelligent solutions.</p>
+            <p>Elevating businesses...</p>
           </div>
           <div class="footer-col">
             <h3>Product</h3>
@@ -160,80 +187,112 @@
       </div>
     </footer>
 
-   <script>
-        const SUPABASE_URL = 'https://mugxkieakyulsoqzrhro.supabase.co'; // ** Paste your Project URL here **
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8'; // ** Paste your Anon Key here **
+    <script>
+      const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** INTEGRATED **
+      const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** INTEGRATED **
 
-        let supabase = null;
-        if (window.supabase) {
-            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            console.log('Supabase client initialized.');
-        } else {
-            console.error('Supabase library not loaded.');
-        }
+      let supabase = null;
+      if (window.supabase) {
+        supabase = window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_ANON_KEY
+        );
+        console.log("Supabase client initialized.");
+      } else {
+        console.error("Supabase library not loaded.");
+      }
     </script>
 
     <script>
-        // --- Signup Form Logic ---
-        const signupForm = document.querySelector('#signup .contact-form');
-        const messageDiv = document.getElementById('form-message'); // Assumes you added this div
+      // --- Signup Form Logic ---
+      const signupForm = document.querySelector("#signup .contact-form");
+      const messageDiv = document.getElementById("form-message");
 
-        if (signupForm && typeof supabase !== 'undefined' && messageDiv) {
-            signupForm.addEventListener('submit', async (event) => {
-                event.preventDefault();
-                messageDiv.textContent = ''; // Clear previous message
-
-                const usernameInput = document.getElementById('username');
-                const emailInput = document.getElementById('email');
-                const phoneInput = document.getElementById('phone');
-                const passwordInput = document.getElementById('password');
-                const confirmPasswordInput = document.getElementById('confirm-password');
-                const submitButton = signupForm.querySelector('button[type="submit"]');
-
-                // Basic Validation
-                if (!usernameInput || !emailInput || !passwordInput || !confirmPasswordInput) {
-                    messageDiv.textContent = 'Error: Form elements missing.'; return;
-                }
-                if (passwordInput.value !== confirmPasswordInput.value) {
-                    messageDiv.textContent = 'Passwords do not match!'; return;
-                }
-                if (passwordInput.value.length < 6) {
-                    messageDiv.textContent = 'Password must be at least 6 characters long.'; return;
-                }
-
-                // Disable button
-                submitButton.disabled = true;
-                submitButton.innerHTML = `<span>Signing Up...</span>`;
-
-                try {
-                    const { data, error } = await supabase.auth.signUp({
-                        email: emailInput.value,
-                        password: passwordInput.value,
-                        options: { data: { username: usernameInput.value, phone: phoneInput ? phoneInput.value : null } }
-                    });
-
-                    if (error) {
-                        console.error('Signup Error:', error);
-                        messageDiv.textContent = `Signup failed: ${error.message}`;
-                        submitButton.disabled = false;
-                        submitButton.innerHTML = `<span>Sign Up <i class='bx bx-right-arrow-alt'></i></span>`;
-                    } else {
-                        console.log('Signup successful:', data);
-                        messageDiv.textContent = 'Signup successful! Redirecting to login...';
-                        setTimeout(() => { window.location.href = '/login.html'; }, 1500);
-                    }
-                } catch (catchError) {
-                    console.error('Unexpected Signup Error:', catchError);
-                    messageDiv.textContent = 'An unexpected error occurred. Please try again.';
-                    submitButton.disabled = false;
-                    submitButton.innerHTML = `<span>Sign Up <i class='bx bx-right-arrow-alt'></i></span>`;
-                }
+      if (signupForm && typeof supabase !== "undefined" && messageDiv) {
+        signupForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          messageDiv.textContent = "";
+          const usernameInput = document.getElementById("username");
+          const emailInput = document.getElementById("email");
+          const phoneInput = document.getElementById("phone");
+          const passwordInput = document.getElementById("password");
+          const confirmPasswordInput =
+            document.getElementById("confirm-password");
+          const submitButton = signupForm.querySelector(
+            'button[type="submit"]'
+          );
+          // Validation
+          if (
+            !usernameInput ||
+            !emailInput ||
+            !passwordInput ||
+            !confirmPasswordInput
+          ) {
+            messageDiv.textContent = "Error: Form elements missing.";
+            return;
+          }
+          if (passwordInput.value !== confirmPasswordInput.value) {
+            messageDiv.textContent = "Passwords do not match!";
+            return;
+          }
+          if (passwordInput.value.length < 6) {
+            messageDiv.textContent =
+              "Password must be at least 6 characters long.";
+            return;
+          }
+          // Disable button
+          submitButton.disabled = true;
+          submitButton.innerHTML = `<span>Signing Up...</span>`;
+          try {
+            const { data, error } = await supabase.auth.signUp({
+              email: emailInput.value,
+              password: passwordInput.value,
+              options: {
+                data: {
+                  username: usernameInput.value,
+                  phone: phoneInput ? phoneInput.value : null,
+                },
+              },
             });
-            console.log('Signup form listener added.');
-        } else {
-            if(!signupForm) console.error('Signup form not found.');
-            if(typeof supabase === 'undefined') console.error('Supabase client not initialized.');
-            if(!messageDiv) console.error('Form message div not found.');
-        }
+            if (error) {
+              console.error("Signup Error:", error);
+              messageDiv.textContent = `Signup failed: ${error.message}`;
+              submitButton.disabled = false;
+              submitButton.innerHTML = `<span>Sign Up <i class='bx bx-right-arrow-alt'></i></span>`;
+            } else {
+              console.log("Signup successful:", data);
+              // Provide feedback based on whether email confirmation is likely needed
+              if (
+                data.user &&
+                data.user.identities &&
+                data.user.identities.length === 0
+              ) {
+                messageDiv.textContent =
+                  "Signup successful! Please check your email to confirm your account before logging in. Redirecting...";
+              } else {
+                messageDiv.textContent =
+                  "Signup successful! Redirecting to login...";
+              }
+              setTimeout(() => {
+                window.location.href = "/login.html";
+              }, 2500); // Slightly longer delay
+            }
+          } catch (catchError) {
+            console.error("Unexpected Signup Error:", catchError);
+            messageDiv.textContent =
+              "An unexpected error occurred. Please try again.";
+            submitButton.disabled = false;
+            submitButton.innerHTML = `<span>Sign Up <i class='bx bx-right-arrow-alt'></i></span>`;
+          }
+        });
+        console.log("Signup form listener added.");
+      } else {
+        if (!signupForm) console.error("Signup form not found.");
+        if (typeof supabase === "undefined")
+          console.error("Supabase client not initialized.");
+        if (!messageDiv) console.error("Form message div not found.");
+      }
     </script>
+  </body>
 </html>

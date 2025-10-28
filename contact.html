@@ -3,28 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Contact Us - Levelex</title>
+    <meta
+      name="description"
+      content="Get in touch with Levelex. Have questions about our AI automation solutions? Contact us via email, phone, or our contact form."
+    />
+    <meta
+      name="keywords"
+      content="contact, support, inquiry, AI automation, Levelex"
+    />
+    <meta name="author" content="Levelex" />
+    <meta name="robots" content="noindex, follow" />
+
+    <meta property="og:title" content="Contact Us - Levelex" />
+    <meta
+      property="og:description"
+      content="Get in touch with Levelex for inquiries about our AI automation solutions."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://your-levelex-domain.com/contact.html"
+    />
+    <meta
+      property="og:image"
+      content="https://your-levelex-domain.com/assets/og-image.png"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Contact Us - Levelex" />
+    <meta
+      name="twitter:description"
+      content="Get in touch with Levelex for inquiries about our AI automation solutions."
+    />
+    <meta
+      name="twitter:image"
+      content="https://your-levelex-domain.com/assets/og-image.png"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
+
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
+
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <nav class="navbar">
       <div class="container navbar-container">
         <a href="index.html" class="logo">
-          <img
-            src="LevelX-Photoroom.svg"
-            alt="Levelex Logo"
-            class="logo-icon"
-          />
+          <img src="assets/logo.svg" alt="Levelex Logo" class="logo-icon" />
           <span>Levelex</span>
         </a>
         <ul class="nav-links">
@@ -36,8 +72,10 @@
           <li><a href="contact.html" class="active">Contact</a></li>
         </ul>
         <div class="auth-buttons">
-          <a href="dashboard.html" class="btn-link">Dashboard</a>
-          <a href="login.html" class="btn btn-gradient"><span>Logout</span></a>
+          <a href="login.html" class="btn-link">Login</a>
+          <a href="signup.html" class="btn btn-gradient"
+            ><span>Sign Up</span></a
+          >
         </div>
         <i class="bx bx-menu mobile-menu-toggle"></i>
       </div>
@@ -71,15 +109,33 @@
 
         <div class="card contact-form-card">
           <h3>Send us a Message</h3>
-          <form name="contact" class="contact-form" method="POST">
+          <form
+            name="contact"
+            class="contact-form"
+            method="POST"
+            data-netlify="true"
+          >
+            <input type="hidden" name="form-name" value="contact" />
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" id="name" placeholder="Enter your name" />
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Enter your name"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" placeholder="Enter your email" />
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  required
+                />
               </div>
             </div>
             <div class="form-group">
@@ -87,17 +143,30 @@
               <input
                 type="text"
                 id="subject"
+                name="subject"
                 placeholder="What's this about?"
+                required
               />
             </div>
             <div class="form-group">
               <label for="message">Message</label>
               <textarea
                 id="message"
+                name="message"
                 rows="5"
                 placeholder="Your message..."
+                required
               ></textarea>
             </div>
+            <div
+              id="form-message"
+              style="
+                color: var(--accent-cyan);
+                text-align: center;
+                margin-bottom: 1rem;
+                min-height: 1em;
+              "
+            ></div>
             <button type="submit" class="btn btn-gradient btn-full">
               <span>Send Message <i class="bx bx-right-arrow-alt"></i></span>
             </button>
@@ -110,10 +179,8 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-col">
-            <a href="index.html" class="logo">
-              <span>Levelex</span>
-            </a>
-            <p>Elevating businesses with intelligent solutions.</p>
+            <a href="index.html" class="logo"><span>Levelex</span></a>
+            <p>Elevating businesses...</p>
           </div>
           <div class="footer-col">
             <h3>Product</h3>
@@ -144,10 +211,11 @@
         </div>
       </div>
     </footer>
+
     <script>
-      const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** Paste your Project URL here **
+      const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** INTEGRATED **
       const SUPABASE_ANON_KEY =
-        "YOUR_SUPABASE_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8ANON_KEY"; // ** Paste your Anon Key here **
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** INTEGRATED **
 
       let supabase = null;
       if (window.supabase) {
@@ -165,60 +233,43 @@
       // --- NOTE: This is the EXACT SAME script as in index.html ---
       async function updateNavbarBasedOnAuthState() {
         if (!supabase) return;
-
         const {
           data: { session },
         } = await supabase.auth.getSession();
         const authButtonsContainer = document.querySelector(".auth-buttons");
-
         if (authButtonsContainer) {
           if (session) {
-            // User is logged in
-            authButtonsContainer.innerHTML = `
-                        <a href="dashboard.html" class="btn-link">Dashboard</a>
-                        <a href="#" id="logout-button-dynamic" class="btn btn-gradient"><span>Logout</span></a>
-                    `;
+            authButtonsContainer.innerHTML = `<a href="dashboard.html" class="btn-link">Dashboard</a><a href="#" id="logout-button-dynamic" class="btn btn-gradient"><span>Logout</span></a>`;
             const logoutBtn = document.getElementById("logout-button-dynamic");
             if (logoutBtn) {
               logoutBtn.addEventListener("click", async (e) => {
                 e.preventDefault();
                 await supabase.auth.signOut();
-                // No redirect needed here, onAuthStateChange will handle UI update
               });
             }
           } else {
-            // User is logged out
-            authButtonsContainer.innerHTML = `
-                        <a href="login.html" class="btn-link">Login</a>
-                        <a href="signup.html" class="btn btn-gradient"><span>Sign Up</span></a>
-                    `;
+            authButtonsContainer.innerHTML = `<a href="login.html" class="btn-link">Login</a><a href="signup.html" class="btn btn-gradient"><span>Sign Up</span></a>`;
           }
         } else {
-          console.error("Auth buttons container not found in navbar.");
+          console.error("Auth buttons container not found.");
         }
       }
-
-      // Run check when DOM is ready
       document.addEventListener(
         "DOMContentLoaded",
         updateNavbarBasedOnAuthState
       );
-
-      // Listen for auth state changes
       if (supabase) {
         supabase.auth.onAuthStateChange((event, session) => {
           console.log("Auth state changed:", event);
-          updateNavbarBasedOnAuthState(); // Re-run the check
+          updateNavbarBasedOnAuthState();
         });
       }
     </script>
 
     <script>
-      // Optional: Enhance Netlify form submission without full page reload
       const contactForm = document.querySelector('form[data-netlify="true"]');
-      const formMessageDiv = document.getElementById("form-message"); // Assumes you added this div
-
-      if (contactForm) {
+      const formMessageDiv = document.getElementById("form-message");
+      if (contactForm && formMessageDiv) {
         contactForm.addEventListener("submit", async (e) => {
           e.preventDefault();
           const formData = new FormData(contactForm);
@@ -226,31 +277,25 @@
             'button[type="submit"]'
           );
           const originalButtonHtml = submitButton.innerHTML;
-
-          if (formMessageDiv) formMessageDiv.textContent = "Sending...";
+          formMessageDiv.textContent = "Sending...";
           submitButton.disabled = true;
           submitButton.innerHTML = "<span>Sending...</span>";
-
           try {
+            // Send to Netlify (submits to the current page path "/")
             const response = await fetch("/", {
-              // Netlify handles submission to root path
               method: "POST",
               headers: { "Content-Type": "application/x-www-form-urlencoded" },
               body: new URLSearchParams(formData).toString(),
             });
             if (response.ok) {
-              if (formMessageDiv)
-                formMessageDiv.textContent =
-                  "Thanks! Your message has been sent.";
-              contactForm.reset(); // Clear the form
+              formMessageDiv.textContent = "Thanks! Message sent.";
+              contactForm.reset();
             } else {
               throw new Error("Form submission failed.");
             }
           } catch (error) {
-            console.error("Netlify form submission error:", error);
-            if (formMessageDiv)
-              formMessageDiv.textContent =
-                "Sorry, there was an error sending your message. Please try again.";
+            console.error("Netlify form error:", error);
+            formMessageDiv.textContent = "Sorry, error sending message.";
           } finally {
             submitButton.disabled = false;
             submitButton.innerHTML = originalButtonHtml;

@@ -3,7 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Dashboard - Levelex</title>
+    <meta
+      name="description"
+      content="Manage your Levelex AI automations, view key analytics, and access your account settings."
+    />
+    <meta name="author" content="Levelex" />
+    <meta name="robots" content="noindex, nofollow" />
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -27,15 +34,12 @@
         color: var(--text-white);
         text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
       }
-
       /* Basic dashboard layout styles */
       .dashboard-content {
         padding-top: 5rem; /* Add padding below navbar */
         text-align: center;
-        min-height: calc(
-          100vh - 250px
-        ); /* Adjust to keep footer down based on footer height */
-        display: none; /* Initially hide content until auth check passes */
+        min-height: calc(100vh - 250px); /* Adjust based on footer height */
+        display: none; /* Initially hide content */
       }
       .dashboard-content .card {
         max-width: 600px;
@@ -43,23 +47,22 @@
         text-align: left;
       }
       #workflow-buttons-container {
-        /* Style for automation buttons */
         display: flex;
         flex-direction: column;
         gap: 1rem;
         margin-top: 1rem;
       }
+      #analytics-stats p,
+      #workflow-buttons-container p {
+        color: var(--text-gray);
+      } /* Style loading messages */
     </style>
   </head>
   <body>
     <nav class="navbar">
       <div class="container navbar-container">
         <a href="index.html" class="logo">
-          <img
-            src="LevelX-Photoroom.svg"
-            alt="Levelex Logo"
-            class="logo-icon"
-          />
+          <img src="assets/logo.svg" alt="Levelex Logo" class="logo-icon" />
           <span>Levelex</span>
         </a>
         <ul class="nav-links">
@@ -107,10 +110,8 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-col">
-            <a href="index.html" class="logo">
-              <span>Levelex</span>
-            </a>
-            <p>Elevating businesses with intelligent solutions.</p>
+            <a href="index.html" class="logo"><span>Levelex</span></a>
+            <p>Elevating businesses...</p>
           </div>
           <div class="footer-col">
             <h3>Product</h3>
@@ -144,9 +145,9 @@
 
     <script>
       // --- Initialize Supabase Client ---
-      const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** Paste your Project URL here **
+      const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** INTEGRATED **
       const SUPABASE_ANON_KEY =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** Paste your Anon Key here **
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** INTEGRATED **
 
       let supabase = null;
       if (window.supabase) {
@@ -157,11 +158,11 @@
         console.log("Supabase client initialized for dashboard.");
       } else {
         console.error("Supabase library not loaded. Redirecting to login.");
-        window.location.href = "/login.html"; // Redirect immediately if lib fails
+        window.location.href = "/login.html";
       }
 
       // --- DOM Elements ---
-      const logoutButton = document.querySelector('.auth-buttons a[href="#"]'); // More specific selector for logout
+      const logoutButton = document.querySelector('.auth-buttons a[href="#"]'); // More specific selector
       const dashboardContent = document.getElementById("dashboard");
       const welcomeMessage = document.getElementById("welcome-message");
       const workflowContainer = document.getElementById(
@@ -175,7 +176,7 @@
         const { error } = await supabase.auth.signOut();
         if (error) {
           console.error("Error logging out:", error);
-          alert("Logout failed. Please try again."); // Alert ok for simple logout error
+          alert("Logout failed.");
         } else {
           console.log("Logged out successfully.");
           window.location.href = "/login.html";
@@ -190,8 +191,8 @@
         }
         workflowContainer.innerHTML = "<p>Loading your automations...</p>";
         try {
+          // Calls Vercel function relative to current domain
           const response = await fetch("/api/get-user-automations", {
-            // Calls Vercel function
             method: "GET",
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -205,8 +206,7 @@
           const automations = await response.json();
           workflowContainer.innerHTML = ""; // Clear loading
           if (!automations || automations.length === 0) {
-            workflowContainer.innerHTML =
-              "<p>You do not have access to any automations yet.</p>";
+            workflowContainer.innerHTML = "<p>No automations assigned yet.</p>";
             return;
           }
           automations.forEach((auto) => {
@@ -225,7 +225,7 @@
           console.log("Automations loaded:", automations);
         } catch (error) {
           console.error("Error loading automations:", error);
-          workflowContainer.innerHTML = `<p style="color: red;">Error loading automations: ${error.message}</p>`;
+          workflowContainer.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
         }
       }
 
@@ -234,13 +234,12 @@
         const button = event.currentTarget;
         const automationId = parseInt(button.dataset.automationId, 10);
         if (!supabase) return;
-
         const {
           data: { session },
           error: sessionError,
         } = await supabase.auth.getSession();
         if (sessionError || !session?.access_token) {
-          alert("Error: Could not get user session. Please log in again.");
+          alert("Session error. Please log in again.");
           console.error("Session error:", sessionError);
           return;
         }
@@ -249,13 +248,12 @@
           alert("Error: Missing automation data.");
           return;
         }
-
         const originalButtonText = button.innerHTML;
         button.disabled = true;
         button.innerHTML = `<span>Running...</span>`;
         try {
+          // Calls Vercel function relative to current domain
           const response = await fetch("/api/trigger-workflow", {
-            // Calls Vercel function
             method: "POST",
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -267,10 +265,12 @@
           if (!response.ok) {
             throw new Error(result.error || `Failed (${response.status})`);
           }
-          alert(result.message || "Workflow triggered successfully!"); // Use alert for trigger confirmation
+          alert(result.message || "Workflow triggered successfully!"); // Show confirmation
+          // Optionally reload analytics after trigger
+          loadAnalytics(accessToken);
         } catch (error) {
           console.error("Workflow trigger failed:", error);
-          alert(`Error: ${error.message}`); // Use alert for trigger error
+          alert(`Error: ${error.message}`);
         } finally {
           button.disabled = false;
           button.innerHTML = originalButtonText;
@@ -317,8 +317,7 @@
 
       // --- Check Authentication State on Page Load ---
       async function checkAuthState() {
-        if (!supabase) return; // Already handled redirect if lib failed
-
+        if (!supabase) return; // Should have redirected if lib failed
         const {
           data: { session },
           error,
@@ -329,41 +328,38 @@
           return;
         }
         if (!session) {
-          console.log("No session found, redirecting to login.");
+          console.log("No session, redirecting.");
           window.location.href = "/login.html";
         } else {
           // User is logged in
-          console.log("User is logged in:", session.user.email);
-          if (welcomeMessage) {
-            welcomeMessage.textContent = `Manage your automations and view insights, ${
+          console.log("User logged in:", session.user.email);
+          if (welcomeMessage)
+            welcomeMessage.textContent = `Manage automations and view insights, ${
               session.user.email || "User"
             }.`;
-          }
-          if (dashboardContent) {
-            dashboardContent.style.display = "block"; // Show content
-          }
+          if (dashboardContent) dashboardContent.style.display = "block"; // Show content
           if (logoutButton) {
-            logoutButton.addEventListener("click", (event) => {
-              event.preventDefault();
+            logoutButton.addEventListener("click", (e) => {
+              e.preventDefault();
               handleLogout();
             });
             console.log("Logout listener added.");
           } else {
-            console.error("Logout button element not found.");
+            console.error("Logout button not found.");
           }
-          loadUserSpecificData(session.access_token); // Load data for logged-in user
+          loadUserSpecificData(session.access_token); // Load data
         }
       }
 
       // --- Run Auth Check When DOM is Ready ---
       document.addEventListener("DOMContentLoaded", checkAuthState);
 
-      // Optional: Listen for auth changes while on dashboard page
+      // --- Listen for Auth Changes ---
       if (supabase) {
         supabase.auth.onAuthStateChange((event, session) => {
-          // If user is signed out (e.g. in another tab), redirect to login
+          // If user signs out elsewhere, redirect this page to login
           if (event === "SIGNED_OUT") {
-            console.log("Detected SIGNED_OUT event, redirecting to login.");
+            console.log("Detected SIGNED_OUT, redirecting dashboard to login.");
             window.location.href = "/login.html";
           }
         });
