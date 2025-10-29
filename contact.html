@@ -60,7 +60,11 @@
     <nav class="navbar">
       <div class="container navbar-container">
         <a href="index.html" class="logo">
-          <img src="assets/logo.svg" alt="Levelex Logo" class="logo-icon" />
+          <img
+            src="assets/LevelX-Photoroom.svg"
+            alt="Levelex Logo"
+            class="logo-icon"
+          />
           <span>Levelex</span>
         </a>
         <ul id="nav-links-ul" class="nav-links">
@@ -204,7 +208,7 @@
     <script>
       const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** INTEGRATED **
       const SUPABASE_ANON_KEY =
-        "eyJhbGciOiJIJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** INTEGRATED **
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** INTEGRATED **
 
       let supabase = null;
       if (window.supabase) {
@@ -275,29 +279,11 @@
           }
         }
       }
-      document.addEventListener(
-        "DOMContentLoaded",
-        updateNavbarBasedOnAuthState
-      );
-      if (supabase) {
-        supabase.auth.onAuthStateChange((event, session) => {
-          console.log("Auth state changed:", event);
-          updateNavbarBasedOnAuthState();
-        });
-      }
-      let resizeTimer;
-      window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          updateNavbarBasedOnAuthState();
-        }, 250);
-      });
     </script>
 
     <script>
       const vercelContactForm = document.getElementById("vercel-contact-form");
       const formMessageDiv = document.getElementById("form-message");
-
       if (vercelContactForm && formMessageDiv) {
         vercelContactForm.addEventListener("submit", async (e) => {
           e.preventDefault();
@@ -306,39 +292,33 @@
             'button[type="submit"]'
           );
           const originalButtonHtml = submitButton.innerHTML;
-
-          // Create a simple object from form data
           const data = {
             name: formData.get("name"),
             email: formData.get("email"),
             subject: formData.get("subject"),
             message: formData.get("message"),
           };
-
           formMessageDiv.textContent = "Sending...";
           submitButton.disabled = true;
-          submitButton.innerHTML = "<span>Sending...</span>";
-
+          submitButton.innerHTML =
+            '<span class="spinner"></span><span>Sending...</span>'; // Added spinner
           try {
-            // Send data to our Vercel function
             const response = await fetch("/api/contact", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data), // Send as JSON
+              body: JSON.stringify(data),
             });
-
             const result = await response.json();
-
             if (response.ok) {
               formMessageDiv.textContent =
                 result.message || "Thanks! Message sent.";
-              vercelContactForm.reset(); // Clear the form
+              vercelContactForm.reset();
             } else {
               throw new Error(result.error || "Form submission failed.");
             }
           } catch (error) {
             console.error("Contact form error:", error);
-            formMessageDiv.textContent = `Sorry, error sending message: ${error.message}`;
+            formMessageDiv.textContent = `Sorry, error: ${error.message}`;
           } finally {
             submitButton.disabled = false;
             submitButton.innerHTML = originalButtonHtml;
@@ -364,6 +344,26 @@
       } else {
         console.error("Mobile menu elements not found.");
       }
+    </script>
+
+    <script>
+      document.addEventListener(
+        "DOMContentLoaded",
+        updateNavbarBasedOnAuthState
+      ); // Set initial navbar state
+      if (supabase) {
+        supabase.auth.onAuthStateChange((event, session) => {
+          console.log("Auth state changed:", event);
+          updateNavbarBasedOnAuthState();
+        });
+      } // Listen for auth changes
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          updateNavbarBasedOnAuthState();
+        }, 250);
+      }); // Update navbar on resize
     </script>
   </body>
 </html>

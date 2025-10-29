@@ -55,7 +55,11 @@
     <nav class="navbar">
       <div class="container navbar-container">
         <a href="index.html" class="logo">
-          <img src="assets/logo.svg" alt="Levelex Logo" class="logo-icon" />
+          <img
+            src="assets/LevelX-Photoroom.svg"
+            alt="Levelex Logo"
+            class="logo-icon"
+          />
           <span>Levelex</span>
         </a>
         <ul id="nav-links-ul" class="nav-links">
@@ -212,7 +216,7 @@
           }
           // Disable button
           submitButton.disabled = true;
-          submitButton.innerHTML = `<span>Logging In...</span>`;
+          submitButton.innerHTML = `<span class="spinner"></span><span>Logging In...</span>`; // Added spinner
           try {
             const { data, error } = await supabase.auth.signInWithPassword({
               email: emailInput.value,
@@ -255,9 +259,8 @@
     </script>
 
     <script>
-      // --- THIS SCRIPT IS IDENTICAL TO THE ONE IN index.html ---
       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      const navLinksUlForMenu = document.getElementById("nav-links-ul"); // Use different var name
+      const navLinksUlForMenu = document.getElementById("nav-links-ul");
       if (mobileMenuBtn && navLinksUlForMenu) {
         mobileMenuBtn.addEventListener("click", () => {
           navLinksUlForMenu.classList.toggle("active");

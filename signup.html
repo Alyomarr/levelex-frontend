@@ -49,7 +49,7 @@
       <div class="container navbar-container">
         <a href="index.html" class="logo">
           <img
-            src="assets\LevelX-Photoroom.svg"
+            src="assets/LevelX-Photoroom.svg"
             alt="Levelex Logo"
             class="logo-icon"
           />
@@ -116,17 +116,21 @@
             </div>
             <div class="form-row">
               <div class="form-group">
-                <label for="password">Password</label
-                ><input
+                <label for="password">Password</label>
+                <input
                   type="password"
                   id="password"
                   placeholder="Create a password (min 6 chars)"
                   required
                 />
+                <div
+                  id="password-strength"
+                  style="font-size: 0.8rem; margin-top: 5px; min-height: 1em"
+                ></div>
               </div>
               <div class="form-group">
-                <label for="confirm-password">Confirm Password</label
-                ><input
+                <label for="confirm-password">Confirm Password</label>
+                <input
                   type="password"
                   id="confirm-password"
                   placeholder="Confirm password"
@@ -247,7 +251,7 @@
           }
           // Disable button
           submitButton.disabled = true;
-          submitButton.innerHTML = `<span>Signing Up...</span>`;
+          submitButton.innerHTML = `<span class="spinner"></span><span>Signing Up...</span>`; // Added spinner
           try {
             const { data, error } = await supabase.auth.signUp({
               email: emailInput.value,
@@ -311,9 +315,52 @@
     </script>
 
     <script>
-      // --- THIS SCRIPT IS IDENTICAL TO THE ONE IN index.html ---
+      const passwordInputForStrength = document.getElementById("password");
+      const strengthIndicator = document.getElementById("password-strength");
+      if (passwordInputForStrength && strengthIndicator) {
+        passwordInputForStrength.addEventListener("input", () => {
+          const password = passwordInputForStrength.value;
+          let strength = 0;
+          let message = "";
+          let color = "var(--text-gray)";
+          if (password.length >= 6) strength++;
+          if (password.match(/[a-z]/)) strength++;
+          if (password.match(/[A-Z]/)) strength++;
+          if (password.match(/[0-9]/)) strength++;
+          if (password.match(/[^a-zA-Z0-9]/)) strength++;
+          switch (strength) {
+            case 0:
+            case 1:
+            case 2:
+              message = "Weak";
+              color = "#ff4d4d";
+              break;
+            case 3:
+              message = "Medium";
+              color = "#ffa500";
+              break;
+            case 4:
+              message = "Strong";
+              color = "#4caf50";
+              break;
+            case 5:
+              message = "Very Strong";
+              color = "var(--accent-cyan)";
+              break;
+          }
+          if (password.length === 0) {
+            strengthIndicator.textContent = "";
+          } else {
+            strengthIndicator.textContent = `Strength: ${message}`;
+            strengthIndicator.style.color = color;
+          }
+        });
+      }
+    </script>
+
+    <script>
       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      const navLinksUlForMenu = document.getElementById("nav-links-ul"); // Use different var name
+      const navLinksUlForMenu = document.getElementById("nav-links-ul");
       if (mobileMenuBtn && navLinksUlForMenu) {
         mobileMenuBtn.addEventListener("click", () => {
           navLinksUlForMenu.classList.toggle("active");
