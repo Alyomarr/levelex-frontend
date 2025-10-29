@@ -51,8 +51,7 @@
         margin-top: 1rem;
       }
       #analytics-stats p,
-      #workflow-buttons-container p,
-      #trigger-message {
+      #workflow-buttons-container p {
         color: var(--text-gray);
       }
       #trigger-message {
@@ -60,7 +59,7 @@
         text-align: center;
         margin-bottom: 1rem;
         min-height: 1em;
-      } /* Style for trigger message */
+      }
     </style>
   </head>
   <body>
@@ -119,7 +118,18 @@
         <div class="footer-grid">
           <div class="footer-col">
             <a href="index.html" class="logo"><span>Levelex</span></a>
-            <p>Elevating businesses...</p>
+            <p>Elevating businesses with intelligent solutions.</p>
+            <div class="social-links">
+              <a href="#" target="_blank" aria-label="Instagram"
+                ><i class="bx bxl-instagram"></i
+              ></a>
+              <a href="#" target="_blank" aria-label="TikTok"
+                ><i class="bx bxl-tiktok"></i
+              ></a>
+              <a href="#" target="_blank" aria-label="LinkedIn"
+                ><i class="bx bxl-linkedin-square"></i
+              ></a>
+            </div>
           </div>
           <div class="footer-col">
             <h3>Product</h3>
@@ -424,7 +434,9 @@
 
         if (session) {
           // Logged In
-          const dash = `<a href="dashboard.html" class="btn-link active">Dashboard</a>`; // Active class here
+          const dash = `<a href="dashboard.html" class="btn-link ${
+            window.location.pathname.includes("/dashboard.html") ? "active" : ""
+          }">Dashboard</a>`; // Check if current page is dashboard
           const logout = `<a href="#" id="logout-button-dynamic" class="btn btn-gradient"><span>Logout</span></a>`;
           if (isMobileView()) {
             const li1 = document.createElement("li");
@@ -447,7 +459,9 @@
           }
         } else {
           // Logged Out
-          const login = `<a href="login.html" class="btn-link">Login</a>`;
+          const login = `<a href="login.html" class="btn-link ${
+            window.location.pathname.includes("/login.html") ? "active" : ""
+          }">Login</a>`; // Add active class check
           const signup = `<a href="signup.html" class="btn btn-gradient"><span>Sign Up</span></a>`;
           if (isMobileView()) {
             const li1 = document.createElement("li");

@@ -173,12 +173,23 @@
         <div class="footer-grid">
           <div class="footer-col">
             <a href="index.html" class="logo"><span>Levelex</span></a>
-            <p>Elevating businesses...</p>
+            <p>Elevating businesses with intelligent solutions.</p>
+            <div class="social-links">
+              <a href="#" target="_blank" aria-label="Instagram"
+                ><i class="bx bxl-instagram"></i
+              ></a>
+              <a href="#" target="_blank" aria-label="TikTok"
+                ><i class="bx bxl-tiktok"></i
+              ></a>
+              <a href="#" target="_blank" aria-label="LinkedIn"
+                ><i class="bx bxl-linkedin-square"></i
+              ></a>
+            </div>
           </div>
           <div class="footer-col">
             <h3>Product</h3>
             <ul>
-              <li><a href="#">Features</a></li>
+              <li><a href="#what-we-do">Features</a></li>
               <li><a href="#">Pricing</a></li>
               <li><a href="#">Security</a></li>
             </ul>
@@ -209,7 +220,6 @@
       const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** INTEGRATED **
       const SUPABASE_ANON_KEY =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** INTEGRATED **
-
       let supabase = null;
       if (window.supabase) {
         supabase = window.supabase.createClient(
@@ -234,6 +244,7 @@
         } = await supabase.auth.getSession();
         const authButtonsContainer = document.querySelector(".auth-buttons");
         const navLinksUl = document.getElementById("nav-links-ul");
+        if (!navLinksUl) return;
         navLinksUl
           .querySelectorAll(".auth-link-mobile")
           .forEach((el) => el.remove());
@@ -255,11 +266,12 @@
               authButtonsContainer.innerHTML = dash + logout;
           }
           const logoutBtn = document.getElementById("logout-button-dynamic");
-          if (logoutBtn) {
+          if (logoutBtn && !logoutBtn.dataset.listenerAttached) {
             logoutBtn.addEventListener("click", async (e) => {
               e.preventDefault();
               await supabase.auth.signOut();
             });
+            logoutBtn.dataset.listenerAttached = "true";
           }
         } else {
           const login = `<a href="login.html" class="btn-link">Login</a>`;
@@ -278,6 +290,15 @@
               authButtonsContainer.innerHTML = login + signup;
           }
         }
+        document.querySelectorAll("#logout-button-dynamic").forEach((btn) => {
+          if (!btn.dataset.listenerAttached) {
+            btn.addEventListener("click", async (e) => {
+              e.preventDefault();
+              await supabase.auth.signOut();
+            });
+            btn.dataset.listenerAttached = "true";
+          }
+        });
       }
     </script>
 
@@ -301,7 +322,7 @@
           formMessageDiv.textContent = "Sending...";
           submitButton.disabled = true;
           submitButton.innerHTML =
-            '<span class="spinner"></span><span>Sending...</span>'; // Added spinner
+            '<span class="spinner"></span><span>Sending...</span>';
           try {
             const response = await fetch("/api/contact", {
               method: "POST",
@@ -350,20 +371,20 @@
       document.addEventListener(
         "DOMContentLoaded",
         updateNavbarBasedOnAuthState
-      ); // Set initial navbar state
+      );
       if (supabase) {
         supabase.auth.onAuthStateChange((event, session) => {
           console.log("Auth state changed:", event);
           updateNavbarBasedOnAuthState();
         });
-      } // Listen for auth changes
+      }
       let resizeTimer;
       window.addEventListener("resize", () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
           updateNavbarBasedOnAuthState();
         }, 250);
-      }); // Update navbar on resize
+      });
     </script>
   </body>
 </html>

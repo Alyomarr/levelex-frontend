@@ -65,7 +65,7 @@
       <div class="container navbar-container">
         <a href="index.html#home" class="logo">
           <img
-            src="assets\LevelX-Photoroom.svg"
+            src="assets/LevelX-Photoroom.svg"
             alt="Levelex Logo"
             class="logo-icon"
           />
@@ -207,7 +207,19 @@
         <div class="footer-grid">
           <div class="footer-col">
             <a href="index.html#home" class="logo"><span>Levelex</span></a>
-            <p>Elevating businesses...</p>
+            <p>Elevating businesses with intelligent solutions.</p>
+
+            <div class="social-links">
+              <a href="#" target="_blank" aria-label="Instagram"
+                ><i class="bx bxl-instagram"></i
+              ></a>
+              <a href="#" target="_blank" aria-label="TikTok"
+                ><i class="bx bxl-tiktok"></i
+              ></a>
+              <a href="#" target="_blank" aria-label="LinkedIn"
+                ><i class="bx bxl-linkedin-square"></i
+              ></a>
+            </div>
           </div>
           <div class="footer-col">
             <h3>Product</h3>
@@ -337,12 +349,10 @@
           }
           console.log(`LOG: Found ${data.length} services. Populating...`);
           data.forEach((service) => {
-            // *** ADDED DEBUG LOG ***
             console.log(
               "LOG: Processing service item. Icon value:",
               service.icon
             );
-
             const card = document.createElement("div");
             card.className = "card feature-card-large";
             const iconClass = service.icon
@@ -378,9 +388,7 @@
           }
           console.log(`LOG: Found ${data.length} vision items. Populating...`);
           data.forEach((item) => {
-            // *** ADDED DEBUG LOG ***
             console.log("LOG: Processing vision item. Icon value:", item.icon);
-
             const card = document.createElement("div");
             card.className = "card feature-card";
             const iconClass = item.icon

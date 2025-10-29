@@ -149,7 +149,18 @@
         <div class="footer-grid">
           <div class="footer-col">
             <a href="index.html" class="logo"><span>Levelex</span></a>
-            <p>Elevating businesses...</p>
+            <p>Elevating businesses with intelligent solutions.</p>
+            <div class="social-links">
+              <a href="#" target="_blank" aria-label="Instagram"
+                ><i class="bx bxl-instagram"></i
+              ></a>
+              <a href="#" target="_blank" aria-label="TikTok"
+                ><i class="bx bxl-tiktok"></i
+              ></a>
+              <a href="#" target="_blank" aria-label="LinkedIn"
+                ><i class="bx bxl-linkedin-square"></i
+              ></a>
+            </div>
           </div>
           <div class="footer-col">
             <h3>Product</h3>
@@ -234,9 +245,6 @@
               submitButton.disabled = false;
               submitButton.innerHTML = `<span>Login <i class='bx bx-right-arrow-alt'></i></span>`;
             } else {
-              // Optional extra check if needed, but error handling above should cover required confirmation
-              // if (data.user && !data.user.email_confirmed_at && ...) { ... }
-
               console.log("Login successful:", data);
               // Success: INSTANT REDIRECT
               window.location.href = "/dashboard.html";

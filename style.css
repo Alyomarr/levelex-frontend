@@ -38,17 +38,18 @@ html {
   background: linear-gradient(
     to bottom,
     var(--bg-light-blue) 0%,
-    var(--bg-dark) 8.6%
+    var(--bg-dark) 9.5%
   );
   background-color: var(--bg-dark); /* Fallback */
+  /* Fixes gradient scrolling */
 }
 
 body {
   font-family: "Poppins", sans-serif;
-  /* Background properties moved to html for better fixed attachment */
+  /* Background properties moved to html */
   color: var(--text-white);
   line-height: 1.6;
-  min-height: 100vh; /* Ensures body can fill height */
+  min-height: 100vh;
 }
 
 /* ============================================ */
@@ -208,12 +209,12 @@ ul {
   display: inline-block;
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  border-top-color: var(--text-white); /* White top border */
-  width: 1em; /* Size relative to button font size */
+  border-top-color: var(--text-white);
+  width: 1em;
   height: 1em;
   animation: spin 1s linear infinite;
-  vertical-align: middle; /* Align with text */
-  margin-right: 0.5em; /* Space if text follows */
+  vertical-align: middle;
+  margin-right: 0.5em;
 }
 
 /* ============================================ */
@@ -475,7 +476,7 @@ ul {
 .case-study-content ul {
   margin-bottom: 1.5rem;
   padding-left: 0;
-} /* Reset padding */
+}
 .case-study-content ul li {
   color: var(--text-gray);
   font-size: 0.9rem;
@@ -488,10 +489,10 @@ ul {
   color: var(--accent-cyan);
   font-size: 1.1rem;
   flex-shrink: 0;
-} /* Prevent icon shrinking */
+}
 .case-study-content .btn-link {
   margin-top: auto;
-} /* Pushes link to bottom */
+}
 
 /* ============================================ */
 /* 8. COMPONENT 7: "CONTACT" SECTION & FORMS    */
@@ -628,7 +629,7 @@ ul {
 }
 .footer-col ul {
   padding-left: 0;
-} /* Reset default padding */
+}
 .footer-col ul li {
   margin-bottom: 0.5rem;
 }
@@ -647,6 +648,42 @@ ul {
   font-size: 0.9rem;
 }
 
+/* Social Links Styling */
+.social-links {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.social-links a i {
+  font-size: 1.75rem;
+  color: var(--text-gray);
+  transition: all 0.3s ease;
+}
+.social-links a:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--glow-shadow);
+  border-color: var(--accent-cyan);
+}
+.social-links a:hover i {
+  background: var(--gradient-hover);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.5), 0 0 12px rgba(138, 43, 226, 0.3);
+}
+
 /* ============================================ */
 /* 11. RESPONSIVE DESIGN (Mobile)               */
 /* ============================================ */
@@ -654,7 +691,7 @@ ul {
 @media (max-width: 992px) {
   .container,
   .navbar-container {
-    padding: 0 1.5rem; /* Consistent mobile padding */
+    padding: 0 1.5rem;
   }
 
   /* Mobile Nav specific styles */
@@ -669,6 +706,7 @@ ul {
     left: 0;
     width: 100%;
     background-color: rgba(13, 15, 43, 0.95);
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     flex-direction: column;
     padding: 1rem 0;
@@ -713,7 +751,7 @@ ul {
   .case-study-grid,
   .info-grid {
     grid-template-columns: 1fr;
-  } /* Force single column */
+  }
   .footer-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -723,7 +761,7 @@ ul {
   .navbar-container {
     padding-left: 15px;
     padding-right: 15px;
-  } /* Adjust padding */
+  }
   .hero h1 {
     font-size: 2.5rem;
   }
