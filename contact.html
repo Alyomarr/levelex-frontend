@@ -60,11 +60,7 @@
     <nav class="navbar">
       <div class="container navbar-container">
         <a href="index.html" class="logo">
-          <img
-            src="assets\LevelX-Photoroom.svg"
-            alt="Levelex Logo"
-            class="logo-icon"
-          />
+          <img src="assets/logo.svg" alt="Levelex Logo" class="logo-icon" />
           <span>Levelex</span>
         </a>
         <ul id="nav-links-ul" class="nav-links">
@@ -97,24 +93,18 @@
           <div class="card info-card">
             <i class="bx bxs-envelope card-icon"></i>
             <h3>Email</h3>
-            <p>levelexcloud@gmail.com</p>
+            <p>hello@levelex.com</p>
           </div>
           <div class="card info-card">
             <i class="bx bxs-phone card-icon"></i>
             <h3>Phone</h3>
-            <p>+20 103 2270 126</p>
+            <p>+1 (555) 123-4567</p>
           </div>
         </div>
 
         <div class="card contact-form-card">
           <h3>Send us a Message</h3>
-          <form
-            name="contact"
-            class="contact-form"
-            method="POST"
-            data-netlify="true"
-          >
-            <input type="hidden" name="form-name" value="contact" />
+          <form id="vercel-contact-form" class="contact-form">
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Name</label
@@ -214,7 +204,7 @@
     <script>
       const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** INTEGRATED **
       const SUPABASE_ANON_KEY =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** INTEGRATED **
+        "eyJhbGciOiJIJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** INTEGRATED **
 
       let supabase = null;
       if (window.supabase) {
@@ -234,7 +224,6 @@
         return btn && getComputedStyle(btn).display !== "none";
       }
       async function updateNavbarBasedOnAuthState() {
-        // --- THIS FUNCTION IS IDENTICAL TO THE ONE IN index.html ---
         if (!supabase) return;
         const {
           data: { session },
@@ -246,7 +235,6 @@
           .forEach((el) => el.remove());
         if (authButtonsContainer) authButtonsContainer.innerHTML = "";
         if (session) {
-          // Logged In
           const dash = `<a href="dashboard.html" class="btn-link">Dashboard</a>`;
           const logout = `<a href="#" id="logout-button-dynamic" class="btn btn-gradient"><span>Logout</span></a>`;
           if (isMobileView()) {
@@ -270,7 +258,6 @@
             });
           }
         } else {
-          // Logged Out
           const login = `<a href="login.html" class="btn-link">Login</a>`;
           const signup = `<a href="signup.html" class="btn btn-gradient"><span>Sign Up</span></a>`;
           if (isMobileView()) {
@@ -288,37 +275,70 @@
           }
         }
       }
+      document.addEventListener(
+        "DOMContentLoaded",
+        updateNavbarBasedOnAuthState
+      );
+      if (supabase) {
+        supabase.auth.onAuthStateChange((event, session) => {
+          console.log("Auth state changed:", event);
+          updateNavbarBasedOnAuthState();
+        });
+      }
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          updateNavbarBasedOnAuthState();
+        }, 250);
+      });
     </script>
 
     <script>
-      const contactForm = document.querySelector('form[data-netlify="true"]');
+      const vercelContactForm = document.getElementById("vercel-contact-form");
       const formMessageDiv = document.getElementById("form-message");
-      if (contactForm && formMessageDiv) {
-        contactForm.addEventListener("submit", async (e) => {
+
+      if (vercelContactForm && formMessageDiv) {
+        vercelContactForm.addEventListener("submit", async (e) => {
           e.preventDefault();
-          const formData = new FormData(contactForm);
-          const submitButton = contactForm.querySelector(
+          const formData = new FormData(vercelContactForm);
+          const submitButton = vercelContactForm.querySelector(
             'button[type="submit"]'
           );
           const originalButtonHtml = submitButton.innerHTML;
+
+          // Create a simple object from form data
+          const data = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            subject: formData.get("subject"),
+            message: formData.get("message"),
+          };
+
           formMessageDiv.textContent = "Sending...";
           submitButton.disabled = true;
           submitButton.innerHTML = "<span>Sending...</span>";
+
           try {
-            const response = await fetch("/", {
+            // Send data to our Vercel function
+            const response = await fetch("/api/contact", {
               method: "POST",
-              headers: { "Content-Type": "application/x-www-form-urlencoded" },
-              body: new URLSearchParams(formData).toString(),
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data), // Send as JSON
             });
+
+            const result = await response.json();
+
             if (response.ok) {
-              formMessageDiv.textContent = "Thanks! Message sent.";
-              contactForm.reset();
+              formMessageDiv.textContent =
+                result.message || "Thanks! Message sent.";
+              vercelContactForm.reset(); // Clear the form
             } else {
-              throw new Error(`Form submission failed (${response.status})`);
-            } // Include status
+              throw new Error(result.error || "Form submission failed.");
+            }
           } catch (error) {
-            console.error("Netlify form error:", error);
-            formMessageDiv.textContent = "Sorry, error sending message.";
+            console.error("Contact form error:", error);
+            formMessageDiv.textContent = `Sorry, error sending message: ${error.message}`;
           } finally {
             submitButton.disabled = false;
             submitButton.innerHTML = originalButtonHtml;
@@ -328,9 +348,8 @@
     </script>
 
     <script>
-      // --- THIS SCRIPT IS IDENTICAL TO THE ONE IN index.html ---
       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      const navLinksUlForMenu = document.getElementById("nav-links-ul"); // Use different var name
+      const navLinksUlForMenu = document.getElementById("nav-links-ul");
       if (mobileMenuBtn && navLinksUlForMenu) {
         mobileMenuBtn.addEventListener("click", () => {
           navLinksUlForMenu.classList.toggle("active");
@@ -345,26 +364,6 @@
       } else {
         console.error("Mobile menu elements not found.");
       }
-    </script>
-
-    <script>
-      document.addEventListener(
-        "DOMContentLoaded",
-        updateNavbarBasedOnAuthState
-      ); // Set initial navbar state
-      if (supabase) {
-        supabase.auth.onAuthStateChange((event, session) => {
-          console.log("Auth state changed:", event);
-          updateNavbarBasedOnAuthState();
-        });
-      } // Listen for auth changes
-      let resizeTimer;
-      window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          updateNavbarBasedOnAuthState();
-        }, 250);
-      }); // Update navbar on resize
     </script>
   </body>
 </html>
