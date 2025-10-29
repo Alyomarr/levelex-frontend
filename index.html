@@ -260,49 +260,39 @@
       // --- Load Dynamic Content for index.html ---
       async function loadPublicContent() {
         if (!supabase) {
-          console.error("Supabase client not available for loading content.");
+          console.error("Supabase client not available.");
           return;
         }
-        console.log("LOG: Starting loadPublicContent..."); // <-- Debug Log
-        // Load concurrently
+        console.log("LOG: Starting loadPublicContent...");
         await Promise.all([
           loadCaseStudies(),
           loadServices(),
           loadVision(),
           loadAboutStats(),
         ]);
-        console.log("LOG: Finished loadPublicContent."); // <-- Debug Log
+        console.log("LOG: Finished loadPublicContent.");
       }
 
       async function loadCaseStudies() {
-        console.log("LOG: Starting loadCaseStudies..."); // <-- Debug Log
         const grid = document.querySelector(".case-study-grid");
         const placeholder = grid
           ? grid.querySelector(".loading-placeholder")
           : null;
-        console.log("LOG: Case study grid found:", grid ? "Yes" : "No"); // <-- Debug Log
-        if (!grid) return; // Exit if container not found
-
+        if (!grid) return;
         try {
           const { data, error } = await supabase
             .from("CaseStudies")
             .select("*");
-          console.log("LOG: Supabase CaseStudies response:", { data, error }); // <-- Debug Log
-          if (error) throw error; // Throw error to be caught below
-
-          if (placeholder) placeholder.remove(); // Remove placeholder on success
-          grid.innerHTML = ""; // Clear grid *after* successful fetch
-
+          console.log("LOG: Supabase CaseStudies response:", { data, error });
+          if (error) throw error;
+          if (placeholder) placeholder.remove();
+          grid.innerHTML = "";
           if (!data || data.length === 0) {
-            console.log("LOG: No case studies found in data."); // <-- Debug Log
             grid.innerHTML =
               '<p class="loading-placeholder">No case studies available yet.</p>';
             return;
           }
-
-          console.log(
-            `LOG: Found ${data.length} case studies. Populating grid...`
-          ); // <-- Debug Log
+          console.log(`LOG: Found ${data.length} case studies.`);
           data.forEach((study) => {
             const card = document.createElement("div");
             card.className = "card case-study-card";
@@ -324,22 +314,19 @@
           });
         } catch (error) {
           console.error("Error loading case studies:", error.message);
-          grid.innerHTML = `<p class="loading-placeholder" style="color: red;">Error loading case studies.</p>`; // Show error in grid
+          grid.innerHTML = `<p class="loading-placeholder" style="color: red;">Error loading case studies.</p>`;
         }
       }
 
       async function loadServices() {
-        console.log("LOG: Starting loadServices..."); // <-- Debug Log
         const grid = document.querySelector(".feature-grid-2");
         const placeholder = grid
           ? grid.querySelector(".loading-placeholder")
           : null;
-        console.log("LOG: Services grid found:", grid ? "Yes" : "No"); // <-- Debug Log
         if (!grid) return;
-
         try {
           const { data, error } = await supabase.from("Services").select("*");
-          console.log("LOG: Supabase Services response:", { data, error }); // <-- Debug Log
+          console.log("LOG: Supabase Services response:", { data, error });
           if (error) throw error;
           if (placeholder) placeholder.remove();
           grid.innerHTML = "";
@@ -348,8 +335,14 @@
               '<p class="loading-placeholder">No services available yet.</p>';
             return;
           }
-          console.log(`LOG: Found ${data.length} services. Populating grid...`); // <-- Debug Log
+          console.log(`LOG: Found ${data.length} services. Populating...`);
           data.forEach((service) => {
+            // *** ADDED DEBUG LOG ***
+            console.log(
+              "LOG: Processing service item. Icon value:",
+              service.icon
+            );
+
             const card = document.createElement("div");
             card.className = "card feature-card-large";
             const iconClass = service.icon
@@ -367,17 +360,14 @@
       }
 
       async function loadVision() {
-        console.log("LOG: Starting loadVision..."); // <-- Debug Log
         const grid = document.querySelector(".feature-grid-3");
         const placeholder = grid
           ? grid.querySelector(".loading-placeholder")
           : null;
-        console.log("LOG: Vision grid found:", grid ? "Yes" : "No"); // <-- Debug Log
         if (!grid) return;
-
         try {
           const { data, error } = await supabase.from("Vision").select("*");
-          console.log("LOG: Supabase Vision response:", { data, error }); // <-- Debug Log
+          console.log("LOG: Supabase Vision response:", { data, error });
           if (error) throw error;
           if (placeholder) placeholder.remove();
           grid.innerHTML = "";
@@ -386,10 +376,11 @@
               '<p class="loading-placeholder">No vision items available yet.</p>';
             return;
           }
-          console.log(
-            `LOG: Found ${data.length} vision items. Populating grid...`
-          ); // <-- Debug Log
+          console.log(`LOG: Found ${data.length} vision items. Populating...`);
           data.forEach((item) => {
+            // *** ADDED DEBUG LOG ***
+            console.log("LOG: Processing vision item. Icon value:", item.icon);
+
             const card = document.createElement("div");
             card.className = "card feature-card";
             const iconClass = item.icon
@@ -407,24 +398,21 @@
       }
 
       async function loadAboutStats() {
-        console.log("LOG: Starting loadAboutStats..."); // <-- Debug Log
         const statsGrid = document.querySelector(".stats-grid");
         const placeholder = statsGrid
           ? statsGrid.querySelector(".loading-placeholder")
           : null;
-        console.log("LOG: Stats grid found:", statsGrid ? "Yes" : "No"); // <-- Debug Log
         if (!statsGrid) return;
-
         try {
           const { data, error } = await supabase
             .from("AboutPage")
             .select("*")
             .eq("id", true)
             .single();
-          console.log("LOG: Supabase AboutPage response:", { data, error }); // <-- Debug Log
+          console.log("LOG: Supabase AboutPage response:", { data, error });
           if (error) throw error;
           if (!data) throw new Error("No data");
-          if (placeholder) placeholder.remove(); // Remove placeholder only on success
+          if (placeholder) placeholder.remove();
           statsGrid.innerHTML = `<div class="stat-item"><span class="stat-number">${
             data.stat_clients || "N/A"
           }</span><span class="stat-label">Happy Clients</span></div><div class="stat-item"><span class="stat-number">${
@@ -456,7 +444,7 @@
         } = await supabase.auth.getSession();
         const authButtonsContainer = document.querySelector(".auth-buttons");
         const navLinksUl = document.getElementById("nav-links-ul");
-        if (!navLinksUl) return; // Add guard for navLinksUl
+        if (!navLinksUl) return;
         navLinksUl
           .querySelectorAll(".auth-link-mobile")
           .forEach((el) => el.remove());
@@ -478,7 +466,6 @@
               authButtonsContainer.innerHTML = dash + logout;
           }
           const logoutBtn = document.getElementById("logout-button-dynamic");
-          // Ensure listener added only once, handle potential re-creation
           if (logoutBtn && !logoutBtn.dataset.listenerAttached) {
             logoutBtn.addEventListener("click", async (e) => {
               e.preventDefault();
@@ -503,7 +490,6 @@
               authButtonsContainer.innerHTML = login + signup;
           }
         }
-        // Ensure logout listeners are correctly managed if elements are recreated
         document.querySelectorAll("#logout-button-dynamic").forEach((btn) => {
           if (!btn.dataset.listenerAttached) {
             btn.addEventListener("click", async (e) => {
@@ -518,7 +504,7 @@
 
     <script>
       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      const navLinksUlForMenu = document.getElementById("nav-links-ul"); // Use different var name to avoid conflict
+      const navLinksUlForMenu = document.getElementById("nav-links-ul");
       if (mobileMenuBtn && navLinksUlForMenu) {
         mobileMenuBtn.addEventListener("click", () => {
           navLinksUlForMenu.classList.toggle("active");
@@ -537,19 +523,18 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        if (typeof loadPublicContent === "function") loadPublicContent(); // Load content on page load
+        if (typeof loadPublicContent === "function") loadPublicContent();
         if (typeof updateNavbarBasedOnAuthState === "function")
-          updateNavbarBasedOnAuthState(); // Set initial navbar state
+          updateNavbarBasedOnAuthState();
       });
       if (supabase) {
-        // Listen for auth changes
         supabase.auth.onAuthStateChange((event, session) => {
           console.log("Auth state changed:", event);
           if (typeof updateNavbarBasedOnAuthState === "function")
             updateNavbarBasedOnAuthState();
         });
       }
-      let resizeTimer; // Update navbar on resize
+      let resizeTimer;
       window.addEventListener("resize", () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
