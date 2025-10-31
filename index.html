@@ -101,7 +101,7 @@
           systems.
         </p>
         <div class="cta-buttons">
-          <a href="#contact" class="btn btn-gradient">
+          <a href="contact.html" class="btn btn-gradient">
             <span>Get Started <i class="bx bx-right-arrow-alt"></i></span>
           </a>
           <a href="#about" class="btn-link">Learn More</a>
@@ -206,9 +206,8 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-col">
-            <a href="index.html#home" class="logo"><span>Levelex</span></a>
+            <a href="index.html" class="logo"><span>Levelex</span></a>
             <p>Elevating businesses with intelligent solutions.</p>
-
             <div class="social-links">
               <a
                 href="https://www.instagram.com/levelexcloud"
@@ -230,6 +229,13 @@
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 ><i class="bx bxl-linkedin-square"></i
+              ></a>
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter"
+                ><i class="bx bxl-twitter"></i
               ></a>
             </div>
           </div>
@@ -284,7 +290,7 @@
       // --- Load Dynamic Content for index.html ---
       async function loadPublicContent() {
         if (!supabase) {
-          console.error("Supabase client not available.");
+          console.error("Supabase client not available for loading content.");
           return;
         }
         console.log("LOG: Starting loadPublicContent...");
@@ -298,25 +304,36 @@
       }
 
       async function loadCaseStudies() {
+        console.log("LOG: Starting loadCaseStudies...");
         const grid = document.querySelector(".case-study-grid");
         const placeholder = grid
           ? grid.querySelector(".loading-placeholder")
           : null;
-        if (!grid) return;
+        if (!grid) {
+          console.error("Case study grid not found.");
+          return;
+        }
+
         try {
           const { data, error } = await supabase
             .from("CaseStudies")
             .select("*");
           console.log("LOG: Supabase CaseStudies response:", { data, error });
           if (error) throw error;
+
           if (placeholder) placeholder.remove();
           grid.innerHTML = "";
+
           if (!data || data.length === 0) {
+            console.log("LOG: No case studies found in data.");
             grid.innerHTML =
               '<p class="loading-placeholder">No case studies available yet.</p>';
             return;
           }
-          console.log(`LOG: Found ${data.length} case studies.`);
+
+          console.log(
+            `LOG: Found ${data.length} case studies. Populating grid...`
+          );
           data.forEach((study) => {
             const card = document.createElement("div");
             card.className = "card case-study-card";
@@ -338,16 +355,22 @@
           });
         } catch (error) {
           console.error("Error loading case studies:", error.message);
-          grid.innerHTML = `<p class="loading-placeholder" style="color: red;">Error loading case studies.</p>`;
+          if (grid)
+            grid.innerHTML = `<p class="loading-placeholder" style="color: red;">Error loading case studies.</p>`;
         }
       }
 
       async function loadServices() {
+        console.log("LOG: Starting loadServices...");
         const grid = document.querySelector(".feature-grid-2");
         const placeholder = grid
           ? grid.querySelector(".loading-placeholder")
           : null;
-        if (!grid) return;
+        if (!grid) {
+          console.error("Services grid not found.");
+          return;
+        }
+
         try {
           const { data, error } = await supabase.from("Services").select("*");
           console.log("LOG: Supabase Services response:", { data, error });
@@ -377,16 +400,22 @@
           });
         } catch (error) {
           console.error("Error loading services:", error.message);
-          grid.innerHTML = `<p class="loading-placeholder" style="color: red;">Error loading services.</p>`;
+          if (grid)
+            grid.innerHTML = `<p class="loading-placeholder" style="color: red;">Error loading services.</p>`;
         }
       }
 
       async function loadVision() {
+        console.log("LOG: Starting loadVision...");
         const grid = document.querySelector(".feature-grid-3");
         const placeholder = grid
           ? grid.querySelector(".loading-placeholder")
           : null;
-        if (!grid) return;
+        if (!grid) {
+          console.error("Vision grid not found.");
+          return;
+        }
+
         try {
           const { data, error } = await supabase.from("Vision").select("*");
           console.log("LOG: Supabase Vision response:", { data, error });
@@ -413,16 +442,22 @@
           });
         } catch (error) {
           console.error("Error loading vision:", error.message);
-          grid.innerHTML = `<p class="loading-placeholder" style="color: red;">Error loading vision items.</p>`;
+          if (grid)
+            grid.innerHTML = `<p class="loading-placeholder" style="color: red;">Error loading vision items.</p>`;
         }
       }
 
       async function loadAboutStats() {
+        console.log("LOG: Starting loadAboutStats...");
         const statsGrid = document.querySelector(".stats-grid");
         const placeholder = statsGrid
           ? statsGrid.querySelector(".loading-placeholder")
           : null;
-        if (!statsGrid) return;
+        if (!statsGrid) {
+          console.error("Stats grid not found.");
+          return;
+        }
+
         try {
           const { data, error } = await supabase
             .from("AboutPage")
@@ -447,7 +482,8 @@
             "Error loading about stats:",
             error?.message || "No data"
           );
-          statsGrid.innerHTML = `<p class="loading-placeholder" style="color: red;">Failed to load stats.</p>`;
+          if (statsGrid)
+            statsGrid.innerHTML = `<p class="loading-placeholder" style="color: red;">Failed to load stats.</p>`;
         }
       }
     </script>
@@ -464,7 +500,10 @@
         } = await supabase.auth.getSession();
         const authButtonsContainer = document.querySelector(".auth-buttons");
         const navLinksUl = document.getElementById("nav-links-ul");
-        if (!navLinksUl) return;
+        if (!navLinksUl) {
+          console.error("navLinksUl not found");
+          return;
+        }
         navLinksUl
           .querySelectorAll(".auth-link-mobile")
           .forEach((el) => el.remove());
@@ -535,6 +574,16 @@
             mobileMenuBtn.classList.remove("bx-x");
             mobileMenuBtn.classList.add("bx-menu");
           }
+        });
+        // Close menu when any link inside it is clicked
+        navLinksUlForMenu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            if (navLinksUlForMenu.classList.contains("active")) {
+              navLinksUlForMenu.classList.remove("active");
+              mobileMenuBtn.classList.remove("bx-x");
+              mobileMenuBtn.classList.add("bx-menu");
+            }
+          });
         });
       } else {
         console.error("Mobile menu elements not found.");
