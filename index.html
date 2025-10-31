@@ -59,6 +59,8 @@
     />
 
     <link rel="stylesheet" href="style.css" />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
   <body>
     <nav class="navbar">
@@ -91,16 +93,16 @@
 
     <section id="home" class="hero">
       <div class="container hero-content">
-        <h1>
+        <h1 data-aos="fade-up" data-aos-delay="100">
           Elevate Your
           <span class="gradient-text">Digital Presence</span>
         </h1>
-        <p>
+        <p data-aos="fade-up" data-aos-delay="200">
           Levelex is a cutting-edge platform providing AI-architected automation
           solutions using workflows built to integrate seamlessly into client
           systems.
         </p>
-        <div class="cta-buttons">
+        <div class="cta-buttons" data-aos="fade-up" data-aos-delay="300">
           <a href="contact.html" class="btn btn-gradient">
             <span>Get Started <i class="bx bx-right-arrow-alt"></i></span>
           </a>
@@ -111,11 +113,11 @@
 
     <section id="about" class="about-us">
       <div class="container">
-        <h2 class="section-title">
+        <h2 class="section-title" data-aos="fade-up">
           About <span class="gradient-text">Levelex</span>
         </h2>
         <div class="about-grid">
-          <div class="about-text">
+          <div class="about-text" data-aos="fade-up" data-aos-delay="100">
             <p>
               At Levelex, we believe that growth begins with innovation. We're a
               forward-thinking team dedicated to empowering individuals and
@@ -136,7 +138,7 @@
               a mindset.
             </p>
           </div>
-          <div class="stats-card card">
+          <div class="stats-card card" data-aos="fade-up" data-aos-delay="200">
             <div class="stats-grid">
               <div class="loading-placeholder">Loading stats...</div>
             </div>
@@ -147,10 +149,10 @@
 
     <section id="vision" class="vision">
       <div class="container">
-        <h2 class="section-title">
+        <h2 class="section-title" data-aos="fade-up">
           Our <span class="gradient-text">Vision</span>
         </h2>
-        <p class="section-subheadline">
+        <p class="section-subheadline" data-aos="fade-up" data-aos-delay="100">
           To empower businesses worldwide with intelligent, scalable
           solutions...
         </p>
@@ -162,10 +164,10 @@
 
     <section id="what-we-do" class="what-we-do">
       <div class="container">
-        <h2 class="section-title">
+        <h2 class="section-title" data-aos="fade-up">
           What We <span class="gradient-text">Do</span>
         </h2>
-        <p class="section-subheadline">
+        <p class="section-subheadline" data-aos="fade-up" data-aos-delay="100">
           Comprehensive solutions tailored to your business needs.
         </p>
         <div class="feature-grid-2">
@@ -176,10 +178,10 @@
 
     <section id="case-studies" class="case-studies">
       <div class="container">
-        <h2 class="section-title">
+        <h2 class="section-title" data-aos="fade-up">
           Our <span class="gradient-text">Case Studies</span>
         </h2>
-        <p class="section-subheadline">
+        <p class="section-subheadline" data-aos="fade-up" data-aos-delay="100">
           Discover how we've helped businesses transform, scale, and succeed...
         </p>
         <div class="case-study-grid">
@@ -190,7 +192,7 @@
 
     <section class="final-cta">
       <div class="container">
-        <div class="card final-cta-card">
+        <div class="card final-cta-card" data-aos="fade-up">
           <p>
             Join hundreds of businesses already transforming their operations
             with Levelex.
@@ -290,7 +292,7 @@
       // --- Load Dynamic Content for index.html ---
       async function loadPublicContent() {
         if (!supabase) {
-          console.error("Supabase client not available for loading content.");
+          console.error("Supabase client not available.");
           return;
         }
         console.log("LOG: Starting loadPublicContent...");
@@ -301,42 +303,40 @@
           loadAboutStats(),
         ]);
         console.log("LOG: Finished loadPublicContent.");
+
+        // --- *** INITIALIZE AOS *** ---
+        // Must be called AFTER content is fetched and added to the page
+        AOS.init({
+          duration: 600, // Animation duration in ms
+          once: true, // Whether animation should happen only once
+          offset: 50, // Offset (in px) from bottom of screen to trigger
+        });
+        console.log("LOG: AOS Initialized.");
       }
 
       async function loadCaseStudies() {
-        console.log("LOG: Starting loadCaseStudies...");
         const grid = document.querySelector(".case-study-grid");
         const placeholder = grid
           ? grid.querySelector(".loading-placeholder")
           : null;
-        if (!grid) {
-          console.error("Case study grid not found.");
-          return;
-        }
-
+        if (!grid) return;
         try {
           const { data, error } = await supabase
             .from("CaseStudies")
             .select("*");
-          console.log("LOG: Supabase CaseStudies response:", { data, error });
           if (error) throw error;
-
           if (placeholder) placeholder.remove();
           grid.innerHTML = "";
-
           if (!data || data.length === 0) {
-            console.log("LOG: No case studies found in data.");
             grid.innerHTML =
               '<p class="loading-placeholder">No case studies available yet.</p>';
             return;
           }
-
-          console.log(
-            `LOG: Found ${data.length} case studies. Populating grid...`
-          );
-          data.forEach((study) => {
+          data.forEach((study, index) => {
             const card = document.createElement("div");
             card.className = "card case-study-card";
+            card.setAttribute("data-aos", "fade-up"); // *** ADDED AOS ***
+            card.setAttribute("data-aos-delay", (index % 3) * 100); // Stagger delay
             let resultsHtml =
               study.results && Array.isArray(study.results)
                 ? study.results
@@ -361,19 +361,13 @@
       }
 
       async function loadServices() {
-        console.log("LOG: Starting loadServices...");
         const grid = document.querySelector(".feature-grid-2");
         const placeholder = grid
           ? grid.querySelector(".loading-placeholder")
           : null;
-        if (!grid) {
-          console.error("Services grid not found.");
-          return;
-        }
-
+        if (!grid) return;
         try {
           const { data, error } = await supabase.from("Services").select("*");
-          console.log("LOG: Supabase Services response:", { data, error });
           if (error) throw error;
           if (placeholder) placeholder.remove();
           grid.innerHTML = "";
@@ -382,14 +376,11 @@
               '<p class="loading-placeholder">No services available yet.</p>';
             return;
           }
-          console.log(`LOG: Found ${data.length} services. Populating...`);
-          data.forEach((service) => {
-            console.log(
-              "LOG: Processing service item. Icon value:",
-              service.icon
-            );
+          data.forEach((service, index) => {
             const card = document.createElement("div");
             card.className = "card feature-card-large";
+            card.setAttribute("data-aos", "fade-up"); // *** ADDED AOS ***
+            card.setAttribute("data-aos-delay", (index % 2) * 100); // Stagger delay
             const iconClass = service.icon
               ? service.icon.trim()
               : "bx bx-question-mark";
@@ -406,19 +397,13 @@
       }
 
       async function loadVision() {
-        console.log("LOG: Starting loadVision...");
         const grid = document.querySelector(".feature-grid-3");
         const placeholder = grid
           ? grid.querySelector(".loading-placeholder")
           : null;
-        if (!grid) {
-          console.error("Vision grid not found.");
-          return;
-        }
-
+        if (!grid) return;
         try {
           const { data, error } = await supabase.from("Vision").select("*");
-          console.log("LOG: Supabase Vision response:", { data, error });
           if (error) throw error;
           if (placeholder) placeholder.remove();
           grid.innerHTML = "";
@@ -427,11 +412,11 @@
               '<p class="loading-placeholder">No vision items available yet.</p>';
             return;
           }
-          console.log(`LOG: Found ${data.length} vision items. Populating...`);
-          data.forEach((item) => {
-            console.log("LOG: Processing vision item. Icon value:", item.icon);
+          data.forEach((item, index) => {
             const card = document.createElement("div");
             card.className = "card feature-card";
+            card.setAttribute("data-aos", "fade-up"); // *** ADDED AOS ***
+            card.setAttribute("data-aos-delay", index * 100); // Stagger delay
             const iconClass = item.icon
               ? item.icon.trim()
               : "bx bx-question-mark";
@@ -448,23 +433,17 @@
       }
 
       async function loadAboutStats() {
-        console.log("LOG: Starting loadAboutStats...");
         const statsGrid = document.querySelector(".stats-grid");
         const placeholder = statsGrid
           ? statsGrid.querySelector(".loading-placeholder")
           : null;
-        if (!statsGrid) {
-          console.error("Stats grid not found.");
-          return;
-        }
-
+        if (!statsGrid) return;
         try {
           const { data, error } = await supabase
             .from("AboutPage")
             .select("*")
             .eq("id", true)
             .single();
-          console.log("LOG: Supabase AboutPage response:", { data, error });
           if (error) throw error;
           if (!data) throw new Error("No data");
           if (placeholder) placeholder.remove();
@@ -612,5 +591,7 @@
         }, 250);
       });
     </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   </body>
 </html>

@@ -38,7 +38,7 @@ html {
   background: linear-gradient(
     to bottom,
     var(--bg-light-blue) 0%,
-    var(--bg-dark) 9.5%
+    var(--bg-dark) 11%
   );
   background-color: var(--bg-dark); /* Fallback */
   /* Fixes gradient scrolling */
@@ -50,6 +50,11 @@ body {
   color: var(--text-white);
   line-height: 1.6;
   min-height: 100vh;
+}
+
+/* Fix for AOS animations appearing over sticky navbar */
+[data-aos] {
+  z-index: 1;
 }
 
 /* ============================================ */

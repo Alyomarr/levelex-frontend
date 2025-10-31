@@ -55,6 +55,8 @@
     />
 
     <link rel="stylesheet" href="style.css" />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
   <body>
     <nav class="navbar">
@@ -87,26 +89,34 @@
 
     <section id="contact" class="contact">
       <div class="container">
-        <h2 class="section-title">
+        <h2 class="section-title" data-aos="fade-up">
           Get in <span class="gradient-text">Touch</span>
         </h2>
-        <p class="section-subheadline">
+        <p class="section-subheadline" data-aos="fade-up" data-aos-delay="100">
           Have questions? We'd love to hear from you...
         </p>
         <div class="info-grid">
-          <div class="card info-card">
+          <div
+            class="card info-card"
+            data-aos="fade-right"
+            data-aos-delay="200"
+          >
             <i class="bx bxs-envelope card-icon"></i>
             <h3>Email</h3>
             <p>hello@levelex.com</p>
           </div>
-          <div class="card info-card">
+          <div class="card info-card" data-aos="fade-left" data-aos-delay="300">
             <i class="bx bxs-phone card-icon"></i>
             <h3>Phone</h3>
             <p>+1 (555) 123-4567</p>
           </div>
         </div>
 
-        <div class="card contact-form-card">
+        <div
+          class="card contact-form-card"
+          data-aos="fade-up"
+          data-aos-delay="400"
+        >
           <h3>Send us a Message</h3>
           <form id="vercel-contact-form" class="contact-form">
             <div class="form-row">
@@ -385,7 +395,7 @@
             mobileMenuBtn.classList.add("bx-menu");
           }
         });
-        // Close menu when a link is clicked
+        // Close menu when any link inside it is clicked
         navLinksUlForMenu.querySelectorAll("a").forEach((link) => {
           link.addEventListener("click", () => {
             if (navLinksUlForMenu.classList.contains("active")) {
@@ -401,10 +411,11 @@
     </script>
 
     <script>
-      document.addEventListener(
-        "DOMContentLoaded",
-        updateNavbarBasedOnAuthState
-      );
+      document.addEventListener("DOMContentLoaded", () => {
+        updateNavbarBasedOnAuthState();
+        // Initialize AOS after DOM content is loaded
+        AOS.init({ duration: 600, once: true, offset: 50 });
+      });
       if (supabase) {
         supabase.auth.onAuthStateChange((event, session) => {
           console.log("Auth state changed:", event);
@@ -419,5 +430,7 @@
         }, 250);
       });
     </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   </body>
 </html>

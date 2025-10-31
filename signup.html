@@ -43,6 +43,8 @@
     />
 
     <link rel="stylesheet" href="style.css" />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
   <body>
     <nav class="navbar">
@@ -78,6 +80,7 @@
         <div
           class="card contact-form-card"
           style="max-width: 600px; margin: 0 auto"
+          data-aos="fade-up"
         >
           <h3
             style="text-align: center; font-size: 1.8rem; margin-bottom: 2rem"
@@ -229,7 +232,6 @@
       const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** INTEGRATED **
       const SUPABASE_ANON_KEY =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** INTEGRATED **
-
       let supabase = null;
       if (window.supabase) {
         supabase = window.supabase.createClient(
@@ -243,10 +245,8 @@
     </script>
 
     <script>
-      // --- Signup Form Logic ---
       const signupForm = document.querySelector("#signup .contact-form");
       const messageDiv = document.getElementById("form-message");
-
       if (signupForm && typeof supabase !== "undefined" && messageDiv) {
         signupForm.addEventListener("submit", async (event) => {
           event.preventDefault();
@@ -260,8 +260,6 @@
           const submitButton = signupForm.querySelector(
             'button[type="submit"]'
           );
-
-          // Validation
           if (
             !usernameInput ||
             !emailInput ||
@@ -280,11 +278,8 @@
               "Password must be at least 6 characters long.";
             return;
           }
-
-          // Disable button
           submitButton.disabled = true;
           submitButton.innerHTML = `<span class="spinner"></span><span>Signing Up...</span>`;
-
           try {
             const { data, error } = await supabase.auth.signUp({
               email: emailInput.value,
@@ -296,27 +291,19 @@
                 },
               },
             });
-
-            // --- REFINED ERROR HANDLING ---
             if (error) {
               console.error("Signup Error:", error);
-
-              // Check for specific "already registered" error
               if (
                 error.message &&
                 error.message.toLowerCase().includes("user already registered")
               ) {
-                // *** UPDATED THIS LINE ***
                 messageDiv.textContent = "Account already registered!";
               } else {
                 messageDiv.textContent = `Signup failed: ${error.message}`;
               }
-
-              // Re-enable button ONLY on error
               submitButton.disabled = false;
               submitButton.innerHTML = `<span>Sign Up <i class='bx bx-right-arrow-alt'></i></span>`;
             } else {
-              // --- SUCCESS CASE (No error) ---
               console.log("Signup successful:", data);
               if (
                 data.user &&
@@ -329,7 +316,6 @@
                 messageDiv.textContent =
                   "Signup successful! Redirecting to login...";
               }
-              // Only redirect on success
               setTimeout(() => {
                 window.location.href = "/login.html";
               }, 2500);
@@ -398,12 +384,9 @@
     <script>
       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
       const navLinksUlForMenu = document.getElementById("nav-links-ul");
-
       if (mobileMenuBtn && navLinksUlForMenu) {
-        // Toggle menu on hamburger click
         mobileMenuBtn.addEventListener("click", () => {
           navLinksUlForMenu.classList.toggle("active");
-          // Change icon
           if (navLinksUlForMenu.classList.contains("active")) {
             mobileMenuBtn.classList.remove("bx-menu");
             mobileMenuBtn.classList.add("bx-x");
@@ -412,13 +395,10 @@
             mobileMenuBtn.classList.add("bx-menu");
           }
         });
-
-        // Close menu when any link inside it is clicked
         navLinksUlForMenu.querySelectorAll("a").forEach((link) => {
           link.addEventListener("click", () => {
             if (navLinksUlForMenu.classList.contains("active")) {
               navLinksUlForMenu.classList.remove("active");
-              // Reset icon back to hamburger
               mobileMenuBtn.classList.remove("bx-x");
               mobileMenuBtn.classList.add("bx-menu");
             }
@@ -427,6 +407,18 @@
       } else {
         console.error("Mobile menu elements not found.");
       }
+    </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        AOS.init({
+          duration: 600,
+          once: true,
+          offset: 50,
+        });
+      });
     </script>
   </body>
 </html>

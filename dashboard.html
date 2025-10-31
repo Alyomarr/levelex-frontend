@@ -28,6 +28,8 @@
 
     <link rel="stylesheet" href="style.css" />
 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
     <style>
       .auth-buttons .btn-link.active {
         color: var(--text-white);
@@ -91,19 +93,24 @@
 
     <section id="dashboard" class="dashboard-content">
       <div class="container">
-        <h1 class="section-title">
+        <h1 class="section-title" data-aos="fade-up">
           Welcome to your <span class="gradient-text">Dashboard</span>
         </h1>
-        <p class="section-subheadline" id="welcome-message">
+        <p
+          class="section-subheadline"
+          id="welcome-message"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
           Loading your information...
         </p>
 
-        <div class="card">
+        <div class="card" data-aos="fade-up" data-aos-delay="200">
           <h3>Your Stats (from Analytics)</h3>
           <div id="analytics-stats"><p>Loading stats...</p></div>
         </div>
 
-        <div class="card">
+        <div class="card" data-aos="fade-up" data-aos-delay="300">
           <h3>Available Automations</h3>
           <div id="trigger-message"></div>
           <div id="workflow-buttons-container">
@@ -535,6 +542,9 @@
       document.addEventListener("DOMContentLoaded", () => {
         checkAuthState(); // Checks login status, loads data if logged in
         updateNavbarBasedOnAuthState(); // Set navbar state on initial load
+
+        // Initialize AOS after DOM content is loaded
+        AOS.init({ duration: 600, once: true, offset: 50 });
       });
 
       // --- Listen for Auth Changes & Update Navbar ---
@@ -559,5 +569,7 @@
         }, 250);
       });
     </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   </body>
 </html>

@@ -44,6 +44,8 @@
 
     <link rel="stylesheet" href="style.css" />
 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
     <style>
       .auth-buttons .btn-link.active {
         color: var(--text-white);
@@ -85,6 +87,7 @@
         <div
           class="card contact-form-card"
           style="max-width: 500px; margin: 0 auto"
+          data-aos="fade-up"
         >
           <h3
             style="text-align: center; font-size: 1.8rem; margin-bottom: 2rem"
@@ -229,10 +232,8 @@
     </script>
 
     <script>
-      // --- Login Form Logic ---
       const loginForm = document.querySelector("#login .contact-form");
       const messageDiv = document.getElementById("form-message");
-
       if (loginForm && typeof supabase !== "undefined" && messageDiv) {
         loginForm.addEventListener("submit", async (event) => {
           event.preventDefault();
@@ -244,9 +245,8 @@
             messageDiv.textContent = "Error: Form elements missing.";
             return;
           }
-          // Disable button
           submitButton.disabled = true;
-          submitButton.innerHTML = `<span class="spinner"></span><span>Logging In...</span>`; // Added spinner
+          submitButton.innerHTML = `<span class="spinner"></span><span>Logging In...</span>`;
           try {
             const { data, error } = await supabase.auth.signInWithPassword({
               email: emailInput.value,
@@ -254,18 +254,16 @@
             });
             if (error) {
               console.error("Login Error:", error);
-              // Specific check for unverified email error
               if (error.message.includes("Email not confirmed")) {
                 messageDiv.textContent =
                   "Login failed: Please check your email to confirm your account first.";
               } else {
-                messageDiv.textContent = `Login failed: ${error.message}`; // Handles "Invalid login credentials" etc.
+                messageDiv.textContent = `Login failed: ${error.message}`;
               }
               submitButton.disabled = false;
               submitButton.innerHTML = `<span>Login <i class='bx bx-right-arrow-alt'></i></span>`;
             } else {
               console.log("Login successful:", data);
-              // Success: INSTANT REDIRECT
               window.location.href = "/dashboard.html";
             }
           } catch (catchError) {
@@ -299,7 +297,6 @@
             mobileMenuBtn.classList.add("bx-menu");
           }
         });
-        // Close menu when any link inside it is clicked
         navLinksUlForMenu.querySelectorAll("a").forEach((link) => {
           link.addEventListener("click", () => {
             if (navLinksUlForMenu.classList.contains("active")) {
@@ -312,6 +309,18 @@
       } else {
         console.error("Mobile menu elements not found.");
       }
+    </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        AOS.init({
+          duration: 600,
+          once: true,
+          offset: 50,
+        });
+      });
     </script>
   </body>
 </html>
