@@ -59,7 +59,11 @@ export default function Home() {
                 <i className="bx bx-right-arrow-alt"></i>
               </span>
             </Link>
-            <Link href="/contact" className="btn-link">
+            <Link
+              href="https://cal.com/levelexcloud/levelex-audit"
+              className="btn-link"
+              target="_blank"
+            >
               Book Technical Audit
             </Link>
           </div>
@@ -399,7 +403,11 @@ export default function Home() {
               Stop leaking data to the cloud. Let's build a system you actually
               own.
             </p>
-            <Link href="/contact" className="btn btn-gradient">
+            <Link
+              href="https://cal.com/levelexcloud/levelex-audit"
+              className="btn btn-gradient"
+              target="_blank"
+            >
               <span>
                 Schedule Discovery Call{" "}
                 <i className="bx bx-right-arrow-alt"></i>
