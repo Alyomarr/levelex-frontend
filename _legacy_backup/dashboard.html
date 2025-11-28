@@ -77,16 +77,13 @@
         </a>
         <ul id="nav-links-ul" class="nav-links">
           <li><a href="index.html#home">Home</a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#vision">Vision</a></li>
+          <li><a href="index.html#capabilities">Capabilities</a></li>
           <li><a href="index.html#what-we-do">What We Do</a></li>
           <li><a href="index.html#case-studies">Case Studies</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="dashboard.html" class="active">Dashboard</a></li>
+          <li><a href="#" id="logout-link">Logout</a></li>
         </ul>
-        <div class="auth-buttons">
-          <a href="dashboard.html" class="btn-link active">Dashboard</a>
-          <a href="#" class="btn btn-gradient"><span>Logout</span></a>
-        </div>
         <i id="mobile-menu-btn" class="bx bx-menu mobile-menu-toggle"></i>
       </div>
     </nav>
@@ -206,7 +203,7 @@
       }
 
       // --- DOM Elements ---
-      const logoutButton = document.querySelector('.auth-buttons a[href="#"]'); // More specific selector for logout
+      const logoutButton = document.getElementById("logout-link"); // Updated selector
       const dashboardContent = document.getElementById("dashboard");
       const welcomeMessage = document.getElementById("welcome-message");
       const workflowContainer = document.getElementById(
@@ -440,76 +437,6 @@
           }
           loadUserSpecificData(session.access_token); // Load data
         }
-      }
-
-      // --- Auth State & Navbar Update ---
-      function isMobileView() {
-        const btn = document.getElementById("mobile-menu-btn");
-        return btn && getComputedStyle(btn).display !== "none";
-      }
-      async function updateNavbarBasedOnAuthState() {
-        if (!supabase || !navLinksUl) return;
-        const {
-          data: { session },
-        } = await supabase.auth.getSession();
-        const authButtonsContainer = document.querySelector(".auth-buttons");
-        navLinksUl
-          .querySelectorAll(".auth-link-mobile")
-          .forEach((el) => el.remove());
-        if (authButtonsContainer) authButtonsContainer.innerHTML = "";
-
-        if (session) {
-          // Logged In
-          const dash = `<a href="dashboard.html" class="btn-link ${
-            window.location.pathname.includes("/dashboard.html") ? "active" : ""
-          }">Dashboard</a>`; // Check if current page is dashboard
-          const logout = `<a href="#" id="logout-button-dynamic" class="btn btn-gradient"><span>Logout</span></a>`;
-          if (isMobileView()) {
-            const li1 = document.createElement("li");
-            li1.className = "auth-link-mobile";
-            li1.innerHTML = dash;
-            navLinksUl.appendChild(li1);
-            const li2 = document.createElement("li");
-            li2.className = "auth-link-mobile";
-            li2.innerHTML = logout;
-            navLinksUl.appendChild(li2);
-          } else {
-            if (authButtonsContainer)
-              authButtonsContainer.innerHTML = dash + logout;
-          }
-          const logoutBtn = document.getElementById("logout-button-dynamic");
-          // Re-add listener if button was recreated
-          if (logoutBtn && !logoutBtn.dataset.listenerAttached) {
-            logoutBtn.addEventListener("click", handleLogout);
-            logoutBtn.dataset.listenerAttached = "true";
-          }
-        } else {
-          // Logged Out
-          const login = `<a href="login.html" class="btn-link ${
-            window.location.pathname.includes("/login.html") ? "active" : ""
-          }">Login</a>`; // Add active class check
-          const signup = `<a href="signup.html" class="btn btn-gradient"><span>Sign Up</span></a>`;
-          if (isMobileView()) {
-            const li1 = document.createElement("li");
-            li1.className = "auth-link-mobile";
-            li1.innerHTML = login;
-            navLinksUl.appendChild(li1);
-            const li2 = document.createElement("li");
-            li2.className = "auth-link-mobile";
-            li2.innerHTML = signup;
-            navLinksUl.appendChild(li2);
-          } else {
-            if (authButtonsContainer)
-              authButtonsContainer.innerHTML = login + signup;
-          }
-        }
-        // Ensure listeners are only attached once or removed/re-added correctly
-        document.querySelectorAll("#logout-button-dynamic").forEach((btn) => {
-          if (!btn.dataset.listenerAttached) {
-            btn.addEventListener("click", handleLogout); // Use named function
-            btn.dataset.listenerAttached = "true";
-          }
-        });
       }
     </script>
 

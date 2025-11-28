@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Levelex - AI-Architected Automation Solutions</title>
+    <meta
+      name="description"
+      content="Elevate your business with Levelex. We provide cutting-edge, AI-architected automation solutions and intelligent workflows tailored to your needs."
+    />
+    <meta
+      name="keywords"
+      content="AI, automation, workflow automation, n8n, intelligent solutions, business process automation, Levelex, SaaS"
+    />
+    <meta name="author" content="Levelex" />
+
+    <meta
+      property="og:title"
+      content="Levelex - AI-Architected Automation Solutions"
+    />
+    <meta
+      property="og:description"
+      content="Elevate your business with cutting-edge, AI-architected automation solutions and intelligent workflows."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://your-levelex-domain.com/" />
+    <meta
+      property="og:image"
+      content="https://your-levelex-domain.com/assets/og-image.png"
+    />
+    <meta property="og:site_name" content="Levelex" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Levelex - AI-Architected Automation Solutions"
+    />
+    <meta
+      name="twitter:description"
+      content="Elevate your business with cutting-edge, AI-architected automation solutions and intelligent workflows."
+    />
+    <meta
+      name="twitter:image"
+      content="https://your-levelex-domain.com/assets/twitter-image.png"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container navbar-container">
+        <a href="index.html#home" class="logo">
+          <img
+            src="assets/LevelX-Photoroom.png"
+            alt="Levelex Logo"
+            class="logo-icon"
+          />
+          <span>Levelex</span>
+        </a>
+        <ul id="nav-links-ul" class="nav-links">
+          <li><a href="index.html#home" class="active">Home</a></li>
+          <li><a href="index.html#capabilities">Capabilities</a></li>
+          <li><a href="index.html#what-we-do">What We Do</a></li>
+          <li><a href="index.html#case-studies">Case Studies</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <i id="mobile-menu-btn" class="bx bx-menu mobile-menu-toggle"></i>
+      </div>
+    </nav>
+
+    <section id="home" class="hero">
+      <canvas id="particle-canvas"></canvas>
+
+      <div class="container hero-content">
+        <h1 data-aos="fade-up" data-aos-delay="100">
+          Secure AI Infrastructure.
+          <span class="gradient-text">Locally Hosted.</span>
+          100% Data Sovereignty.
+        </h1>
+        <p data-aos="fade-up" data-aos-delay="200">
+          We architect custom, on-premise automation ecosystems. Integrate
+          legacy databases, deploy local LLMs, and visualize real-time
+          ROI—without exposing your data to public clouds.
+        </p>
+        <div class="cta-buttons" data-aos="fade-up" data-aos-delay="300">
+          <a href="#capabilities" class="btn btn-gradient">
+            <span
+              >View System Architecture <i class="bx bx-right-arrow-alt"></i
+            ></span>
+          </a>
+          <a href="contact.html" class="btn-link">Book Technical Audit</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="capabilities" class="capabilities">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">
+          Stop Renting Intelligence.
+          <span class="gradient-text">Build Your Own.</span>
+        </h2>
+        <div class="feature-grid-3">
+          <!-- Card 1: Local & Secure -->
+          <div
+            class="card feature-card"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <i class="bx bx-shield-quarter card-icon"></i>
+            <h3>Local & Secure</h3>
+            <p>
+              We deploy models locally on your hardware. Your proprietary data
+              never leaves your perimeter. GDPR & Enterprise ready.
+            </p>
+          </div>
+          <!-- Card 2: Legacy Integration -->
+          <div
+            class="card feature-card"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <i class="bx bx-server card-icon"></i>
+            <h3>Legacy Integration</h3>
+            <p>
+              We don't just write prompts. We migrate SQL to PostgreSQL, link
+              biometric feeds, and modernize your backend infrastructure.
+            </p>
+          </div>
+          <!-- Card 3: The Command Center -->
+          <div
+            class="card feature-card"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <i class="bx bx-bar-chart-alt-2 card-icon"></i>
+            <h3>The Command Center</h3>
+            <p>
+              Ditch the spreadsheets. Our custom dashboards give you a God-mode
+              view of your automations, leads, and system health in real-time.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="what-we-do" class="what-we-do">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">
+          What We <span class="gradient-text">Do</span>
+        </h2>
+        <p class="section-subheadline" data-aos="fade-up" data-aos-delay="100">
+          Comprehensive solutions tailored to your business needs.
+        </p>
+        <div class="feature-grid-2">
+          <!-- Service 1 -->
+          <div class="card feature-card-large" data-aos="fade-up" data-aos-delay="100">
+            <i class="bx bx-network-chart card-icon"></i>
+            <h3>Intelligent Workflows</h3>
+            <p>
+              Automate complex business processes with self-healing AI agents that adapt to changing data and requirements in real-time.
+            </p>
+          </div>
+          <!-- Service 2 -->
+          <div class="card feature-card-large" data-aos="fade-up" data-aos-delay="200">
+            <i class="bx bx-chip card-icon"></i>
+            <h3>Local AI Infrastructure</h3>
+            <p>
+              Deploy open-source LLMs on your own hardware. Achieve total data sovereignty and zero latency without cloud dependencies.
+            </p>
+          </div>
+          <!-- Service 3 -->
+          <div class="card feature-card-large" data-aos="fade-up" data-aos-delay="300">
+            <i class="bx bx-data card-icon"></i>
+            <h3>Legacy Modernization</h3>
+            <p>
+              Bridge the gap between mainframe/SQL systems and modern AI tools. We modernize your backend without a complete rewrite.
+            </p>
+          </div>
+          <!-- Service 4 -->
+          <div class="card feature-card-large" data-aos="fade-up" data-aos-delay="400">
+            <i class="bx bx-scan card-icon"></i>
+            <h3>Computer Vision Systems</h3>
+            <p>
+              Implement secure, offline face matching and object detection for access control and automated monitoring.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="case-studies" class="case-studies">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">
+          Featured <span class="gradient-text">Project</span>
+        </h2>
+        <div
+          class="card featured-project-card"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="featured-content">
+            <div class="featured-header">
+              <h3>Enterprise Legacy Modernization & Biometric Security</h3>
+              <span class="featured-tagline"
+                >Zero-Downtime Migration & Local Computer Vision</span
+              >
+            </div>
+            <p class="featured-description">
+              Migrated a high-volume facility from legacy SQL to PostgreSQL
+              while deploying a local, offline Face Match system for secure
+              access control. Integrated with a custom WhatsApp LLM agent for
+              24/7 support.
+            </p>
+            <div class="featured-stats">
+              <div class="stat-box">
+                <i class="bx bx-data"></i>
+                <span class="stat-value">100%</span>
+                <span class="stat-label">Data Ownership</span>
+              </div>
+              <div class="stat-box">
+                <i class="bx bx-time-five"></i>
+                <span class="stat-value">40%</span>
+                <span class="stat-label">Reduction in Manual Admin</span>
+              </div>
+              <div class="stat-box">
+                <i class="bx bx-server"></i>
+                <span class="stat-value">99.9%</span>
+                <span class="stat-label">Uptime</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container">
+        <div class="card final-cta-card" data-aos="fade-up">
+          <h2>Ready to secure your infrastructure?</h2>
+          <p>
+            Stop leaking data to the cloud. Let's build a system you actually
+            own.
+          </p>
+          <a href="contact.html" class="btn btn-gradient">
+            <span
+              >Schedule Discovery Call <i class="bx bx-right-arrow-alt"></i
+            ></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <a href="index.html" class="logo"><span>Levelex</span></a>
+            <p>Elevating businesses with intelligent solutions.</p>
+            <div class="social-links">
+              <a
+                href="https://www.instagram.com/levelexcloud"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                ><i class="bx bxl-instagram"></i
+              ></a>
+              <a
+                href="https://www.tiktok.com/@levelex.cloud"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+                ><i class="bx bxl-tiktok"></i
+              ></a>
+              <a
+                href="https://www.linkedin.com/in/levelex-cloud-89b623394"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                ><i class="bx bxl-linkedin-square"></i
+              ></a>
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter"
+                ><i class="bx bxl-twitter"></i
+              ></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h3>Product</h3>
+            <ul>
+              <li><a href="#what-we-do">Features</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">Security</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Company</h3>
+            <ul>
+              <li><a href="#capabilities">Capabilities</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Legal</h3>
+            <ul>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright-bar">
+          <p>© 2025 Levelex. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** INTEGRATED **
+      const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** INTEGRATED **
+
+      let supabase = null;
+      if (window.supabase) {
+        supabase = window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_ANON_KEY
+        );
+        console.log("Supabase client initialized.");
+      } else {
+        console.error("Supabase library not loaded.");
+      }
+    </script>
+
+    <script>
+      // --- Load Dynamic Content for index.html ---
+      async function loadPublicContent() {
+        if (!supabase) {
+          console.error("Supabase client not available.");
+          return;
+        }
+        console.log("LOG: Starting loadPublicContent...");
+        // await Promise.all([loadServices()]); // Disabled dynamic loading
+        console.log("LOG: Finished loadPublicContent.");
+
+        // --- *** INITIALIZE AOS *** ---
+        // Must be called AFTER content is fetched and added to the page
+        AOS.init({
+          duration: 600, // Animation duration in ms
+          once: true, // Whether animation should happen only once
+          offset: 50, // Offset (in px) from bottom of screen to trigger
+        });
+        console.log("LOG: AOS Initialized.");
+      }
+
+      async function loadServices() {
+        const grid = document.querySelector(".feature-grid-2");
+        const placeholder = grid
+          ? grid.querySelector(".loading-placeholder")
+          : null;
+        if (!grid) return;
+        try {
+          const { data, error } = await supabase.from("Services").select("*");
+          if (error) throw error;
+          if (placeholder) placeholder.remove();
+          grid.innerHTML = "";
+          if (!data || data.length === 0) {
+            grid.innerHTML =
+              '<p class="loading-placeholder">No services available yet.</p>';
+            return;
+          }
+          data.forEach((service, index) => {
+            const card = document.createElement("div");
+            card.className = "card feature-card-large";
+            card.setAttribute("data-aos", "fade-up"); // *** ADDED AOS ***
+            card.setAttribute("data-aos-delay", (index % 2) * 100); // Stagger delay
+            const iconClass = service.icon
+              ? service.icon.trim()
+              : "bx bx-question-mark";
+            card.innerHTML = `<i class='${iconClass} card-icon'></i><h3>${
+              service.title || "Service"
+            }</h3><p>${service.description || ""}</p>`;
+            grid.appendChild(card);
+          });
+        } catch (error) {
+          console.error("Error loading services:", error.message);
+          if (grid)
+            grid.innerHTML = `<p class="loading-placeholder" style="color: red;">Error loading services.</p>`;
+        }
+      }
+    </script>
+
+      document.addEventListener("DOMContentLoaded", () => {
+        loadPublicContent();
+      });
+    </script>
+
+    <script src="assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="assets/js/smooth-scroll.js"></script>
+    <script src="assets/js/particles.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100,
+      });
+    </script>
+  </body>
+</html>

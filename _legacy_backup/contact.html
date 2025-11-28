@@ -4,13 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Forgot Password - Levelex</title>
+    <title>Contact Us - Levelex</title>
     <meta
       name="description"
-      content="Reset your Levelex account password. Enter your email to receive reset instructions."
+      content="Get in touch with Levelex. Have questions about our AI automation solutions? Contact us via email, phone, or our contact form."
     />
-    <meta name="robots" content="noindex, nofollow" />
+    <meta
+      name="keywords"
+      content="contact, support, inquiry, AI automation, Levelex"
+    />
+    <meta name="author" content="Levelex" />
+    <meta name="robots" content="noindex, follow" />
 
+    <meta property="og:title" content="Contact Us - Levelex" />
+    <meta
+      property="og:description"
+      content="Get in touch with Levelex for inquiries about our AI automation solutions."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://your-levelex-domain.com/contact.html"
+    />
+    <meta
+      property="og:image"
+      content="https://your-levelex-domain.com/assets/og-image.png"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Contact Us - Levelex" />
+    <meta
+      name="twitter:description"
+      content="Get in touch with Levelex for inquiries about our AI automation solutions."
+    />
+    <meta
+      name="twitter:image"
+      content="https://your-levelex-domain.com/assets/og-image.png"
+    />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -19,19 +48,22 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
+
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="style.css" />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
   <body>
     <nav class="navbar">
       <div class="container navbar-container">
         <a href="index.html" class="logo">
           <img
-            src="assets/LevelX-Photoroom.svg"
+            src="assets/LevelX-Photoroom.png"
             alt="Levelex Logo"
             class="logo-icon"
           />
@@ -39,55 +71,90 @@
         </a>
         <ul id="nav-links-ul" class="nav-links">
           <li><a href="index.html#home">Home</a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#vision">Vision</a></li>
+          <li><a href="index.html#capabilities">Capabilities</a></li>
           <li><a href="index.html#what-we-do">What We Do</a></li>
           <li><a href="index.html#case-studies">Case Studies</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
         </ul>
-        <div class="auth-buttons">
-          <a href="login.html" class="btn-link">Login</a>
-          <a href="signup.html" class="btn btn-gradient"
-            ><span>Sign Up</span></a
-          >
-        </div>
+
         <i id="mobile-menu-btn" class="bx bx-menu mobile-menu-toggle"></i>
       </div>
     </nav>
 
-    <section id="forgot-password" class="contact" style="padding: 6rem 0">
+    <section id="contact" class="contact">
       <div class="container">
+        <h2 class="section-title" data-aos="fade-up">
+          Get in <span class="gradient-text">Touch</span>
+        </h2>
+        <p class="section-subheadline" data-aos="fade-up" data-aos-delay="100">
+          Have questions? We'd love to hear from you...
+        </p>
+        <div class="info-grid">
+          <div
+            class="card info-card"
+            data-aos="fade-right"
+            data-aos-delay="200"
+          >
+            <i class="bx bxs-envelope card-icon"></i>
+            <h3>Email</h3>
+            <p>hello@levelex.com</p>
+          </div>
+          <div class="card info-card" data-aos="fade-left" data-aos-delay="300">
+            <i class="bx bxs-phone card-icon"></i>
+            <h3>Phone</h3>
+            <p>+1 (555) 123-4567</p>
+          </div>
+        </div>
+
         <div
           class="card contact-form-card"
-          style="max-width: 500px; margin: 0 auto"
+          data-aos="fade-up"
+          data-aos-delay="400"
         >
-          <h3
-            style="text-align: center; font-size: 1.8rem; margin-bottom: 2rem"
-          >
-            Reset Your Password
-          </h3>
-          <p
-            style="
-              text-align: center;
-              color: var(--text-gray);
-              margin-bottom: 1.5rem;
-            "
-          >
-            Enter your account's email address and we will send you a link to
-            reset your password.
-          </p>
-
-          <form id="forgot-password-form" class="contact-form">
+          <h3>Send us a Message</h3>
+          <form id="vercel-contact-form" class="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name</label
+                ><input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Enter your name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label
+                ><input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+            </div>
             <div class="form-group">
-              <label for="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
+              <label for="subject">Subject</label
+              ><input
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder="What's this about?"
                 required
               />
             </div>
-
+            <div class="form-group">
+              <label for="message">Message</label
+              ><textarea
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Your message..."
+                required
+              ></textarea>
+            </div>
             <div
               id="form-message"
               style="
@@ -98,11 +165,8 @@
               "
             ></div>
             <button type="submit" class="btn btn-gradient btn-full">
-              <span>Send Reset Link <i class="bx bx-mail-send"></i></span>
+              <span>Send Message <i class="bx bx-right-arrow-alt"></i></span>
             </button>
-            <p class="form-switch-link">
-              Remembered your password? <a href="login.html">Login</a>
-            </p>
           </form>
         </div>
       </div>
@@ -176,7 +240,6 @@
     </footer>
 
     <script>
-      // Initialize Supabase Client
       const SUPABASE_URL = "https://mugxkieakyulsoqzrhro.supabase.co"; // ** INTEGRATED **
       const SUPABASE_ANON_KEY =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3hraWVha3l1bHNvcXpyaHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0Mjc2NzAsImV4cCI6MjA3NzAwMzY3MH0.D-0TZfEEfsgfHEqppfSDMTj8ix97bEW2XwOYmJD3kh8"; // ** INTEGRATED **
@@ -191,67 +254,51 @@
       } else {
         console.error("Supabase library not loaded.");
       }
+    </script>
 
-      // Forgot Password Form Logic
-      const forgotPasswordForm = document.getElementById(
-        "forgot-password-form"
-      );
-      const messageDiv = document.getElementById("form-message");
-
-      if (forgotPasswordForm && supabase && messageDiv) {
-        forgotPasswordForm.addEventListener("submit", async (event) => {
-          event.preventDefault();
-          messageDiv.textContent = ""; // Clear message
-          const emailInput = document.getElementById("email");
-          const submitButton = forgotPasswordForm.querySelector(
+    <script>
+      const vercelContactForm = document.getElementById("vercel-contact-form");
+      const formMessageDiv = document.getElementById("form-message");
+      if (vercelContactForm && formMessageDiv) {
+        vercelContactForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const formData = new FormData(vercelContactForm);
+          const submitButton = vercelContactForm.querySelector(
             'button[type="submit"]'
           );
-
-          if (!emailInput) {
-            messageDiv.textContent = "Error: Email input not found.";
-            return;
-          }
-          const emailValue = emailInput.value; // Get value before disabling
-
+          const originalButtonHtml = submitButton.innerHTML;
+          const data = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            subject: formData.get("subject"),
+            message: formData.get("message"),
+          };
+          formMessageDiv.textContent = "Sending...";
           submitButton.disabled = true;
           submitButton.innerHTML =
-            '<span class="spinner"></span><span>Sending...</span>'; // Added spinner
-
+            '<span class="spinner"></span><span>Sending...</span>';
           try {
-            // Send password reset email
-            const { data, error } = await supabase.auth.resetPasswordForEmail(
-              emailValue,
-              {
-                // Redirect URL after user clicks link in email
-                // ** IMPORTANT: Ensure this matches a URL in your Supabase Auth Redirect URLs settings **
-                redirectTo: window.location.origin + "/update-password.html",
-              }
-            );
-
-            if (error) {
-              console.error("Password Reset Error:", error);
-              messageDiv.textContent = `Error: ${error.message}`;
+            const response = await fetch("/api/contact", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
+            const result = await response.json();
+            if (response.ok) {
+              formMessageDiv.textContent =
+                result.message || "Thanks! Message sent.";
+              vercelContactForm.reset();
             } else {
-              console.log("Password reset email sent:", data);
-              messageDiv.textContent =
-                "Password reset instructions sent! Please check your email (including spam folder).";
-              emailInput.value = ""; // Clear field on success
+              throw new Error(result.error || "Form submission failed.");
             }
-          } catch (catchError) {
-            console.error("Unexpected Password Reset Error:", catchError);
-            messageDiv.textContent =
-              "An unexpected error occurred. Please try again.";
+          } catch (error) {
+            console.error("Contact form error:", error);
+            formMessageDiv.textContent = `Sorry, error: ${error.message}`;
           } finally {
             submitButton.disabled = false;
-            submitButton.innerHTML = `<span>Send Reset Link <i class='bx bx-mail-send'></i></span>`;
+            submitButton.innerHTML = originalButtonHtml;
           }
         });
-        console.log("Forgot password listener added.");
-      } else {
-        if (!forgotPasswordForm)
-          console.error("Forgot password form not found.");
-        if (!supabase) console.error("Supabase client not initialized.");
-        if (!messageDiv) console.error("Message div not found.");
       }
     </script>
 
