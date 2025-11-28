@@ -1114,3 +1114,152 @@ ul {
   fill: var(--text-white); /* For SVG */
   transform: translateY(-3px);
 }
+
+/* ============================================ */
+/* MOBILE RESPONSIVENESS (Max-width: 768px)     */
+/* ============================================ */
+
+@media (max-width: 768px) {
+  /* Typography Adjustments */
+  html {
+    font-size: 14px; /* Base font size reduction */
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero h1 span {
+    font-size: 3rem;
+  }
+
+  /* Layout Adjustments */
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  section {
+    padding: 4rem 0;
+  }
+
+  /* Navbar */
+  .navbar {
+    width: 90%;
+    padding: 0.5rem 1rem;
+  }
+
+  .nav-links.active {
+    flex-direction: column;
+    align-items: center; /* Center links on mobile */
+    padding: 1.5rem 0;
+    gap: 1.5rem;
+    background: rgba(13, 15, 43, 0.95); /* Ensure background opacity */
+    border-radius: 20px;
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  .navbar-container {
+    flex-wrap: wrap; /* Allow wrapping for expanded menu */
+  }
+
+  /* Hero Section */
+  .hero {
+    padding-top: 140px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .cta-buttons .btn,
+  .cta-buttons .btn-link {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Tech Stack */
+  .tech-stack-logos {
+    gap: 1.5rem;
+  }
+
+  .tech-stack-logos i,
+  .tech-stack-logos svg,
+  .tech-stack-logos img,
+  .tech-stack-icon-wrapper {
+    font-size: 2rem;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  /* Capabilities */
+  .capabilities-layout {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .capabilities-image-container {
+    order: 0;
+  }
+
+  .capabilities-content .section-title {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .capabilities-content .section-title.text-left {
+    text-align: center;
+  }
+
+  /* Grids - Stack everything */
+  .feature-grid-2,
+  .feature-grid-3,
+  .case-study-grid,
+  .stats-grid,
+  .footer-grid,
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Featured Project */
+  .featured-projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-header h3 {
+    font-size: 1.4rem;
+  }
+
+  .featured-stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Contact Form */
+  .contact-form .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-col p,
+  .footer-col ul {
+    margin: 0 auto;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+}
