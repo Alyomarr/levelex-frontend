@@ -1060,3 +1060,43 @@ ul {
   color: var(--text-white);
   transform: scale(1.1);
 }
+
+/* Tech Stack Section */
+.tech-stack {
+  padding: 2rem 0; /* Narrow section */
+  background: rgba(13, 15, 43, 0.5); /* Subtle background */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tech-stack-label {
+  text-align: center;
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 1.5rem;
+  opacity: 0.7;
+}
+
+.tech-stack-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.tech-stack-logos i {
+  font-size: 2.5rem;
+  color: var(--text-gray);
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  filter: grayscale(100%);
+}
+
+.tech-stack-logos i:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+  color: var(--text-white);
+  transform: translateY(-3px);
+}

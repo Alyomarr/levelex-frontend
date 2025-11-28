@@ -65,6 +65,19 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="tech-stack">
+        <div className="container">
+          <p className="tech-stack-label">Built with Industry Standards</p>
+          <div className="tech-stack-logos">
+            <i className="bx bxl-python" title="Python"></i>
+            <i className="bx bxl-postgresql" title="PostgreSQL"></i>
+            <i className="bx bxl-docker" title="Docker"></i>
+            <i className="bx bxl-react" title="React"></i>
+            <i className="bx bxl-aws" title="AWS"></i>
+          </div>
+        </div>
+      </section>
+
       <section id="capabilities" className="capabilities">
         <div className="container">
           <h2 className="section-title text-left" data-aos="fade-up">
