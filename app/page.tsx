@@ -75,7 +75,7 @@ export default function Home() {
             <i className="bx bxl-react" title="React"></i>
             {/* n8n Logo */}
             <img
-              src="/assets/n8n-logo.png"
+              src="/assets/n8n-logo.png?v=2"
               alt="n8n"
               title="n8n"
               className="tech-stack-img"
