@@ -1086,17 +1086,23 @@ ul {
   flex-wrap: wrap;
 }
 
-.tech-stack-logos i {
+.tech-stack-logos i,
+.tech-stack-logos svg {
   font-size: 2.5rem;
+  width: 2.5rem; /* Ensure SVG has width */
+  height: 2.5rem; /* Ensure SVG has height */
   color: var(--text-gray);
+  fill: var(--text-gray); /* For SVG */
   opacity: 0.5;
   transition: all 0.3s ease;
   filter: grayscale(100%);
 }
 
-.tech-stack-logos i:hover {
+.tech-stack-logos i:hover,
+.tech-stack-logos svg:hover {
   opacity: 1;
   filter: grayscale(0%);
   color: var(--text-white);
+  fill: var(--text-white); /* For SVG */
   transform: translateY(-3px);
 }

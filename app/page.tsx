@@ -73,7 +73,26 @@ export default function Home() {
             <i className="bx bxl-postgresql" title="PostgreSQL"></i>
             <i className="bx bxl-docker" title="Docker"></i>
             <i className="bx bxl-react" title="React"></i>
-            <i className="bx bxl-aws" title="AWS"></i>
+            {/* n8n Logo SVG */}
+            <svg
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{ display: "block" }}
+            >
+              <title>n8n</title>
+              <path d="M12.72 2.4l-1.6 2.4h-2.24l-1.6-2.4h5.44zM4.48 9.6h2.24l1.6 2.4h-5.44l1.6-2.4zM2.4 12.72l2.4 1.6v2.24l-2.4 1.6v-5.44zM9.6 19.52v-2.24l2.4-1.6 2.4 1.6v2.24h-4.8zM19.52 14.4l-2.4-1.6v-2.24l2.4-1.6v5.44zM14.4 4.48h-2.24l-1.6-2.4h5.44l-1.6 2.4z" />
+              <text
+                x="50%"
+                y="50%"
+                dominantBaseline="middle"
+                textAnchor="middle"
+                fontSize="10"
+                fontWeight="bold"
+                fontFamily="Arial, sans-serif"
+              >
+                n8n
+              </text>
+            </svg>
           </div>
         </div>
       </section>
