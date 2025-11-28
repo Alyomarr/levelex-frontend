@@ -23,15 +23,10 @@ export default function Navbar() {
     localStorage.setItem("navbarOpen", String(newState));
   };
 
-  const closeMenu = () => {
-    // Do NOT update localStorage here to preserve persistence across pages
-    setIsOpen(false);
-  };
-
   return (
     <nav className="navbar">
       <div className="container navbar-container">
-        <Link href="/#home" className="logo" onClick={closeMenu} scroll={false}>
+        <Link href="/#home" className="logo" scroll={false}>
           <Image
             src="/assets/LevelX-Photoroom.png"
             alt="Levelex Logo"
@@ -44,22 +39,22 @@ export default function Navbar() {
         </Link>
         <ul id="nav-links-ul" className={`nav-links ${isOpen ? "active" : ""}`}>
           <li>
-            <Link href="/#home" onClick={closeMenu} scroll={false}>
+            <Link href="/#home" scroll={false}>
               Home
             </Link>
           </li>
           <li>
-            <Link href="/#capabilities" onClick={closeMenu} scroll={false}>
+            <Link href="/#capabilities" scroll={false}>
               Capabilities
             </Link>
           </li>
           <li>
-            <Link href="/#what-we-do" onClick={closeMenu} scroll={false}>
+            <Link href="/#what-we-do" scroll={false}>
               What We Do
             </Link>
           </li>
           <li>
-            <Link href="/#case-studies" onClick={closeMenu} scroll={false}>
+            <Link href="/#case-studies" scroll={false}>
               Case Studies
             </Link>
           </li>
@@ -67,7 +62,6 @@ export default function Navbar() {
             <Link
               href="/contact"
               className={pathname === "/contact" ? "active" : ""}
-              onClick={closeMenu}
             >
               Contact
             </Link>
