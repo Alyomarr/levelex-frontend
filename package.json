@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@lobehub/icons": "^2.43.1",
     "@types/aos": "^3.0.7",
     "aos": "^2.3.4",
     "framer-motion": "^12.23.24",

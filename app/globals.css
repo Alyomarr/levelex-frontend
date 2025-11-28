@@ -1088,7 +1088,8 @@ ul {
 
 .tech-stack-logos i,
 .tech-stack-logos svg,
-.tech-stack-logos img {
+.tech-stack-logos img,
+.tech-stack-icon-wrapper {
   font-size: 2.5rem;
   width: 2.5rem; /* Ensure SVG/Img has width */
   height: 2.5rem; /* Ensure SVG/Img has height */
@@ -1098,11 +1099,15 @@ ul {
   transition: all 0.3s ease;
   filter: grayscale(100%);
   object-fit: contain; /* For img */
+  display: flex; /* For wrapper */
+  align-items: center;
+  justify-content: center;
 }
 
 .tech-stack-logos i:hover,
 .tech-stack-logos svg:hover,
-.tech-stack-logos img:hover {
+.tech-stack-logos img:hover,
+.tech-stack-icon-wrapper:hover {
   opacity: 1;
   filter: grayscale(0%);
   color: var(--text-white);

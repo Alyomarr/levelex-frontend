@@ -6,6 +6,7 @@ import ParticleBackground from "@/components/ParticleBackground";
 import GlowingBracket from "@/components/GlowingBracket";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { N8n } from "@lobehub/icons";
 
 export default function Home() {
   useEffect(() => {
@@ -74,12 +75,9 @@ export default function Home() {
             <i className="bx bxl-docker" title="Docker"></i>
             <i className="bx bxl-react" title="React"></i>
             {/* n8n Logo */}
-            <img
-              src="/assets/n8n-logo.png?v=2"
-              alt="n8n"
-              title="n8n"
-              className="tech-stack-img"
-            />
+            <div className="tech-stack-icon-wrapper" title="n8n">
+              <N8n size={40} />
+            </div>
           </div>
         </div>
       </section>
