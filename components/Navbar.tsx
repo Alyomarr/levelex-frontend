@@ -31,7 +31,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="container navbar-container">
-        <Link href="/#home" className="logo" onClick={closeMenu}>
+        <Link href="/#home" className="logo" onClick={closeMenu} scroll={false}>
           <Image
             src="/assets/LevelX-Photoroom.png"
             alt="Levelex Logo"
@@ -44,22 +44,22 @@ export default function Navbar() {
         </Link>
         <ul id="nav-links-ul" className={`nav-links ${isOpen ? "active" : ""}`}>
           <li>
-            <Link href="/#home" onClick={closeMenu}>
+            <Link href="/#home" onClick={closeMenu} scroll={false}>
               Home
             </Link>
           </li>
           <li>
-            <Link href="/#capabilities" onClick={closeMenu}>
+            <Link href="/#capabilities" onClick={closeMenu} scroll={false}>
               Capabilities
             </Link>
           </li>
           <li>
-            <Link href="/#what-we-do" onClick={closeMenu}>
+            <Link href="/#what-we-do" onClick={closeMenu} scroll={false}>
               What We Do
             </Link>
           </li>
           <li>
-            <Link href="/#case-studies" onClick={closeMenu}>
+            <Link href="/#case-studies" onClick={closeMenu} scroll={false}>
               Case Studies
             </Link>
           </li>
