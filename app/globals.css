@@ -985,7 +985,7 @@ ul {
 
 .carousel-container {
   position: relative;
-  min-height: 350px;
+  height: 400px; /* Explicit height for carousel visibility */
 }
 
 .capabilities-image-container {
