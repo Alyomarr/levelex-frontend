@@ -28,20 +28,12 @@ export default function Footer() {
                 <i className="bx bxl-tiktok"></i>
               </a>
               <a
-                href="https://www.linkedin.com/in/levelex-cloud-89b623394"
+                href="https://www.linkedin.com/in/levelex-cloud"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
               >
                 <i className="bx bxl-linkedin-square"></i>
-              </a>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-              >
-                <i className="bx bxl-twitter"></i>
               </a>
             </div>
           </div>
