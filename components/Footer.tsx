@@ -13,7 +13,7 @@ export default function Footer() {
           </div>
           <div className="footer-col">
             <h3>Follow Us</h3>
-            <div className="social-links social-links-large">
+            <div className="social-links-large">
               <a
                 href="https://www.instagram.com/levelexcloud"
                 target="_blank"

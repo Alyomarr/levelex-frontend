@@ -1105,41 +1105,6 @@ ul {
   transform: scale(1.1);
 }
 
-/* Large Social Links (for footer column) - Gooey Flowing Effect */
-.social-links-large {
-  display: flex;
-  gap: 0.8rem; /* Close spacing for gooey merge */
-  margin-top: 1rem;
-  flex-wrap: wrap;
-  filter: url("#gooey"); /* SVG filter for gooey effect */
-}
-
-/* Fallback for browsers without SVG filter support */
-@supports not (filter: url("#gooey")) {
-  .social-links-large {
-    filter: blur(2px) contrast(20);
-  }
-}
-
-.social-links-large a {
-  width: 60px;
-  height: 60px;
-  font-size: 2rem;
-  border-radius: 50%; /* Back to circles */
-  background: linear-gradient(
-    135deg,
-    rgba(138, 43, 226, 0.9),
-    rgba(0, 255, 255, 0.9)
-  );
-  border: none;
-  transition: all 0.3s ease;
-}
-
-.social-links-large a:hover {
-  transform: translateY(-5px) scale(1.15);
-  filter: brightness(1.2);
-}
-
 /* SLM Logos Container - Horizontal Layout */
 .slm-logos-container {
   position: relative;
@@ -2020,6 +1985,9 @@ ul {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   text-decoration: none;
+  overflow: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 .social-links-large a::before {
