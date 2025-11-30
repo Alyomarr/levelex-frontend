@@ -38,20 +38,6 @@ export default function Footer() {
             </div>
           </div>
           <div className="footer-col">
-            <h3>Product</h3>
-            <ul>
-              <li>
-                <Link href="/#what-we-do">Features</Link>
-              </li>
-              <li>
-                <Link href="#">Pricing</Link>
-              </li>
-              <li>
-                <Link href="#">Security</Link>
-              </li>
-            </ul>
-          </div>
-          <div className="footer-col">
             <h3>Company</h3>
             <ul>
               <li>
