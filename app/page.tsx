@@ -92,12 +92,12 @@ export default function Home() {
           <div className="capabilities-layout">
             <div className="capabilities-content">
               <div className="capabilities-cards">
-                {/* Left Column: 2 Cards Stacked */}
-                <div className="flex flex-col gap-6">
+                {/* Row 1: Card on left, Carousel on right */}
+                <div className="zigzag-row">
                   {/* Card 1: Local & Secure */}
                   <div
                     className="card feature-card"
-                    data-aos="fade-up"
+                    data-aos="fade-right"
                     data-aos-delay="100"
                   >
                     <i className="bx bx-shield-quarter card-icon"></i>
@@ -109,10 +109,60 @@ export default function Home() {
                     </p>
                   </div>
 
+                  {/* Carousel */}
+                  <div
+                    className="carousel-container"
+                    data-aos="fade-left"
+                    data-aos-delay="100"
+                  >
+                    <FeatureCarousel
+                      slides={[
+                        {
+                          title: "Lead Generation",
+                          button: "View Details",
+                          src: "/assets/lead-gen.png",
+                        },
+                        {
+                          title: "Levelex Dashboard",
+                          button: "View Details",
+                          src: "/assets/dashboard.png",
+                        },
+                        {
+                          title: "CCTV Footage",
+                          button: "View Details",
+                          src: "/assets/cctv.png",
+                        },
+                      ]}
+                    />
+                  </div>
+                </div>
+
+                {/* Row 2: Empty on left, Card on right */}
+                <div className="zigzag-row">
+                  <div className="zigzag-spacer"></div>
+
+                  {/* Card 2: The Command Center */}
+                  <div
+                    className="card feature-card"
+                    data-aos="fade-left"
+                    data-aos-delay="200"
+                  >
+                    <i className="bx bx-bar-chart-alt-2 card-icon"></i>
+                    <h3>The Command Center</h3>
+                    <p>
+                      Ditch the spreadsheets. Our custom dashboards give you a
+                      God-mode view of your automations, leads, and system
+                      health in real-time.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Row 3: Card on left, Empty on right */}
+                <div className="zigzag-row">
                   {/* Card 3: Full SLM training */}
                   <div
                     className="card feature-card"
-                    data-aos="fade-up"
+                    data-aos="fade-right"
                     data-aos-delay="300"
                   >
                     <i className="bx bx-server card-icon"></i>
@@ -122,56 +172,8 @@ export default function Home() {
                       focused goals and ensure quality, security and fast queues
                     </p>
                   </div>
-                </div>
 
-                {/* Right Column: Command Center + Carousel */}
-                <div className="flex flex-col gap-6">
-                  {/* Command Center and Carousel side by side */}
-                  <div className="flex gap-6">
-                    {/* Card 2: The Command Center */}
-                    <div
-                      className="card feature-card"
-                      data-aos="fade-up"
-                      data-aos-delay="200"
-                      style={{ flex: "1" }}
-                    >
-                      <i className="bx bx-bar-chart-alt-2 card-icon"></i>
-                      <h3>The Command Center</h3>
-                      <p>
-                        Ditch the spreadsheets. Our custom dashboards give you a
-                        God-mode view of your automations, leads, and system
-                        health in real-time.
-                      </p>
-                    </div>
-
-                    {/* Carousel beside Command Center */}
-                    <div
-                      className="relative"
-                      style={{ flex: "1", minHeight: "300px" }}
-                      data-aos="fade-up"
-                      data-aos-delay="200"
-                    >
-                      <FeatureCarousel
-                        slides={[
-                          {
-                            title: "Lead Generation",
-                            button: "View Details",
-                            src: "/assets/lead-gen.png",
-                          },
-                          {
-                            title: "Levelex Dashboard",
-                            button: "View Details",
-                            src: "/assets/dashboard.png",
-                          },
-                          {
-                            title: "CCTV Footage",
-                            button: "View Details",
-                            src: "/assets/cctv.png",
-                          },
-                        ]}
-                      />
-                    </div>
-                  </div>
+                  <div className="zigzag-spacer"></div>
                 </div>
               </div>
             </div>

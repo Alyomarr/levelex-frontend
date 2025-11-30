@@ -961,9 +961,31 @@ ul {
 
 .capabilities-cards {
   display: flex;
-  flex-direction: row; /* Changed from column to row for side-by-side layout */
-  gap: 1.5rem;
-  align-items: flex-start; /* Align items to the top */
+  flex-direction: column; /* Stack rows vertically */
+  gap: 2rem;
+}
+
+/* Zigzag row layout */
+.zigzag-row {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.zigzag-row > * {
+  flex: 1;
+  min-width: 0; /* Prevent flex item overflow */
+}
+
+.zigzag-spacer {
+  /* Empty spacer for zigzag pattern */
+  flex: 1;
+}
+
+.carousel-container {
+  position: relative;
+  min-height: 350px;
 }
 
 .capabilities-image-container {
