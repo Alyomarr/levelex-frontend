@@ -139,7 +139,22 @@ export default function Home() {
 
                 {/* Row 2: Empty on left, Card on right */}
                 <div className="zigzag-row">
-                  <div className="zigzag-spacer"></div>
+                  {/* Security Visual - Glass Shield & Lock */}
+                  <div
+                    className="security-visual-container"
+                    data-aos="fade-right"
+                    data-aos-delay="200"
+                  >
+                    <div className="shield-wrapper">
+                      <div className="shield-glow"></div>
+                      <i className="bx bx-shield shield-icon"></i>
+                      <div className="lock-wrapper">
+                        <i className="bx bx-lock-alt lock-icon"></i>
+                      </div>
+                      {/* Scanning Line */}
+                      <div className="scan-line"></div>
+                    </div>
+                  </div>
 
                   {/* Card 2: Local & Secure */}
                   <div
