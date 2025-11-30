@@ -105,98 +105,70 @@ export default function Home() {
                     data never leaves your perimeter. GDPR & Enterprise ready.
                   </p>
                 </div>
-                {/* Image 2: Moved from Right Column */}
+
+                {/* Side-by-side layout: Command Center + Carousel */}
                 <div
-                  className="image-wrapper stagger-right"
-                  style={{ alignSelf: "center", width: "100%" }}
+                  className="flex gap-6 w-full"
+                  style={{ marginBottom: "2rem" }}
                 >
-                  <GlowingBracket position="top-left" />
-                  <GlowingBracket position="top-right" />
-                  <GlowingBracket position="bottom-left" />
-                  <GlowingBracket position="bottom-right" />
-                  <img
-                    src="/assets/lead-gen.png"
-                    alt="Lead Generation"
-                    className="hero-dashboard-img"
-                  />
+                  {/* Card 2: The Command Center */}
+                  <div
+                    className="card feature-card"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                    style={{ flex: "1" }}
+                  >
+                    <i className="bx bx-bar-chart-alt-2 card-icon"></i>
+                    <h3>The Command Center</h3>
+                    <p>
+                      Ditch the spreadsheets. Our custom dashboards give you a
+                      God-mode view of your automations, leads, and system
+                      health in real-time.
+                    </p>
+                  </div>
+
+                  {/* Minimized Carousel */}
+                  <div
+                    className="relative"
+                    style={{ flex: "1", height: "300px" }}
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                  >
+                    <FeatureCarousel
+                      slides={[
+                        {
+                          title: "Lead Generation",
+                          button: "View Details",
+                          src: "/assets/lead-gen.png",
+                        },
+                        {
+                          title: "Levelex Dashboard",
+                          button: "View Details",
+                          src: "/assets/dashboard.png",
+                        },
+                        {
+                          title: "CCTV Footage",
+                          button: "View Details",
+                          src: "/assets/cctv.png",
+                        },
+                      ]}
+                    />
+                  </div>
                 </div>
-                {/* Carousel */}
-                <div className="w-full h-[500px] relative mb-8">
-                  <FeatureCarousel
-                    slides={[
-                      {
-                        title: "Lead Generation",
-                        button: "View Details",
-                        src: "/assets/lead-gen.png",
-                      },
-                      {
-                        title: "Levelex Dashboard",
-                        button: "View Details",
-                        src: "/assets/dashboard.png",
-                      },
-                      {
-                        title: "CCTV Footage",
-                        button: "View Details",
-                        src: "/assets/cctv.png",
-                      },
-                    ]}
-                  />
-                </div>
-                {/* Card 3: The Command Center */}
+
+                {/* Card 3: Full SLM training */}
                 <div
                   className="card feature-card"
                   data-aos="fade-up"
-                  data-aos-delay="300"
+                  data-aos-delay="400"
                 >
-                  <i className="bx bx-bar-chart-alt-2 card-icon"></i>
-                  <h3>The Command Center</h3>
+                  <i className="bx bx-server card-icon"></i>
+                  <h3>Full SLM training</h3>
                   <p>
-                    Ditch the spreadsheets. Our custom dashboards give you a
-                    God-mode view of your automations, leads, and system health
-                    in real-time.
+                    We don&apos;t just write prompts., we train SLMs on focused
+                    goals and ensure quality, security and fast queues
                   </p>
                 </div>
-              </div>
-            </div>
-
-            {/* Dashboard Images */}
-            <div
-              className="capabilities-image-container"
-              data-aos="fade-left"
-              data-aos-delay="200"
-            >
-              {/* Image 1: Left */}
-              <div className="image-wrapper stagger-left">
-                <GlowingBracket position="top-left" />
-                <GlowingBracket position="top-right" />
-                <GlowingBracket position="bottom-left" />
-                <GlowingBracket position="bottom-right" />
-                <img
-                  src="/assets/dashboard.png"
-                  alt="Levelex Dashboard"
-                  className="hero-dashboard-img"
-                />
-              </div>
-              {/* Card 2: Moved from Left Column + Updated Text */}
-              <div className="card feature-card" style={{ width: "100%" }}>
-                <i className="bx bx-server card-icon"></i>
-                <h3>Full SLM training</h3>
-                <p>
-                  We don&apos;t just write prompts., we train SLMs on focused
-                  goals and ensure quality, security and fast queues
-                </p>
-              </div>
-              {/* Image 3: Left */}
-              <div className="image-wrapper stagger-left">
-                <GlowingBracket position="top-left" />
-                <GlowingBracket position="top-right" />
-                <GlowingBracket position="bottom-left" />
-                <GlowingBracket position="bottom-right" />
-                <img
-                  src="/assets/cctv.png"
-                  alt="CCTV Footage"
-                  className="hero-dashboard-img"
-                />
               </div>
             </div>
           </div>
