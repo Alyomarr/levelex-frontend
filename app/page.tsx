@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import GlowingBracket from "@/components/GlowingBracket";
 import AOS from "aos";
 
 import FeatureCarousel from "@/components/FeatureCarousel";

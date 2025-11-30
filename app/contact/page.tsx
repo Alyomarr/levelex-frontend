@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import AOS from "aos";
 // import "aos/dist/aos.css";
 
@@ -12,7 +12,7 @@ export default function Contact() {
     AOS.init({ duration: 800, once: true, offset: 100 });
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setMessage("Sending...");
@@ -33,10 +33,13 @@ export default function Contact() {
       } else {
         throw new Error(result.error || "Form submission failed.");
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
+    } catch (error) {
       console.error("Contact form error:", error);
-      setMessage(`Sorry, error: ${error.message}`);
+      if (error instanceof Error) {
+        setMessage(`Sorry, error: ${error.message}`);
+      } else {
+        setMessage("Sorry, an unexpected error occurred.");
+      }
     } finally {
       setIsSubmitting(false);
     }

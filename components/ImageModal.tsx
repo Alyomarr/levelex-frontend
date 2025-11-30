@@ -31,7 +31,10 @@ export default function ImageModal({
 
   return (
     <div className="image-modal-overlay" onClick={onClose}>
-      <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="image-modal-content"
+        onClick={(e: React.MouseEvent) => e.stopPropagation()}
+      >
         <button className="image-modal-close" onClick={onClose}>
           <i className="bx bx-x"></i>
         </button>

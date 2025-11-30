@@ -2036,7 +2036,7 @@ ul {
   z-index: 0; /* Behind content */
 }
 
-/* Aggressive targeting for icons */
+/* Icons */
 .social-links-large a i,
 .social-links-large a .bx {
   position: relative;
