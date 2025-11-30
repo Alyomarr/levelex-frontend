@@ -1,4 +1,6 @@
-import { useEffect, useRef } from "react";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import {
   Scene,
   OrthographicCamera,
@@ -11,7 +13,7 @@ import {
   Clock,
 } from "three";
 
-import "./FloatingLines.css";
+import "./BackgroundLines.css";
 
 const vertexShader = `
 precision highp float;
@@ -253,7 +255,7 @@ function hexToVec3(hex: string): Vector3 {
   return new Vector3(r / 255, g / 255, b / 255);
 }
 
-export default function FloatingLines({
+export default function BackgroundLines({
   linesGradient,
   enabledWaves = ["top", "middle", "bottom"],
   lineCount = [6],
@@ -309,6 +311,21 @@ export default function FloatingLines({
   const bottomLineDistance = enabledWaves.includes("bottom")
     ? getLineDistance("bottom") * 0.01
     : 0.01;
+
+  const [isBlurred, setIsBlurred] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsBlurred(true);
+      } else {
+        setIsBlurred(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -528,7 +545,7 @@ export default function FloatingLines({
   return (
     <div
       ref={containerRef}
-      className="floating-lines-container"
+      className={`floating-lines-container ${isBlurred ? "blurred" : ""}`}
       style={{
         mixBlendMode: mixBlendMode,
       }}

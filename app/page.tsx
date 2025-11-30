@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import FloatingLines from "@/components/FloatingLines";
 import GlowingBracket from "@/components/GlowingBracket";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -39,15 +38,6 @@ export default function Home() {
   return (
     <main>
       <section id="home" className="hero">
-        <FloatingLines
-          linesGradient={["#1e5dc2", "#0d0f2b", "#831891"]}
-          enabledWaves={["top", "middle", "bottom"]}
-          lineCount={[6, 6, 6]}
-          lineDistance={[5, 5, 5]}
-          animationSpeed={1}
-          interactive={true}
-        />
-
         <div className="container hero-content">
           <h1 data-aos="fade-up" data-aos-delay="100">
             Secure AI Infrastructure.

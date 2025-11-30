@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
+import BackgroundLines from "@/components/BackgroundLines";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -36,6 +37,14 @@ export default function RootLayout({
       </head>
       <body className={poppins.className}>
         <Navbar />
+        <BackgroundLines
+          linesGradient={["#1e5dc2", "#0d0f2b", "#831891"]}
+          enabledWaves={["top", "middle", "bottom"]}
+          lineCount={[6, 6, 6]}
+          lineDistance={[5, 5, 5]}
+          animationSpeed={1}
+          interactive={true}
+        />
         <SmoothScroll />
         {children}
         <Footer />

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import ParticleBackground from "@/components/ParticleBackground";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -45,7 +44,6 @@ export default function Contact() {
   return (
     <main>
       <section id="contact" className="contact">
-        <ParticleBackground />
         <div className="container relative z-10">
           <h2 className="section-title" data-aos="fade-up">
             Get in <span className="gradient-text">Touch</span>

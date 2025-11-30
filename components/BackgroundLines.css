@@ -1,5 +1,5 @@
 .floating-lines-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -7,6 +7,12 @@
   overflow: hidden;
   z-index: -1; /* Ensure it stays behind content */
   pointer-events: none; /* Let clicks pass through if needed, though interactive mode might need this off */
+  transition: filter 0.8s ease-in-out;
+  will-change: filter;
+}
+
+.floating-lines-container.blurred {
+  filter: blur(10px);
 }
 
 /* If interactive is true, we might want pointer-events: auto on the canvas, 
