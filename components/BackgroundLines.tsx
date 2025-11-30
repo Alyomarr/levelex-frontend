@@ -13,8 +13,6 @@ import {
   Clock,
 } from "three";
 
-import "./BackgroundLines.css";
-
 const vertexShader = `
 precision highp float;
 

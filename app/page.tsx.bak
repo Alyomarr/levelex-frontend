@@ -6,7 +6,7 @@ import GlowingBracket from "@/components/GlowingBracket";
 import AOS from "aos";
 // import "aos/dist/aos.css";
 // import { N8n } from "@lobehub/icons";
-import { ImageCarousel } from "@/components/ImageCarousel";
+// import { ImageCarousel } from "@/components/ImageCarousel";
 
 export default function Home() {
   useEffect(() => {
@@ -122,7 +122,7 @@ export default function Home() {
                   />
                 </div>
                 {/* Carousel */}
-                <div className="w-full h-[500px] relative mb-8">
+                {/* <div className="w-full h-[500px] relative mb-8">
                   <ImageCarousel
                     slides={[
                       {
@@ -142,7 +142,7 @@ export default function Home() {
                       },
                     ]}
                   />
-                </div>
+                </div> */}
                 {/* Card 3: The Command Center */}
                 <div
                   className="card feature-card"

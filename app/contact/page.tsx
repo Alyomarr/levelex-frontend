@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import AOS from "aos";
-import "aos/dist/aos.css";
+// import "aos/dist/aos.css";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);

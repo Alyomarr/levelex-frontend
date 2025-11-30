@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useId, useEffect } from "react";
-import styles from "./ImageCarousel.module.css";
+import styles from "./carousel.module.css";
 // import { IconArrowNarrowRight } from "@tabler/icons-react";
 
 interface SlideData {
