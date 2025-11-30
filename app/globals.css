@@ -1105,6 +1105,24 @@ ul {
   transform: scale(1.1);
 }
 
+/* Large Social Links (for footer column) */
+.social-links-large {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.social-links-large a {
+  width: 60px;
+  height: 60px;
+  font-size: 2rem;
+}
+
+.social-links-large a:hover {
+  transform: translateY(-5px);
+}
+
 /* Tech Stack Section */
 .tech-stack {
   padding: 2rem 0; /* Narrow section */

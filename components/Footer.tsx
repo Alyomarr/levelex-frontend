@@ -10,7 +10,10 @@ export default function Footer() {
               <span>Levelex</span>
             </Link>
             <p>Elevating businesses with intelligent solutions.</p>
-            <div className="social-links">
+          </div>
+          <div className="footer-col">
+            <h3>Follow Us</h3>
+            <div className="social-links social-links-large">
               <a
                 href="https://www.instagram.com/levelexcloud"
                 target="_blank"
