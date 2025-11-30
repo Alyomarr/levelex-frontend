@@ -53,6 +53,10 @@ export default function FeatureCarousel({ slides }: FeatureCarouselProps) {
           key={index}
           className={`carousel-slide ${index === currentIndex ? "active" : ""}`}
         >
+          <div className="carousel-image-container">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={slide.src} alt={slide.title} className="carousel-image" />
+          </div>
           <div className="carousel-content">
             <h2 className="carousel-title">{slide.title}</h2>
             <Link href="/#contact" className="carousel-btn">

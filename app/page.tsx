@@ -130,7 +130,7 @@ export default function Home() {
                   {/* Minimized Carousel */}
                   <div
                     className="relative"
-                    style={{ flex: "1", height: "300px" }}
+                    style={{ flex: "1", aspectRatio: "1", maxHeight: "350px" }}
                     data-aos="fade-up"
                     data-aos-delay="300"
                   >

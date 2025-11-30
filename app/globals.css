@@ -1333,9 +1333,9 @@ ul {
   opacity: 0;
   transition: opacity 0.8s ease-in-out;
   display: flex;
-  align-items: center;
-  justify-content: flex-start; /* Align left */
-  padding: 4rem; /* Add more padding */
+  align-items: flex-end; /* Position content at bottom */
+  justify-content: center;
+  padding: 1.5rem;
 }
 
 .carousel-slide.active {
@@ -1346,25 +1346,40 @@ ul {
 .carousel-content {
   position: relative;
   z-index: 2;
-  text-align: left; /* Align text left */
-  max-width: 600px;
+  text-align: center;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for text */
+  padding: 1rem;
+  border-radius: 0.5rem;
 }
 
-/* Removed image styles */
+.carousel-image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+}
 
 .carousel-title {
-  font-size: 2rem; /* Smaller title */
+  font-size: 1.25rem; /* Smaller for compact design */
   font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(
-    --text-white
-  ); /* Solid color instead of gradient for cleaner look */
-  text-shadow: none; /* Remove glow */
+  margin-bottom: 0.5rem;
+  color: var(--text-white);
+  text-shadow: none;
 }
 
 .carousel-btn {
   display: inline-block;
-  padding: 0.8rem 2rem;
+  padding: 0.5rem 1.5rem;
   background: linear-gradient(
     90deg,
     rgba(138, 43, 226, 0.8),
@@ -1374,6 +1389,7 @@ ul {
   border-radius: 2rem;
   text-decoration: none;
   font-weight: 600;
+  font-size: 0.875rem;
   transition: all 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(5px);
@@ -1391,8 +1407,8 @@ ul {
   background: rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: white;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1400,7 +1416,7 @@ ul {
   cursor: pointer;
   z-index: 10;
   transition: all 0.3s ease;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 .carousel-nav-btn:hover {
@@ -1409,26 +1425,26 @@ ul {
 }
 
 .carousel-prev {
-  left: 20px;
+  left: 10px;
 }
 
 .carousel-next {
-  right: 20px;
+  right: 10px;
 }
 
 .carousel-indicators {
   position: absolute;
-  bottom: 20px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 10px;
+  gap: 8px;
   z-index: 10;
 }
 
 .carousel-dot {
-  width: 12px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
   cursor: pointer;
@@ -1439,4 +1455,26 @@ ul {
   background: var(--accent-cyan);
   box-shadow: 0 0 10px var(--accent-cyan);
   transform: scale(1.2);
+}
+
+/* Compact Card Styles */
+.feature-card {
+  border-radius: 1rem !important; /* Round corners */
+  padding: 1.5rem !important; /* Compact padding */
+  min-height: auto !important;
+}
+
+.feature-card h3 {
+  font-size: 1.25rem !important; /* Smaller heading */
+  margin-bottom: 0.75rem !important;
+}
+
+.feature-card p {
+  font-size: 0.9rem !important; /* Smaller text */
+  line-height: 1.5 !important;
+}
+
+.feature-card .card-icon {
+  font-size: 2rem !important; /* Smaller icon */
+  margin-bottom: 0.75rem !important;
 }
