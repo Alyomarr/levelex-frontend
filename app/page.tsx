@@ -106,54 +106,42 @@ export default function Home() {
                   </p>
                 </div>
 
-                {/* Side-by-side layout: Command Center + Carousel */}
+                {/* Card 2: The Command Center */}
                 <div
-                  className="flex gap-6 w-full"
-                  style={{ marginBottom: "2rem" }}
+                  className="card feature-card"
+                  data-aos="fade-up"
+                  data-aos-delay="200"
                 >
-                  {/* Card 2: The Command Center */}
-                  <div
-                    className="card feature-card"
-                    data-aos="fade-up"
-                    data-aos-delay="200"
-                    style={{ flex: "1" }}
-                  >
-                    <i className="bx bx-bar-chart-alt-2 card-icon"></i>
-                    <h3>The Command Center</h3>
-                    <p>
-                      Ditch the spreadsheets. Our custom dashboards give you a
-                      God-mode view of your automations, leads, and system
-                      health in real-time.
-                    </p>
-                  </div>
+                  <i className="bx bx-bar-chart-alt-2 card-icon"></i>
+                  <h3>The Command Center</h3>
+                  <p>
+                    Ditch the spreadsheets. Our custom dashboards give you a
+                    God-mode view of your automations, leads, and system health
+                    in real-time.
+                  </p>
+                </div>
 
-                  {/* Minimized Carousel */}
-                  <div
-                    className="relative"
-                    style={{ flex: "1", aspectRatio: "1", maxHeight: "350px" }}
-                    data-aos="fade-up"
-                    data-aos-delay="300"
-                  >
-                    <FeatureCarousel
-                      slides={[
-                        {
-                          title: "Lead Generation",
-                          button: "View Details",
-                          src: "/assets/lead-gen.png",
-                        },
-                        {
-                          title: "Levelex Dashboard",
-                          button: "View Details",
-                          src: "/assets/dashboard.png",
-                        },
-                        {
-                          title: "CCTV Footage",
-                          button: "View Details",
-                          src: "/assets/cctv.png",
-                        },
-                      ]}
-                    />
-                  </div>
+                {/* Full-Width Carousel */}
+                <div className="w-full h-[500px] relative mb-8">
+                  <FeatureCarousel
+                    slides={[
+                      {
+                        title: "Lead Generation",
+                        button: "View Details",
+                        src: "/assets/lead-gen.png",
+                      },
+                      {
+                        title: "Levelex Dashboard",
+                        button: "View Details",
+                        src: "/assets/dashboard.png",
+                      },
+                      {
+                        title: "CCTV Footage",
+                        button: "View Details",
+                        src: "/assets/cctv.png",
+                      },
+                    ]}
+                  />
                 </div>
 
                 {/* Card 3: Full SLM training */}
