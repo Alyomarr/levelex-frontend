@@ -94,18 +94,18 @@ export default function Home() {
               <div className="capabilities-cards">
                 {/* Row 1: Card on left, Carousel on right */}
                 <div className="zigzag-row">
-                  {/* Card 1: Local & Secure */}
+                  {/* Card 1: The Command Center */}
                   <div
                     className="card feature-card"
                     data-aos="fade-right"
                     data-aos-delay="100"
                   >
-                    <i className="bx bx-shield-quarter card-icon"></i>
-                    <h3>Local & Secure</h3>
+                    <i className="bx bx-bar-chart-alt-2 card-icon"></i>
+                    <h3>The Command Center</h3>
                     <p>
-                      We deploy models locally on your hardware. Your
-                      proprietary data never leaves your perimeter. GDPR &
-                      Enterprise ready.
+                      Ditch the spreadsheets. Our custom dashboards give you a
+                      God-mode view of your automations, leads, and system
+                      health in real-time.
                     </p>
                   </div>
 
@@ -141,18 +141,18 @@ export default function Home() {
                 <div className="zigzag-row">
                   <div className="zigzag-spacer"></div>
 
-                  {/* Card 2: The Command Center */}
+                  {/* Card 2: Local & Secure */}
                   <div
                     className="card feature-card"
                     data-aos="fade-left"
                     data-aos-delay="200"
                   >
-                    <i className="bx bx-bar-chart-alt-2 card-icon"></i>
-                    <h3>The Command Center</h3>
+                    <i className="bx bx-shield-quarter card-icon"></i>
+                    <h3>Local & Secure</h3>
                     <p>
-                      Ditch the spreadsheets. Our custom dashboards give you a
-                      God-mode view of your automations, leads, and system
-                      health in real-time.
+                      We deploy models locally on your hardware. Your
+                      proprietary data never leaves your perimeter. GDPR &
+                      Enterprise ready.
                     </p>
                   </div>
                 </div>
