@@ -173,7 +173,29 @@ export default function Home() {
                     </p>
                   </div>
 
-                  <div className="zigzag-spacer"></div>
+                  {/* SLM Logos */}
+                  <div
+                    className="slm-logos-container"
+                    data-aos="fade-left"
+                    data-aos-delay="300"
+                  >
+                    <div className="slm-logo">
+                      <span className="slm-logo-text phi">φ</span>
+                      <span className="slm-name">Phi</span>
+                    </div>
+                    <div className="slm-logo">
+                      <span className="slm-logo-text gemma">◆</span>
+                      <span className="slm-name">Gemma</span>
+                    </div>
+                    <div className="slm-logo">
+                      <span className="slm-logo-text ollama">🦙</span>
+                      <span className="slm-name">Ollama</span>
+                    </div>
+                    <div className="slm-logo">
+                      <span className="slm-logo-text mistral">≋</span>
+                      <span className="slm-name">Mistral</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
