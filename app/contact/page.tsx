@@ -44,53 +44,24 @@ export default function Contact() {
 
   return (
     <main>
-      <section id="contact" className="contact">
+      <section id="contact" className="contact-section">
         <div className="container relative z-10">
-          <h2 className="section-title" data-aos="fade-up">
+          <h2 className="section-title text-center mb-12" data-aos="fade-up">
             Get in <span className="gradient-text">Touch</span>
           </h2>
-          <p
-            className="section-subheadline"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            Have questions? We&apos;d love to hear from you...
-          </p>
-          <div className="info-grid">
-            <div
-              className="card info-card"
-              data-aos="fade-right"
-              data-aos-delay="200"
-            >
-              <i className="bx bxs-envelope card-icon"></i>
-              <h3>Email</h3>
-              <p>hello@levelex.com</p>
-            </div>
-            <div
-              className="card info-card"
-              data-aos="fade-left"
-              data-aos-delay="300"
-            >
-              <i className="bx bxs-phone card-icon"></i>
-              <h3>Phone</h3>
-              <p>+1 (555) 123-4567</p>
-            </div>
-          </div>
 
-          <div
-            className="card contact-form-card"
-            data-aos="fade-up"
-            data-aos-delay="400"
-          >
-            <h3>Send us a Message</h3>
-            <form onSubmit={handleSubmit} className="contact-form">
-              <div className="form-row">
+          <div className="contact-split-layout">
+            {/* Left Column: Glassmorphic Form */}
+            <div className="glass-panel form-panel" data-aos="fade-right">
+              <h3>Send a Message</h3>
+              <form onSubmit={handleSubmit} className="contact-form">
                 <div className="form-group">
                   <label htmlFor="name">Name</label>
                   <input
                     type="text"
                     id="name"
                     name="name"
+                    className="contact-input"
                     placeholder="Enter your name"
                     required
                   />
@@ -101,59 +72,87 @@ export default function Contact() {
                     type="email"
                     id="email"
                     name="email"
+                    className="contact-input"
                     placeholder="Enter your email"
                     required
                   />
                 </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="subject">Subject</label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  placeholder="What's this about?"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={5}
-                  placeholder="Your message..."
-                  required
-                ></textarea>
-              </div>
-              <div
-                id="form-message"
-                style={{
-                  color: "var(--accent-cyan)",
-                  textAlign: "center",
-                  marginBottom: "1rem",
-                  minHeight: "1em",
-                }}
-              >
-                {message}
-              </div>
-              <button
-                type="submit"
-                className="btn btn-gradient btn-full"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <span className="spinner"></span>
-                    <span>Sending...</span>
-                  </>
-                ) : (
-                  <span>
-                    Send Message <i className="bx bx-right-arrow-alt"></i>
-                  </span>
+                <div className="form-group">
+                  <label htmlFor="message">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    className="contact-input"
+                    rows={5}
+                    placeholder="How can we help?"
+                    required
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  className="btn btn-primary w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </button>
+                {message && (
+                  <p
+                    className="form-message"
+                    style={{ marginTop: "1rem", color: "var(--accent-cyan)" }}
+                  >
+                    {message}
+                  </p>
                 )}
-              </button>
-            </form>
+              </form>
+            </div>
+
+            {/* Right Column: Contact Info & Socials */}
+            <div className="contact-info-panel" data-aos="fade-left">
+              <div className="info-item">
+                <div className="icon-box">
+                  <i className="bx bxs-envelope"></i>
+                </div>
+                <div>
+                  <h4>Email Us</h4>
+                  <p>hello@levelex.com</p>
+                </div>
+              </div>
+
+              <div className="info-item">
+                <div className="icon-box">
+                  <i className="bx bxs-phone"></i>
+                </div>
+                <div>
+                  <h4>Call Us</h4>
+                  <p>+1 (555) 123-4567</p>
+                </div>
+              </div>
+
+              <div className="info-item">
+                <div className="icon-box">
+                  <i className="bx bxs-map"></i>
+                </div>
+                <div>
+                  <h4>Visit Us</h4>
+                  <p>123 AI Boulevard, Tech City</p>
+                </div>
+              </div>
+
+              <div className="social-connect">
+                <h4>Connect With Us</h4>
+                <div className="social-links-large">
+                  <a href="#" aria-label="Instagram">
+                    <i className="bx bxl-instagram"></i>
+                  </a>
+                  <a href="#" aria-label="TikTok">
+                    <i className="bx bxl-tiktok"></i>
+                  </a>
+                  <a href="#" aria-label="LinkedIn">
+                    <i className="bx bxl-linkedin"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
