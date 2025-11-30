@@ -13,6 +13,7 @@
 
 .floating-lines-container.blurred {
   filter: blur(10px);
+  pointer-events: none;
 }
 
 /* If interactive is true, we might want pointer-events: auto on the canvas, 

@@ -314,12 +314,21 @@ export default function BackgroundLines({
 
   const [isBlurred, setIsBlurred] = useState(false);
 
+  const isBlurredRef = useRef(false);
+
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setIsBlurred(true);
-      } else {
-        setIsBlurred(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const shouldBlur = window.scrollY > 100;
+          if (isBlurredRef.current !== shouldBlur) {
+            isBlurredRef.current = shouldBlur;
+            setIsBlurred(shouldBlur);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
@@ -478,13 +487,18 @@ export default function BackgroundLines({
     const renderLoop = () => {
       uniforms.iTime.value = clock.getElapsedTime();
 
-      if (interactive) {
+      if (interactive && !isBlurredRef.current) {
         currentMouseRef.current.lerp(targetMouseRef.current, mouseDamping);
         uniforms.iMouse.value.copy(currentMouseRef.current);
 
         currentInfluenceRef.current +=
           (targetInfluenceRef.current - currentInfluenceRef.current) *
           mouseDamping;
+        uniforms.bendInfluence.value = currentInfluenceRef.current;
+      } else {
+        // Reset influence when not interactive/blurred to avoid stuck deformations
+        currentInfluenceRef.current +=
+          (0 - currentInfluenceRef.current) * mouseDamping;
         uniforms.bendInfluence.value = currentInfluenceRef.current;
       }
 
