@@ -90,7 +90,7 @@ export default function Contact() {
                 </div>
                 <button
                   type="submit"
-                  className="btn btn-primary w-full"
+                  className="btn btn-gradient w-full"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}

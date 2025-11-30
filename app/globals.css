@@ -1998,3 +1998,57 @@ ul {
     width: 100%;
   }
 }
+
+/* Large Social Links (for contact page) */
+.social-links-large {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.social-links-large a {
+  width: 60px;
+  height: 60px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-gray);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.social-links-large a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.social-links-large a i {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.social-links-large a:hover {
+  transform: translateY(-5px);
+  border-color: transparent;
+  box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
+  color: white;
+}
+
+.social-links-large a:hover::before {
+  opacity: 1;
+}
