@@ -2017,11 +2017,12 @@ ul {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-white); /* Changed from text-gray to text-white */
+  color: #ffffff !important; /* Force white color */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  text-decoration: none; /* Ensure no underline */
+  text-decoration: none;
+  z-index: 1; /* Establish stacking context */
 }
 
 .social-links-large a::before {
@@ -2034,21 +2035,20 @@ ul {
   background: var(--gradient);
   opacity: 0;
   transition: opacity 0.3s ease;
-  z-index: 0;
+  z-index: -1; /* Place behind content */
 }
 
 .social-links-large a i {
   position: relative;
-  z-index: 1;
+  z-index: 2; /* Place on top */
   transition: transform 0.3s ease;
-  color: inherit; /* Force inheritance */
+  color: inherit;
 }
 
 .social-links-large a:hover {
   transform: translateY(-5px);
   border-color: transparent;
   box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
-  color: white;
 }
 
 .social-links-large a:hover::before {
