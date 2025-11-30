@@ -173,27 +173,43 @@ export default function Home() {
                     </p>
                   </div>
 
-                  {/* SLM Logos */}
+                  {/* SLM Logos - Floating around AI */}
                   <div
                     className="slm-logos-container"
                     data-aos="fade-left"
                     data-aos-delay="300"
                   >
-                    <div className="slm-logo">
+                    {/* Center AI Text */}
+                    <div className="ai-center">AI</div>
+
+                    {/* Floating Logo Blobs */}
+                    <div className="slm-logo blob blob-1">
                       <span className="slm-logo-text phi">φ</span>
                       <span className="slm-name">Phi</span>
                     </div>
-                    <div className="slm-logo">
+                    <div className="slm-logo blob blob-2">
                       <span className="slm-logo-text gemma">◆</span>
                       <span className="slm-name">Gemma</span>
                     </div>
-                    <div className="slm-logo">
+                    <div className="slm-logo blob blob-3">
                       <span className="slm-logo-text ollama">🦙</span>
                       <span className="slm-name">Ollama</span>
                     </div>
-                    <div className="slm-logo">
+                    <div className="slm-logo blob blob-4">
                       <span className="slm-logo-text mistral">≋</span>
                       <span className="slm-name">Mistral</span>
+                    </div>
+                    <div className="slm-logo blob blob-5">
+                      <span className="slm-logo-text">◯</span>
+                    </div>
+                    <div className="slm-logo blob blob-6">
+                      <span className="slm-logo-text">◯</span>
+                    </div>
+                    <div className="slm-logo blob blob-7">
+                      <span className="slm-logo-text">◯</span>
+                    </div>
+                    <div className="slm-logo blob blob-8">
+                      <span className="slm-logo-text">◯</span>
                     </div>
                   </div>
                 </div>
