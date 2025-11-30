@@ -6,6 +6,7 @@ import GlowingBracket from "@/components/GlowingBracket";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { N8n } from "@lobehub/icons";
+import { ImageCarousel } from "@/components/ImageCarousel";
 
 export default function Home() {
   useEffect(() => {
@@ -120,6 +121,28 @@ export default function Home() {
                     className="hero-dashboard-img"
                   />
                 </div>
+                {/* Carousel */}
+                <div className="w-full h-[500px] relative mb-8">
+                  <ImageCarousel
+                    slides={[
+                      {
+                        title: "Lead Generation",
+                        button: "View Details",
+                        src: "/assets/lead-gen.png",
+                      },
+                      {
+                        title: "Levelex Dashboard",
+                        button: "View Details",
+                        src: "/assets/dashboard.png",
+                      },
+                      {
+                        title: "CCTV Footage",
+                        button: "View Details",
+                        src: "/assets/cctv.png",
+                      },
+                    ]}
+                  />
+                </div>
                 {/* Card 3: The Command Center */}
                 <div
                   className="card feature-card"
@@ -160,8 +183,8 @@ export default function Home() {
                 <i className="bx bx-server card-icon"></i>
                 <h3>Full SLM training</h3>
                 <p>
-                  We don't just write prompts., we train SLMs on focused goals
-                  and ensure quality, security and fast queues
+                  We don&apos;t just write prompts., we train SLMs on focused
+                  goals and ensure quality, security and fast queues
                 </p>
               </div>
               {/* Image 3: Left */}
@@ -397,8 +420,8 @@ export default function Home() {
           <div className="card final-cta-card" data-aos="fade-up">
             <h2>Ready to secure your infrastructure?</h2>
             <p>
-              Stop leaking data to the cloud. Let's build a system you actually
-              own.
+              Stop leaking data to the cloud. Let&apos;s build a system you
+              actually own.
             </p>
             <Link
               href="https://cal.com/levelexcloud/levelex-audit"

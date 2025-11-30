@@ -33,6 +33,7 @@ export default function Contact() {
       } else {
         throw new Error(result.error || "Form submission failed.");
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Contact form error:", error);
       setMessage(`Sorry, error: ${error.message}`);
@@ -53,7 +54,7 @@ export default function Contact() {
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            Have questions? We'd love to hear from you...
+            Have questions? We&apos;d love to hear from you...
           </p>
           <div className="info-grid">
             <div

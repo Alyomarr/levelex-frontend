@@ -13,6 +13,7 @@ export default function Navbar() {
     // Load saved state from localStorage
     const savedState = localStorage.getItem("navbarOpen");
     if (savedState === "true") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsOpen(true);
     }
   }, []);

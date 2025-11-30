@@ -1,0 +1,19 @@
+﻿
+> temp_next_app@0.1.0 lint
+> eslint
+
+
+C:\Users\alyom\Desktop\LevelexWeb\levelex-frontend\app\page.tsx
+  118:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  175:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  196:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\alyom\Desktop\LevelexWeb\levelex-frontend\components\BackgroundLines.tsx
+  520:30  warning  The ref value 'containerRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'containerRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+  542:6   warning  React Hook useEffect has missing dependencies: 'bottomLineCount', 'bottomLineDistance', 'middleLineCount', 'middleLineDistance', 'topLineCount', and 'topLineDistance'. Either include them or remove the dependency array                                               react-hooks/exhaustive-deps
+
+C:\Users\alyom\Desktop\LevelexWeb\levelex-frontend\components\ImageCarousel.tsx
+  94:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+Γ£û 6 problems (0 errors, 6 warnings)
+
