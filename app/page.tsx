@@ -4,9 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import GlowingBracket from "@/components/GlowingBracket";
 import AOS from "aos";
-// import "aos/dist/aos.css";
-// import { N8n } from "@lobehub/icons";
-// import { N8n } from "@lobehub/icons";
+
 import FeatureCarousel from "@/components/FeatureCarousel";
 
 export default function Home() {
