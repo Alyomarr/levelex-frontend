@@ -1182,40 +1182,41 @@ ul {
   animation-play-state: paused;
 }
 
-/* Position each blob */
+/* Position each blob - Circling around AI */
 .blob-1 {
-  top: 10%;
-  left: 15%;
+  top: 15%;
+  left: 25%;
   animation-delay: 0s;
 }
 
 .blob-2 {
-  top: 5%;
-  right: 20%;
+  top: 10%;
+  right: 25%;
   animation-delay: 1s;
 }
 
 .blob-3 {
-  bottom: 15%;
-  left: 10%;
+  bottom: 20%;
+  left: 22%;
   animation-delay: 2s;
 }
 
 .blob-4 {
-  bottom: 10%;
-  right: 15%;
+  bottom: 15%;
+  right: 22%;
   animation-delay: 3s;
 }
 
 .blob-5 {
-  top: 35%;
-  left: 5%;
+  top: 50%;
+  left: 12%;
+  transform: translateY(-50%);
   animation-delay: 1.5s;
   padding: 0.5rem;
 }
 
 .blob-6 {
-  top: 20%;
+  top: 8%;
   left: 50%;
   transform: translateX(-50%);
   animation-delay: 2.5s;
@@ -1223,14 +1224,15 @@ ul {
 }
 
 .blob-7 {
-  top: 35%;
-  right: 8%;
+  top: 50%;
+  right: 12%;
+  transform: translateY(-50%);
   animation-delay: 0.5s;
   padding: 0.6rem;
 }
 
 .blob-8 {
-  bottom: 35%;
+  bottom: 8%;
   left: 50%;
   transform: translateX(-50%);
   animation-delay: 4s;
