@@ -1316,6 +1316,160 @@ ul {
   transform: translateY(-3px);
 }
 
+/* Security Visual Container */
+.security-visual-container {
+  flex: 1;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.shield-wrapper {
+  position: relative;
+  width: 180px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shield-icon {
+  font-size: 12rem;
+  color: rgba(255, 255, 255, 0.05);
+  filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.2));
+  z-index: 1;
+}
+
+.lock-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+  animation: pulse-lock 3s infinite ease-in-out;
+}
+
+.lock-icon {
+  font-size: 2.5rem;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.shield-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 255, 255, 0.1) 0%,
+    transparent 70%
+  );
+  z-index: 0;
+  animation: pulse-glow 4s infinite ease-in-out;
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 255, 0.8),
+    transparent
+  );
+  z-index: 3;
+  animation: scan-shield 3s infinite linear;
+  opacity: 0.5;
+}
+
+@keyframes pulse-lock {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+@keyframes scan-shield {
+  0% {
+    top: 10%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 90%;
+    opacity: 0;
+  }
+}
+
+/* Responsive adjustments for Security Visual */
+@media (max-width: 768px) {
+  .security-visual-container {
+    height: 200px;
+    margin-bottom: 2rem;
+  }
+
+  .shield-wrapper {
+    width: 140px;
+    height: 170px;
+  }
+
+  .shield-icon {
+    font-size: 9rem;
+  }
+
+  .lock-wrapper {
+    width: 50px;
+    height: 50px;
+  }
+
+  .lock-icon {
+    font-size: 2rem;
+  }
+}
+
 /* ============================================ */
 /* MOBILE RESPONSIVENESS (Max-width: 768px)     */
 /* ============================================ */
