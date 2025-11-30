@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import GlowingBracket from "@/components/GlowingBracket";
 import AOS from "aos";
 
@@ -184,19 +185,43 @@ export default function Home() {
 
                     {/* Floating Logo Blobs */}
                     <div className="slm-logo blob blob-1">
-                      <span className="slm-logo-text phi">φ</span>
+                      <Image
+                        src="/assets/phi-logo.png"
+                        alt="Phi"
+                        width={40}
+                        height={40}
+                        className="slm-logo-img"
+                      />
                       <span className="slm-name">Phi</span>
                     </div>
                     <div className="slm-logo blob blob-2">
-                      <span className="slm-logo-text gemma">◆</span>
+                      <Image
+                        src="/assets/gemma-logo.png"
+                        alt="Gemma"
+                        width={40}
+                        height={40}
+                        className="slm-logo-img"
+                      />
                       <span className="slm-name">Gemma</span>
                     </div>
                     <div className="slm-logo blob blob-3">
-                      <span className="slm-logo-text ollama">🦙</span>
+                      <Image
+                        src="/assets/ollama-logo.png"
+                        alt="Ollama"
+                        width={40}
+                        height={40}
+                        className="slm-logo-img"
+                      />
                       <span className="slm-name">Ollama</span>
                     </div>
                     <div className="slm-logo blob blob-4">
-                      <span className="slm-logo-text mistral">≋</span>
+                      <Image
+                        src="/assets/mistral-logo.png"
+                        alt="Mistral"
+                        width={40}
+                        height={40}
+                        className="slm-logo-img"
+                      />
                       <span className="slm-name">Mistral</span>
                     </div>
                     <div className="slm-logo blob blob-5">

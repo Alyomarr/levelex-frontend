@@ -1266,6 +1266,13 @@ ul {
   display: block;
 }
 
+.slm-logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
 .slm-logo-text.phi {
   font-family: "Georgia", serif;
 }
