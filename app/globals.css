@@ -1214,38 +1214,78 @@ ul {
   animation-delay: 2s;
 }
 
-.blob-4 {
-  top: 50%;
-  left: 5%;
-  margin-top: -50px; /* Half of height to center */
-  animation-delay: 3s;
+/* Responsive Styles for SLM Logos */
+@media (max-width: 768px) {
+  .slm-logos-container {
+    height: 300px; /* Reduce height on mobile */
+  }
+
+  .ai-center {
+    font-size: 4rem; /* Smaller AI text */
+  }
+
+  .slm-logo.blob {
+    width: 70px; /* Smaller blobs */
+    height: 70px;
+  }
+
+  .slm-logo-text {
+    font-size: 1.5rem;
+  }
+
+  .slm-name {
+    font-size: 0.6rem;
+  }
+
+  /* Adjust halo positions for mobile */
+  .blob-1 {
+    top: 5%;
+    margin-left: -35px;
+  }
+
+  .blob-2 {
+    right: 0;
+    margin-top: -35px;
+  }
+
+  .blob-3 {
+    bottom: 5%;
+    margin-left: -35px;
+  }
+
+  .blob-4 {
+    left: 0;
+    margin-top: -35px;
+  }
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
+@media (max-width: 480px) {
+  .slm-logos-container {
+    height: 250px;
   }
-  25% {
-    transform: translateY(-15px) rotate(2deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(-2deg);
-  }
-  75% {
-    transform: translateY(-20px) rotate(1deg);
-  }
-}
 
-.slm-logo-text {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 0.3rem;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  display: block;
+  .ai-center {
+    font-size: 3rem;
+  }
+
+  .slm-logo.blob {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* Tighter halo for very small screens */
+  .blob-1 {
+    top: 0;
+  }
+  .blob-2 {
+    right: -10px;
+  }
+  .blob-3 {
+    bottom: 0;
+  }
+  .blob-4 {
+    left: -10px;
+  }
 }
 
 .slm-logo-img {
