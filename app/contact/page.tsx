@@ -114,7 +114,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4>Email Us</h4>
-                  <p>hello@levelex.com</p>
+                  <p>levelexcloud@gmail.com</p>
                 </div>
               </div>
 
@@ -124,17 +124,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4>Call Us</h4>
-                  <p>+1 (555) 123-4567</p>
-                </div>
-              </div>
-
-              <div className="info-item">
-                <div className="icon-box">
-                  <i className="bx bxs-map"></i>
-                </div>
-                <div>
-                  <h4>Visit Us</h4>
-                  <p>123 AI Boulevard, Tech City</p>
+                  <p>+20 10 3227 0126</p>
                 </div>
               </div>
 
