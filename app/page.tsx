@@ -92,70 +92,86 @@ export default function Home() {
           <div className="capabilities-layout">
             <div className="capabilities-content">
               <div className="capabilities-cards">
-                {/* Card 1: Local & Secure */}
-                <div
-                  className="card feature-card"
-                  data-aos="fade-up"
-                  data-aos-delay="100"
-                >
-                  <i className="bx bx-shield-quarter card-icon"></i>
-                  <h3>Local & Secure</h3>
-                  <p>
-                    We deploy models locally on your hardware. Your proprietary
-                    data never leaves your perimeter. GDPR & Enterprise ready.
-                  </p>
+                {/* Left Column: 2 Cards Stacked */}
+                <div className="flex flex-col gap-6">
+                  {/* Card 1: Local & Secure */}
+                  <div
+                    className="card feature-card"
+                    data-aos="fade-up"
+                    data-aos-delay="100"
+                  >
+                    <i className="bx bx-shield-quarter card-icon"></i>
+                    <h3>Local & Secure</h3>
+                    <p>
+                      We deploy models locally on your hardware. Your
+                      proprietary data never leaves your perimeter. GDPR &
+                      Enterprise ready.
+                    </p>
+                  </div>
+
+                  {/* Card 3: Full SLM training */}
+                  <div
+                    className="card feature-card"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                  >
+                    <i className="bx bx-server card-icon"></i>
+                    <h3>Full SLM training</h3>
+                    <p>
+                      We don&apos;t just write prompts., we train SLMs on
+                      focused goals and ensure quality, security and fast queues
+                    </p>
+                  </div>
                 </div>
 
-                {/* Card 2: The Command Center */}
-                <div
-                  className="card feature-card"
-                  data-aos="fade-up"
-                  data-aos-delay="200"
-                >
-                  <i className="bx bx-bar-chart-alt-2 card-icon"></i>
-                  <h3>The Command Center</h3>
-                  <p>
-                    Ditch the spreadsheets. Our custom dashboards give you a
-                    God-mode view of your automations, leads, and system health
-                    in real-time.
-                  </p>
-                </div>
+                {/* Right Column: Command Center + Carousel */}
+                <div className="flex flex-col gap-6">
+                  {/* Command Center and Carousel side by side */}
+                  <div className="flex gap-6">
+                    {/* Card 2: The Command Center */}
+                    <div
+                      className="card feature-card"
+                      data-aos="fade-up"
+                      data-aos-delay="200"
+                      style={{ flex: "1" }}
+                    >
+                      <i className="bx bx-bar-chart-alt-2 card-icon"></i>
+                      <h3>The Command Center</h3>
+                      <p>
+                        Ditch the spreadsheets. Our custom dashboards give you a
+                        God-mode view of your automations, leads, and system
+                        health in real-time.
+                      </p>
+                    </div>
 
-                {/* Full-Width Carousel */}
-                <div className="w-full h-[500px] relative mb-8">
-                  <FeatureCarousel
-                    slides={[
-                      {
-                        title: "Lead Generation",
-                        button: "View Details",
-                        src: "/assets/lead-gen.png",
-                      },
-                      {
-                        title: "Levelex Dashboard",
-                        button: "View Details",
-                        src: "/assets/dashboard.png",
-                      },
-                      {
-                        title: "CCTV Footage",
-                        button: "View Details",
-                        src: "/assets/cctv.png",
-                      },
-                    ]}
-                  />
-                </div>
-
-                {/* Card 3: Full SLM training */}
-                <div
-                  className="card feature-card"
-                  data-aos="fade-up"
-                  data-aos-delay="400"
-                >
-                  <i className="bx bx-server card-icon"></i>
-                  <h3>Full SLM training</h3>
-                  <p>
-                    We don&apos;t just write prompts., we train SLMs on focused
-                    goals and ensure quality, security and fast queues
-                  </p>
+                    {/* Carousel beside Command Center */}
+                    <div
+                      className="relative"
+                      style={{ flex: "1", minHeight: "300px" }}
+                      data-aos="fade-up"
+                      data-aos-delay="200"
+                    >
+                      <FeatureCarousel
+                        slides={[
+                          {
+                            title: "Lead Generation",
+                            button: "View Details",
+                            src: "/assets/lead-gen.png",
+                          },
+                          {
+                            title: "Levelex Dashboard",
+                            button: "View Details",
+                            src: "/assets/dashboard.png",
+                          },
+                          {
+                            title: "CCTV Footage",
+                            button: "View Details",
+                            src: "/assets/cctv.png",
+                          },
+                        ]}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
