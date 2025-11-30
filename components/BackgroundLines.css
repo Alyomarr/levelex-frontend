@@ -7,12 +7,12 @@
   overflow: hidden;
   z-index: -1; /* Ensure it stays behind content */
   pointer-events: none; /* Let clicks pass through if needed, though interactive mode might need this off */
-  transition: filter 0.8s ease-in-out;
-  will-change: filter;
+  transition: opacity 0.8s ease-in-out;
+  will-change: opacity;
 }
 
 .floating-lines-container.blurred {
-  filter: blur(10px);
+  opacity: 0.3;
   pointer-events: none;
 }
 
