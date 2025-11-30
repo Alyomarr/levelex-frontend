@@ -985,7 +985,7 @@ ul {
 
 .carousel-container {
   position: relative;
-  height: 400px; /* Explicit height for carousel visibility */
+  height: 280px; /* Reduced to match card height */
 }
 
 .capabilities-image-container {
