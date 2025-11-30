@@ -6,7 +6,8 @@ import GlowingBracket from "@/components/GlowingBracket";
 import AOS from "aos";
 // import "aos/dist/aos.css";
 // import { N8n } from "@lobehub/icons";
-import { ImageCarousel } from "@/components/ImageCarousel";
+// import { N8n } from "@lobehub/icons";
+import FeatureCarousel from "@/components/FeatureCarousel";
 
 export default function Home() {
   useEffect(() => {
@@ -123,7 +124,7 @@ export default function Home() {
                 </div>
                 {/* Carousel */}
                 <div className="w-full h-[500px] relative mb-8">
-                  <ImageCarousel
+                  <FeatureCarousel
                     slides={[
                       {
                         title: "Lead Generation",
