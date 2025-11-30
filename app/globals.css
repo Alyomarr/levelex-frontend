@@ -1140,32 +1140,23 @@ ul {
   filter: brightness(1.2);
 }
 
-/* SLM Logos Container - Floating Blobs */
+/* SLM Logos Container - Horizontal Layout */
 .slm-logos-container {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: auto;
+  min-height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* Center AI Text */
-.ai-center {
-  font-size: 6rem;
-  font-weight: 900;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  z-index: 10;
-  position: relative;
-  letter-spacing: 0.1em;
+  gap: 2rem;
+  padding: 2rem 0;
+  flex-wrap: wrap;
 }
 
 /* Floating Blob Logos - Glassy Circle Design */
 .slm-logo.blob {
-  position: absolute;
+  position: relative; /* Changed from absolute */
   width: 100px;
   height: 100px;
   display: flex;
@@ -1192,41 +1183,30 @@ ul {
   animation-play-state: paused;
 }
 
-/* Position each blob - Halo arrangement (Top, Right, Bottom, Left) */
-.blob-1 {
-  top: 0;
-  left: 50%;
-  margin-left: -50px; /* Half of width to center */
+/* Stagger animations */
+.slm-logo.blob:nth-child(1) {
   animation-delay: 0s;
 }
-
-.blob-2 {
-  top: 50%;
-  right: 5%;
-  margin-top: -50px; /* Half of height to center */
+.slm-logo.blob:nth-child(2) {
   animation-delay: 1s;
 }
-
-.blob-3 {
-  bottom: 0;
-  left: 50%;
-  margin-left: -50px; /* Half of width to center */
+.slm-logo.blob:nth-child(3) {
   animation-delay: 2s;
+}
+.slm-logo.blob:nth-child(4) {
+  animation-delay: 3s;
 }
 
 /* Responsive Styles for SLM Logos */
 @media (max-width: 768px) {
   .slm-logos-container {
-    height: 300px; /* Reduce height on mobile */
-  }
-
-  .ai-center {
-    font-size: 4rem; /* Smaller AI text */
+    gap: 1rem;
+    padding: 1rem 0;
   }
 
   .slm-logo.blob {
-    width: 70px; /* Smaller blobs */
-    height: 70px;
+    width: 80px;
+    height: 80px;
   }
 
   .slm-logo-text {
@@ -1234,57 +1214,14 @@ ul {
   }
 
   .slm-name {
-    font-size: 0.6rem;
-  }
-
-  /* Adjust halo positions for mobile */
-  .blob-1 {
-    top: 5%;
-    margin-left: -35px;
-  }
-
-  .blob-2 {
-    right: 0;
-    margin-top: -35px;
-  }
-
-  .blob-3 {
-    bottom: 5%;
-    margin-left: -35px;
-  }
-
-  .blob-4 {
-    left: 0;
-    margin-top: -35px;
+    font-size: 0.7rem;
   }
 }
 
 @media (max-width: 480px) {
-  .slm-logos-container {
-    height: 250px;
-  }
-
-  .ai-center {
-    font-size: 3rem;
-  }
-
   .slm-logo.blob {
-    width: 60px;
-    height: 60px;
-  }
-
-  /* Tighter halo for very small screens */
-  .blob-1 {
-    top: 0;
-  }
-  .blob-2 {
-    right: -10px;
-  }
-  .blob-3 {
-    bottom: 0;
-  }
-  .blob-4 {
-    left: -10px;
+    width: 70px;
+    height: 70px;
   }
 }
 

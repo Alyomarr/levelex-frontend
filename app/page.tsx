@@ -173,29 +173,25 @@ export default function Home() {
                     </p>
                   </div>
 
-                  {/* SLM Logos - Floating around AI */}
+                  {/* SLM Logos - Horizontal Line */}
                   <div
                     className="slm-logos-container"
                     data-aos="fade-left"
                     data-aos-delay="300"
                   >
-                    {/* Center AI Text */}
-                    <div className="ai-center">AI</div>
-
-                    {/* Floating Logo Blobs */}
-                    <div className="slm-logo blob blob-1">
+                    <div className="slm-logo blob">
                       <span className="slm-logo-text phi">φ</span>
                       <span className="slm-name">Phi</span>
                     </div>
-                    <div className="slm-logo blob blob-2">
+                    <div className="slm-logo blob">
                       <span className="slm-logo-text gemma">◆</span>
                       <span className="slm-name">Gemma</span>
                     </div>
-                    <div className="slm-logo blob blob-3">
+                    <div className="slm-logo blob">
                       <span className="slm-logo-text ollama">🦙</span>
                       <span className="slm-name">Ollama</span>
                     </div>
-                    <div className="slm-logo blob blob-4">
+                    <div className="slm-logo blob">
                       <span className="slm-logo-text mistral">≋</span>
                       <span className="slm-name">Mistral</span>
                     </div>
