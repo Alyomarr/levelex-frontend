@@ -2017,10 +2017,11 @@ ul {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-gray);
+  color: var(--text-white); /* Changed from text-gray to text-white */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  text-decoration: none; /* Ensure no underline */
 }
 
 .social-links-large a::before {
@@ -2040,6 +2041,7 @@ ul {
   position: relative;
   z-index: 1;
   transition: transform 0.3s ease;
+  color: inherit; /* Force inheritance */
 }
 
 .social-links-large a:hover {
