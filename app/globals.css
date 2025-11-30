@@ -1105,61 +1105,39 @@ ul {
   transform: scale(1.1);
 }
 
-/* Large Social Links (for footer column) - Liquid Effect */
+/* Large Social Links (for footer column) - Gooey Flowing Effect */
 .social-links-large {
   display: flex;
-  gap: 0.5rem; /* Reduced gap for flowing effect */
+  gap: 0.8rem; /* Close spacing for gooey merge */
   margin-top: 1rem;
   flex-wrap: wrap;
-  filter: blur(1px) contrast(20); /* Creates liquid merge effect */
+  filter: url("#gooey"); /* SVG filter for gooey effect */
+}
+
+/* Fallback for browsers without SVG filter support */
+@supports not (filter: url("#gooey")) {
+  .social-links-large {
+    filter: blur(2px) contrast(20);
+  }
 }
 
 .social-links-large a {
   width: 60px;
   height: 60px;
   font-size: 2rem;
-  border-radius: 45% 55% 52% 48% / 48% 45% 55% 52%; /* Organic blob shape */
-  animation: liquidMorph 8s ease-in-out infinite;
+  border-radius: 50%; /* Back to circles */
   background: linear-gradient(
     135deg,
-    rgba(138, 43, 226, 0.8),
-    rgba(0, 255, 255, 0.8)
+    rgba(138, 43, 226, 0.9),
+    rgba(0, 255, 255, 0.9)
   );
   border: none;
-  filter: blur(0); /* Reset blur on individual icons */
-}
-
-.social-links-large a:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.social-links-large a:nth-child(2) {
-  animation-delay: 2.6s;
-}
-
-.social-links-large a:nth-child(3) {
-  animation-delay: 5.2s;
+  transition: all 0.3s ease;
 }
 
 .social-links-large a:hover {
-  transform: translateY(-5px) scale(1.1);
-  animation-play-state: paused;
-}
-
-@keyframes liquidMorph {
-  0%,
-  100% {
-    border-radius: 45% 55% 52% 48% / 48% 45% 55% 52%;
-  }
-  25% {
-    border-radius: 55% 45% 48% 52% / 52% 55% 45% 48%;
-  }
-  50% {
-    border-radius: 52% 48% 55% 45% / 45% 52% 48% 55%;
-  }
-  75% {
-    border-radius: 48% 52% 45% 55% / 55% 48% 52% 45%;
-  }
+  transform: translateY(-5px) scale(1.15);
+  filter: brightness(1.2);
 }
 
 /* Tech Stack Section */
