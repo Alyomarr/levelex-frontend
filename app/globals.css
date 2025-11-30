@@ -1183,60 +1183,33 @@ ul {
 }
 
 /* Position each blob - Circling around AI */
+/* Position each blob - Halo arrangement */
 .blob-1 {
-  top: 15%;
-  left: 25%;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
   animation-delay: 0s;
 }
 
 .blob-2 {
-  top: 10%;
-  right: 25%;
+  top: 50%;
+  right: 15%;
+  transform: translateY(-50%);
   animation-delay: 1s;
 }
 
 .blob-3 {
-  bottom: 20%;
-  left: 22%;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
   animation-delay: 2s;
 }
 
 .blob-4 {
-  bottom: 15%;
-  right: 22%;
+  top: 50%;
+  left: 15%;
+  transform: translateY(-50%);
   animation-delay: 3s;
-}
-
-.blob-5 {
-  top: 50%;
-  left: 12%;
-  transform: translateY(-50%);
-  animation-delay: 1.5s;
-  padding: 0.5rem;
-}
-
-.blob-6 {
-  top: 8%;
-  left: 50%;
-  transform: translateX(-50%);
-  animation-delay: 2.5s;
-  padding: 0.4rem;
-}
-
-.blob-7 {
-  top: 50%;
-  right: 12%;
-  transform: translateY(-50%);
-  animation-delay: 0.5s;
-  padding: 0.6rem;
-}
-
-.blob-8 {
-  bottom: 8%;
-  left: 50%;
-  transform: translateX(-50%);
-  animation-delay: 4s;
-  padding: 0.5rem;
 }
 
 @keyframes float {
