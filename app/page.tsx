@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import GlowingBracket from "@/components/GlowingBracket";
 import AOS from "aos";
 
@@ -185,56 +184,20 @@ export default function Home() {
 
                     {/* Floating Logo Blobs */}
                     <div className="slm-logo blob blob-1">
-                      <Image
-                        src="/assets/phi-logo.png"
-                        alt="Phi"
-                        width={40}
-                        height={40}
-                        className="slm-logo-img"
-                      />
+                      <span className="slm-logo-text phi">φ</span>
                       <span className="slm-name">Phi</span>
                     </div>
                     <div className="slm-logo blob blob-2">
-                      <Image
-                        src="/assets/gemma-logo.png"
-                        alt="Gemma"
-                        width={40}
-                        height={40}
-                        className="slm-logo-img"
-                      />
+                      <span className="slm-logo-text gemma">◆</span>
                       <span className="slm-name">Gemma</span>
                     </div>
                     <div className="slm-logo blob blob-3">
-                      <Image
-                        src="/assets/ollama-logo.png"
-                        alt="Ollama"
-                        width={40}
-                        height={40}
-                        className="slm-logo-img"
-                      />
+                      <span className="slm-logo-text ollama">🦙</span>
                       <span className="slm-name">Ollama</span>
                     </div>
                     <div className="slm-logo blob blob-4">
-                      <Image
-                        src="/assets/mistral-logo.png"
-                        alt="Mistral"
-                        width={40}
-                        height={40}
-                        className="slm-logo-img"
-                      />
+                      <span className="slm-logo-text mistral">≋</span>
                       <span className="slm-name">Mistral</span>
-                    </div>
-                    <div className="slm-logo blob blob-5">
-                      <span className="slm-logo-text">◯</span>
-                    </div>
-                    <div className="slm-logo blob blob-6">
-                      <span className="slm-logo-text">◯</span>
-                    </div>
-                    <div className="slm-logo blob blob-7">
-                      <span className="slm-logo-text">◯</span>
-                    </div>
-                    <div className="slm-logo blob blob-8">
-                      <span className="slm-logo-text">◯</span>
                     </div>
                   </div>
                 </div>
