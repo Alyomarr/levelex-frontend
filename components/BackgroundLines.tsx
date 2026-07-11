@@ -199,7 +199,10 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 void main() {
   vec4 color = vec4(0.0);
   mainImage(color, gl_FragCoord.xy);
-  gl_FragColor = color;
+  // Output on a transparent canvas: alpha follows line brightness so dark areas
+  // are see-through. Lets us drop CSS mix-blend-mode (mobile compositing flicker).
+  float a = clamp(max(color.r, max(color.g, color.b)), 0.0, 1.0);
+  gl_FragColor = vec4(color.rgb, a);
 }
 `;
 
@@ -268,7 +271,7 @@ export default function BackgroundLines({
   mouseDamping = 0.05,
   parallax = true,
   parallaxStrength = 0.2,
-  mixBlendMode = "screen",
+  mixBlendMode = "normal",
 }: FloatingLinesProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const targetMouseRef = useRef<Vector2>(new Vector2(-1000, -1000));
@@ -319,7 +322,10 @@ export default function BackgroundLines({
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          const shouldBlur = window.scrollY > 100;
+          // Hysteresis: separate on/off thresholds so a scroll position resting
+          // near the boundary can't rapidly toggle the blur (background flicker).
+          const y = window.scrollY;
+          const shouldBlur = isBlurredRef.current ? y > 60 : y > 140;
           if (isBlurredRef.current !== shouldBlur) {
             isBlurredRef.current = shouldBlur;
             setIsBlurred(shouldBlur);
@@ -342,7 +348,8 @@ export default function BackgroundLines({
     const camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
     camera.position.z = 1;
 
-    const renderer = new WebGLRenderer({ antialias: true, alpha: false });
+    const renderer = new WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setClearColor(0x000000, 0); // transparent so only the lines show
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.domElement.style.width = "100%";
     renderer.domElement.style.height = "100%";

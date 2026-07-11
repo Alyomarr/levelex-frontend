@@ -13,6 +13,9 @@ export default function SmoothScroll() {
       smoothWheel: true,
     });
 
+    // Expose the instance so overlays (e.g. modals) can pause/resume scrolling.
+    (window as unknown as { lenis?: Lenis }).lenis = lenis;
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -58,6 +61,7 @@ export default function SmoothScroll() {
 
     return () => {
       lenis.destroy();
+      delete (window as unknown as { lenis?: Lenis }).lenis;
       document.removeEventListener("click", handleClick);
     };
   }, []);
