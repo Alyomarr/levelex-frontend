@@ -30,6 +30,12 @@ interface CaseStudy {
   techStack: { name: string; svg: string }[];  // 4–6 items, self-hosted SVGs
   stats: { icon: string; value: string; label: string }[];
   scalabilityNote: string; // one-liner on how the solution scales
+  screenshots?: { src: string; alt: string; caption?: string }[];
+                           // optional; files under public/case-studies/.
+                           // Rendered after the story section as a hero image
+                           // or small swipeable strip, lazy-loaded on modal
+                           // open. Section skipped entirely when absent.
+                           // Demo/seeded data only — never real PII.
 }
 ```
 
@@ -82,14 +88,16 @@ Follows the existing `ImageModal.tsx` pattern:
 2. **The Client** — who needed it and why. Short block, industry-level
    description.
 3. **The Challenge & Story** — 2–3 short paragraphs from `story[]`.
-4. **The Solution** — existing highlight-item layout (`.featured-highlights`).
-5. **Tech Stack** — logo row: monochrome/white SVGs with the name underneath.
+4. **Screenshots** (optional) — hero image or swipeable strip from
+   `screenshots[]`; section omitted when the case study has none.
+5. **The Solution** — existing highlight-item layout (`.featured-highlights`).
+6. **Tech Stack** — logo row: monochrome/white SVGs with the name underneath.
    Self-hosted SVGs (sourced from simple-icons/devicon), no CDN. Subtle
    hover/active tint only — no full-color logos (clashes with dark glassy
    theme). 4–6 logos per project.
-6. **Results & Scalability** — existing stat boxes (`.featured-stats`) plus
+7. **Results & Scalability** — existing stat boxes (`.featured-stats`) plus
    `scalabilityNote` one-liner.
-7. **Mini CTA** — "Want something like this?" + button linking to
+8. **Mini CTA** — "Want something like this?" + button linking to
    `https://cal.com/levelexcloud/levelex-audit` (same as the site's other
    CTAs).
 
