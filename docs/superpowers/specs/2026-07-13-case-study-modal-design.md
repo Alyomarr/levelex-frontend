@@ -5,9 +5,10 @@
 
 ## Goal
 
-Replace the two full-detail case study cards rendered inline on the homepage
+Replace the full-detail case study cards rendered inline on the homepage
 (`app/page.tsx`, `#case-studies` section) with compact teaser cards that open
-the full case study in an overlay. Desktop gets a centered modal; mobile
+the full case study in an overlay. The lineup grows from two to three case
+studies (DreamHosp added). Desktop gets a centered modal; mobile
 (99% of traffic) gets a bottom sheet. Case study content is enriched with
 client context, a narrative story, tech stack logos, and results/scalability.
 
@@ -32,10 +33,20 @@ interface CaseStudy {
 }
 ```
 
-The two existing case studies (Enterprise Legacy Modernization & Biometric
-Security; Executive Virtual Assistant) migrate into this array. New copy
-(client, story, scalabilityNote) is drafted from existing page content and
-edited by the owner.
+Three case studies populate the array:
+
+1. **Enterprise Legacy Modernization & Biometric Security** (existing) — the
+   club/facility system: SQL→PostgreSQL migration, offline face match,
+   on-gate lead-gen forms, WhatsApp RAG bot.
+2. **Executive Virtual Assistant** (existing) — email sorting + meeting
+   summarization.
+3. **DreamHosp** (new) — full hospital web platform: patient portal, doctor
+   dashboards, appointments, lab result uploads, admin (Next.js, Prisma,
+   Supabase). Copy drafted from the DreamH project at
+   `C:\Users\alyom\Desktop\DreamH`.
+
+New copy (client, story, scalabilityNote) is drafted from existing page
+content and project source, then edited by the owner.
 
 ## Teaser Cards (homepage)
 
@@ -110,5 +121,5 @@ Follows the existing `ImageModal.tsx` pattern:
 
 - Dedicated case-study routes / SEO pages (Next.js intercepting routes) —
   can be added later if the number of case studies grows.
-- Gesture libraries, carousel behavior, more than the two existing case
-  studies.
+- Gesture libraries, carousel behavior, additional projects beyond the three
+  listed (AI Voice Agent, Trim, and others were considered and excluded).
