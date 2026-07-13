@@ -35,6 +35,10 @@ export interface CaseStudy {
   id: string;
   title: string;
   tagline: string;
+  /** Short uppercase record label for the teaser card header, e.g. "AUTO REPAIR — ABU DHABI, UAE". */
+  sector: string;
+  /** Headline result shown in the teaser card's readout footer. */
+  keyMetric: { value: string; label: string };
   summary: string;
   client: string;
   clientLogo?: { src: string; alt: string };
@@ -50,6 +54,8 @@ export const caseStudies: CaseStudy[] = [
     id: "club-modernization",
     title: "Enterprise Legacy Modernization & Biometric Security",
     tagline: "Zero-Downtime Migration & Local Computer Vision",
+    sector: "Members' Club",
+    keyMetric: { value: "40%", label: "less manual admin" },
     summary:
       "A members' club running on paper and legacy SQL became a fully automated, biometrically secured operation.",
     client:
@@ -100,6 +106,8 @@ export const caseStudies: CaseStudy[] = [
     id: "grand-tourer",
     title: "Grand Tourer: Garage Operations Platform",
     tagline: "Bilingual Job Cards, Estimates & Insurance Reporting",
+    sector: "Auto Repair — Abu Dhabi, UAE",
+    keyMetric: { value: "100%", label: "paperless job cards" },
     summary:
       "An Abu Dhabi auto workshop replaced its paper trail with a bilingual platform covering job cards, estimates, and insurer reporting.",
     client:
@@ -152,6 +160,8 @@ export const caseStudies: CaseStudy[] = [
     id: "hospital-platform",
     title: "Hospital Digital Platform",
     tagline: "Patient Portal, Doctor Dashboards & Lab Workflow",
+    sector: "Private Healthcare",
+    keyMetric: { value: "24/7", label: "online booking" },
     summary:
       "A private hospital moved its whole patient journey — booking, results, follow-ups — from phone queues to one platform.",
     client:
@@ -203,6 +213,8 @@ export const caseStudies: CaseStudy[] = [
     id: "executive-assistant",
     title: "Executive Virtual Assistant",
     tagline: "Intelligent Email Sorting & Meeting Summarization",
+    sector: "Enterprise Executive",
+    keyMetric: { value: "2h+", label: "saved daily" },
     summary:
       "A private AI assistant that triages an executive's inbox and turns back-to-back meetings into decisions and action items.",
     client:

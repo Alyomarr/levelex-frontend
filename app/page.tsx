@@ -305,11 +305,25 @@ export default function Home() {
                 data-aos-delay={100 + i * 100}
                 onClick={() => setOpenCaseStudy(cs.id)}
               >
+                <span className="case-record-head">
+                  <span className="case-record-id">
+                    CS/{String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="case-record-sector">{cs.sector}</span>
+                  <span className="case-record-status">
+                    <span className="case-record-dot"></span>In Production
+                  </span>
+                </span>
                 <span className="case-teaser-title">{cs.title}</span>
-                <span className="featured-tagline">{cs.tagline}</span>
                 <p>{cs.summary}</p>
-                <span className="case-teaser-link">
-                  View case study <i className="bx bx-right-arrow-alt"></i>
+                <span className="case-record-foot">
+                  <span className="case-record-metric">
+                    <i className="bx bx-trending-up"></i> {cs.keyMetric.value}{" "}
+                    {cs.keyMetric.label}
+                  </span>
+                  <span className="case-teaser-link">
+                    Open case file <i className="bx bx-right-arrow-alt"></i>
+                  </span>
                 </span>
               </button>
             ))}
