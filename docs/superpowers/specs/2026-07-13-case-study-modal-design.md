@@ -94,8 +94,9 @@ Follows the existing `ImageModal.tsx` pattern:
 - New CSS in `app/globals.css` following existing naming conventions
   (`.case-modal-*` or similar), reusing `.featured-*` styles for highlights
   and stats inside the modal.
-- Tech stack SVGs stored under `public/tech/` (or inline components) —
-  self-hosted, monochrome.
+- Tech stack SVGs are inlined (SVG markup stored with the data, using
+  `fill="currentColor"`) so CSS controls the monochrome tint — a static
+  `<img>` can't be recolored. No external requests.
 
 ## Testing / Verification
 
