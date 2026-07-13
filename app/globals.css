@@ -2119,3 +2119,258 @@ ul {
 .social-links-large a:hover::before {
   opacity: 1;
 }
+
+/* ============================================ */
+/* Case Study Modal / Bottom Sheet              */
+/* ============================================ */
+
+.case-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 2rem;
+  animation: modalOverlayFadeIn 0.25s ease forwards;
+}
+
+.case-modal {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    145deg,
+    rgba(26, 28, 58, 0.98),
+    rgba(13, 15, 43, 0.99)
+  );
+  border: 1px solid rgba(0, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+  animation: modalContentIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.case-modal-handle {
+  display: none; /* mobile only */
+}
+
+.case-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.6rem;
+}
+
+.case-modal-close:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: rotate(90deg);
+}
+
+.case-modal-scroll {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.case-modal-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.case-modal-label {
+  font-family: monospace;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+}
+
+.case-modal-client {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.case-modal-client-logo {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 12px;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.case-modal-client-logo img {
+  height: 42px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+}
+
+.case-modal-client p,
+.case-modal-story-p {
+  color: var(--text-gray);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.case-modal-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.case-modal-tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 84px;
+  padding: 0.85rem 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.case-modal-tech-item:hover {
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
+
+.case-modal-tech-item span {
+  font-size: 0.72rem;
+  color: var(--text-gray);
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.case-modal-scalability {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-gray);
+  line-height: 1.6;
+}
+
+.case-modal-scalability i {
+  color: var(--accent-cyan);
+  margin-right: 0.35rem;
+  vertical-align: middle;
+}
+
+.case-modal-cta {
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.case-modal-cta p {
+  color: var(--text-white);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* Bottom sheet on mobile */
+@media (max-width: 768px) {
+  .case-modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .case-modal {
+    max-width: 100%;
+    height: 92vh;
+    max-height: 92vh;
+    border-radius: 20px 20px 0 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    animation: sheetSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .case-modal-handle {
+    display: flex;
+    justify-content: center;
+    padding: 0.75rem 0 0.25rem;
+    touch-action: none;
+    cursor: grab;
+  }
+
+  .case-modal-handle-bar {
+    width: 44px;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .case-modal-close {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 38px;
+    height: 38px;
+    font-size: 1.4rem;
+  }
+
+  .case-modal-scroll {
+    padding: 1rem 1.25rem 2.5rem;
+    gap: 1.5rem;
+  }
+
+  .case-modal .featured-highlights {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .case-modal .featured-stats {
+    gap: 0.75rem;
+  }
+
+  .case-modal-client {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@keyframes sheetSlideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-modal-overlay,
+  .case-modal {
+    animation: none;
+  }
+}
