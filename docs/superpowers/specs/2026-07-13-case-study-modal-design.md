@@ -30,12 +30,12 @@ interface CaseStudy {
   techStack: { name: string; svg: string }[];  // 4–6 items, self-hosted SVGs
   stats: { icon: string; value: string; label: string }[];
   scalabilityNote: string; // one-liner on how the solution scales
-  screenshots?: { src: string; alt: string; caption?: string }[];
-                           // optional; files under public/case-studies/.
-                           // Rendered after the story section as a hero image
-                           // or small swipeable strip, lazy-loaded on modal
-                           // open. Section skipped entirely when absent.
-                           // Demo/seeded data only — never real PII.
+  clientLogo?: { src: string; alt: string };
+                           // optional; business logo copied into
+                           // public/case-studies/. Shown in "The Client"
+                           // section (and small on the teaser card). Requires
+                           // the client's permission since a logo names them.
+                           // Omitted → text-only client description.
 }
 ```
 
@@ -85,11 +85,12 @@ Follows the existing `ImageModal.tsx` pattern:
 ### Content order (top to bottom)
 
 1. **Header** — title + tagline.
-2. **The Client** — who needed it and why. Short block, industry-level
-   description.
+2. **The Client** — who needed it and why. Short block with the business
+   logo (`clientLogo`, when present) beside the description; text-only when
+   absent.
 3. **The Challenge & Story** — 2–3 short paragraphs from `story[]`.
-4. **Screenshots** (optional) — hero image or swipeable strip from
-   `screenshots[]`; section omitted when the case study has none.
+4. *(reserved)* **Screenshots** — deliberately deferred; may be added later
+   as an optional gallery section. Not part of this build.
 5. **The Solution** — existing highlight-item layout (`.featured-highlights`).
 6. **Tech Stack** — logo row: monochrome/white SVGs with the name underneath.
    Self-hosted SVGs (sourced from simple-icons/devicon), no CDN. Subtle
@@ -138,5 +139,7 @@ Follows the existing `ImageModal.tsx` pattern:
 
 - Dedicated case-study routes / SEO pages (Next.js intercepting routes) —
   can be added later if the number of case studies grows.
+- App screenshots in the modal — deferred to a later pass (capture with
+  demo/seeded data only; a Cowork capture prompt was already drafted).
 - Gesture libraries, carousel behavior, additional projects beyond the four
   listed (AI Voice Agent, Trim, and others were considered and excluded).
