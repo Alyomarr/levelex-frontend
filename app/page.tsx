@@ -1,12 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import AOS from "aos";
 
 import FeatureCarousel from "@/components/FeatureCarousel";
+import CaseStudyModal from "@/components/CaseStudyModal";
+import { caseStudies } from "@/lib/caseStudies";
 
 export default function Home() {
+  const [openCaseStudy, setOpenCaseStudy] = useState<string | null>(null);
+
   useEffect(() => {
     // Initialize AOS
     AOS.init({
@@ -289,141 +293,26 @@ export default function Home() {
       <section id="case-studies" className="case-studies">
         <div className="container">
           <h2 className="section-title" data-aos="fade-up">
-            Featured <span className="gradient-text">Project</span>
+            Case <span className="gradient-text">Studies</span>
           </h2>
-          <div className="featured-projects-grid">
-            {/* Project 1 */}
-            <div
-              className="featured-project-card"
-              data-aos="fade-up"
-              data-aos-delay="100"
-            >
-              <div className="featured-header">
-                <h3>Enterprise Legacy Modernization & Biometric Security</h3>
-                <span className="featured-tagline">
-                  Zero-Downtime Migration & Local Computer Vision
+          <div className="case-teaser-grid">
+            {caseStudies.map((cs, i) => (
+              <button
+                key={cs.id}
+                type="button"
+                className="card case-teaser-card"
+                data-aos="fade-up"
+                data-aos-delay={100 + i * 100}
+                onClick={() => setOpenCaseStudy(cs.id)}
+              >
+                <h3>{cs.title}</h3>
+                <span className="featured-tagline">{cs.tagline}</span>
+                <p>{cs.summary}</p>
+                <span className="case-teaser-link">
+                  View case study <i className="bx bx-right-arrow-alt"></i>
                 </span>
-              </div>
-
-              <div className="featured-body">
-                <div className="featured-main-text">
-                  <p>
-                    Migrated a high-volume facility from legacy SQL to
-                    PostgreSQL while deploying a local, offline Face Match
-                    system for secure access control.
-                  </p>
-                </div>
-
-                <div className="featured-highlights">
-                  <div className="highlight-item">
-                    <i className="bx bx-target-lock highlight-icon"></i>
-                    <div>
-                      <h4>Automated Lead Gen</h4>
-                      <p>
-                        Implemented on-gate forms that automatically qualify and
-                        generate leads for sales agents, streamlining the
-                        funnel.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="highlight-item">
-                    <i className="bx bx-bot highlight-icon"></i>
-                    <div>
-                      <h4>WhatsApp RAG Bot</h4>
-                      <p>
-                        Developed a custom AI agent that answers member
-                        inquiries, handles FAQs, and sends automated membership
-                        & installment reminders.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="featured-stats">
-                <div className="stat-box">
-                  <i className="bx bx-data"></i>
-                  <span className="stat-value">100%</span>
-                  <span className="stat-label">Data Ownership</span>
-                </div>
-                <div className="stat-box">
-                  <i className="bx bx-time-five"></i>
-                  <span className="stat-value">40%</span>
-                  <span className="stat-label">Reduction in Manual Admin</span>
-                </div>
-                <div className="stat-box">
-                  <i className="bx bx-server"></i>
-                  <span className="stat-value">99.9%</span>
-                  <span className="stat-label">Uptime</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Project 2 */}
-            <div
-              className="featured-project-card"
-              data-aos="fade-up"
-              data-aos-delay="200"
-            >
-              <div className="featured-header">
-                <h3>Executive Virtual Assistant</h3>
-                <span className="featured-tagline">
-                  Intelligent Email Sorting & Meeting Summarization
-                </span>
-              </div>
-
-              <div className="featured-body">
-                <div className="featured-main-text">
-                  <p>
-                    A dedicated AI assistant for enterprise executives that
-                    streamlines communication and manages information overload.
-                  </p>
-                </div>
-
-                <div className="featured-highlights">
-                  <div className="highlight-item">
-                    <i className="bx bx-envelope highlight-icon"></i>
-                    <div>
-                      <h4>Smart Email Management</h4>
-                      <p>
-                        Automatically sorts incoming emails into custom labels
-                        and drafts context-aware replies, saving hours of daily
-                        triage.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="highlight-item">
-                    <i className="bx bx-calendar-event highlight-icon"></i>
-                    <div>
-                      <h4>Meeting Summarizer</h4>
-                      <p>
-                        Records and summarizes back-to-back meetings, extracting
-                        key action items and decisions so nothing slips through
-                        the cracks.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="featured-stats">
-                <div className="stat-box">
-                  <i className="bx bx-time"></i>
-                  <span className="stat-value">2h+</span>
-                  <span className="stat-label">Saved Daily</span>
-                </div>
-                <div className="stat-box">
-                  <i className="bx bx-check-shield"></i>
-                  <span className="stat-value">100%</span>
-                  <span className="stat-label">Privacy First</span>
-                </div>
-                <div className="stat-box">
-                  <i className="bx bx-brain"></i>
-                  <span className="stat-value">24/7</span>
-                  <span className="stat-label">Availability</span>
-                </div>
-              </div>
-            </div>
+              </button>
+            ))}
           </div>
         </div>
       </section>
@@ -449,6 +338,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <CaseStudyModal
+        caseStudy={caseStudies.find((cs) => cs.id === openCaseStudy) ?? null}
+        onClose={() => setOpenCaseStudy(null)}
+      />
     </main>
   );
 }
