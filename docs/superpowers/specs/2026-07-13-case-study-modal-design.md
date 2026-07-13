@@ -36,6 +36,7 @@ interface CaseStudy {
                            // section (and small on the teaser card). Requires
                            // the client's permission since a logo names them.
                            // Omitted → text-only client description.
+                           // Currently only Grand Tourer has permission.
 }
 ```
 
@@ -55,10 +56,15 @@ Four case studies populate the array:
    owner name from uploaded vehicle registrations (Next.js, React,
    TypeScript, Prisma, PostgreSQL/Supabase). Copy drafted from the project at
    `C:\Users\alyom\Desktop\Grand Tourer - Copy - Copy (3) - Copy - Copy`.
-4. **DreamHosp** (new) — full hospital web platform: patient portal, doctor
-   dashboards, appointments, lab result uploads, admin (Next.js, Prisma,
-   Supabase). Copy drafted from the DreamH project at
+4. **Hospital Digital Platform** (new) — full hospital web platform: patient
+   portal, doctor dashboards, appointments, lab result uploads, admin
+   (Next.js, Prisma, Supabase). Copy drafted from the DreamH project at
    `C:\Users\alyom\Desktop\DreamH`.
+
+Client naming permissions: **only Grand Tourer may be named and show its
+logo.** The hospital and the club have NOT approved being named — their case
+studies stay industry-anonymous (no client name, no logo, no identifying
+details in copy). The Executive VA client also stays anonymous.
 
 New copy (client, story, scalabilityNote) is drafted from existing page
 content and project source, then edited by the owner.
