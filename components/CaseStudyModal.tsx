@@ -17,6 +17,7 @@ export default function CaseStudyModal({
   const [mounted, setMounted] = useState(false);
   const sheetRef = useRef<HTMLDivElement>(null);
   const dragStartY = useRef<number | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -24,6 +25,8 @@ export default function CaseStudyModal({
 
   useEffect(() => {
     if (!caseStudy) return;
+
+    const previouslyFocused = document.activeElement as HTMLElement | null;
 
     // Lock background scroll (covers both native and Lenis smooth-scroll).
     const previousOverflow = document.body.style.overflow;
@@ -36,10 +39,13 @@ export default function CaseStudyModal({
     };
     document.addEventListener("keydown", handleKeyDown);
 
+    closeButtonRef.current?.focus();
+
     return () => {
       document.body.style.overflow = previousOverflow;
       lenis?.start();
       document.removeEventListener("keydown", handleKeyDown);
+      previouslyFocused?.focus?.();
     };
   }, [caseStudy, onClose]);
 
@@ -65,6 +71,12 @@ export default function CaseStudyModal({
     sheetRef.current.style.transition = "";
     if (delta > 100) onClose();
   };
+  const handleTouchCancel = () => {
+    if (dragStartY.current === null || !sheetRef.current) return;
+    dragStartY.current = null;
+    sheetRef.current.style.transform = "";
+    sheetRef.current.style.transition = "";
+  };
 
   return createPortal(
     <div className="case-modal-overlay" onClick={onClose}>
@@ -81,10 +93,16 @@ export default function CaseStudyModal({
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchCancel}
         >
           <span className="case-modal-handle-bar"></span>
         </div>
-        <button className="case-modal-close" onClick={onClose} aria-label="Close">
+        <button
+          ref={closeButtonRef}
+          className="case-modal-close"
+          onClick={onClose}
+          aria-label="Close"
+        >
           <i className="bx bx-x"></i>
         </button>
 
@@ -177,6 +195,7 @@ export default function CaseStudyModal({
               href="https://cal.com/levelexcloud/levelex-audit"
               className="btn btn-gradient"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <span>
                 Schedule Discovery Call <i className="bx bx-right-arrow-alt"></i>

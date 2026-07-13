@@ -2410,7 +2410,8 @@ ul {
   outline: none;
 }
 
-.case-teaser-card h3 {
+.case-teaser-title {
+  display: block;
   font-size: 1.25rem;
   background: var(--gradient);
   -webkit-background-clip: text;

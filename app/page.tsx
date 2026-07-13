@@ -305,7 +305,7 @@ export default function Home() {
                 data-aos-delay={100 + i * 100}
                 onClick={() => setOpenCaseStudy(cs.id)}
               >
-                <h3>{cs.title}</h3>
+                <span className="case-teaser-title">{cs.title}</span>
                 <span className="featured-tagline">{cs.tagline}</span>
                 <p>{cs.summary}</p>
                 <span className="case-teaser-link">
