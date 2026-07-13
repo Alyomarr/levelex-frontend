@@ -37,7 +37,9 @@ Four case studies populate the array:
 
 1. **Enterprise Legacy Modernization & Biometric Security** (existing) — the
    club/facility system: SQL→PostgreSQL migration, offline face match,
-   on-gate lead-gen forms, WhatsApp RAG bot.
+   on-gate lead-gen forms, WhatsApp RAG bot, plus proactive WhatsApp
+   notifications and reminders sent beforehand (membership renewals,
+   installment due dates).
 2. **Executive Virtual Assistant** (existing) — email sorting + meeting
    summarization.
 3. **Grand Tourer** (new) — garage management system for an auto repair shop
