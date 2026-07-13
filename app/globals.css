@@ -2129,6 +2129,25 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(0, 255, 255, 0.25) transparent;
+}
+
+.case-modal-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.case-modal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.case-modal-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 255, 0.25);
+  border-radius: 3px;
+}
+
+.case-modal-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 255, 0.45);
 }
 
 .case-modal-section {

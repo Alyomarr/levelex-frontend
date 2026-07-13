@@ -106,7 +106,10 @@ export default function CaseStudyModal({
           <i className="bx bx-x"></i>
         </button>
 
-        <div className="case-modal-scroll">
+        {/* data-lenis-prevent: the stopped Lenis instance preventDefaults all
+            wheel/touch events page-wide; this exempts events starting inside
+            the scroll container so native scrolling works. */}
+        <div className="case-modal-scroll" data-lenis-prevent>
           <div className="featured-header">
             <h3>{caseStudy.title}</h3>
             <span className="featured-tagline">{caseStudy.tagline}</span>
