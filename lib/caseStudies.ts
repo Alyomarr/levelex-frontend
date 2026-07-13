@@ -11,7 +11,6 @@ import {
   siFastapi,
   siGmail,
   siGooglecalendar,
-  siChatbot,
 } from "simple-icons";
 
 export interface TechItem {
@@ -229,7 +228,6 @@ export const caseStudies: CaseStudy[] = [
       { name: "Python", iconPath: siPython.path },
       { name: "Gmail", iconPath: siGmail.path },
       { name: "Google Calendar", iconPath: siGooglecalendar.path },
-      { name: "Whisper", iconPath: siChatbot.path },
     ],
     stats: [
       { icon: "bx bx-time", value: "2h+", label: "Saved Daily" },
